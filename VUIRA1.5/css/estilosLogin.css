@@ -1,0 +1,10 @@
+#entrar
+{
+	background: #24345c;
+	color: white;
+}
+#entrar:hover
+{
+	background: #274D68;
+	font-weight: bold;
+}
