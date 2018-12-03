@@ -84,7 +84,7 @@ ini_set("display_errors",1);
       </div>
       <br>
       <div class="col-md-8">
-      <input class="btn btn-danger" type="reset" value="Cancelar" onclick="" />
+      <input class="btn btn-danger" type="reset" value="Cancelar" onclick="realizarSubmit()" />
       <input class="btn btn-success" type="submit" value="Guardar" /><br><br>
       </div>
     </form>

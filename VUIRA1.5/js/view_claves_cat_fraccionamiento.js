@@ -4,6 +4,12 @@ var esPrimerCuenta = "si";
 var esPrimerCarga = 1;
 var mensajeSubmitAux = "Error";
 var id_bd =0;
+
+function dirigir_main_page()
+{
+  window.location.replace("https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamientom");
+}
+
 function realizarSubmit()
 {
   $( "#form" ).submit();
