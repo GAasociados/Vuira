@@ -16,7 +16,7 @@ ini_set("display_errors",1);
 <title>Ventanilla Clave Catastral Fraccionamientos</title>
 </head>
 <body onload="event_load_ventanilla()">
-<form method="post" enctype="multipart/form-data" action="C_C_Fraccionamientos_CE.php" id="formVentanilla">
+<form method="post" enctype="multipart/form-data" action="../c_clave_fraccionamientos/C_C_Fraccionamientos_CE.php" id="formVentanilla">
     <div class="container">
     <br>
     <h1> CLAVE CATASTRAL FRACCIONAMIENTOS</h1>

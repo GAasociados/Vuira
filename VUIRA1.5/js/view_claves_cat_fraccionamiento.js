@@ -58,7 +58,6 @@ function event_load_ventanilla()
     objVista.load_data_fraccionamientos( $("#id").val() );
     objVista.load_data_fraccionamientos_detalles( $("#id").val() );
   }
-
   //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
   $(".custom-file-input").change(function(event){
     var padre = $(this).parent()
@@ -85,12 +84,12 @@ function event_load_ventanilla()
   });
 
   //Para deshabilitar el uso de la tecla "Enter"
-  $("#formVentanilla").keypress(function( event ) {
-    if (event.which == 13)
-    {
-      return false;
-    }
-  });
+  // $("#formVentanilla").keypress(function( event ) {
+  //   if (event.which == 13)
+  //   {
+  //     return false;
+  //   }
+  // });
 }
 
 function event_select_entry(buttonName)
