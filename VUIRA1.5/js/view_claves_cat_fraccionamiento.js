@@ -130,7 +130,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      this.basePath = "http://localhost/Vuira/";
+      this.basePath = "http://"+window.location.hostname+"/";
+      
   }
 
   get_predial(predialNum)
