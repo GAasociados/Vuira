@@ -6,8 +6,8 @@ ini_set("display_errors",1);
 <html>
 <head>
     <?php include("./../base/Header.php");?>
-    <script src="./../js/tether.min.js"></script>
-    <script src="./../js/bootstrap.min.js"></script>
+    <!--<script src="./../js/tether.min.js"></script>
+    <script src="./../js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="./../js/view_claves_cat_fraccionamiento.js"></script>
     <!-- <script type="text/javascript" src="./js/jquery-3.3.1.min.js.js"></script> -->
 
