@@ -105,7 +105,7 @@ ini_set("display_errors",1);
       </div>
       <br>
       <div class="col-md-6">
-        <input class="btn btn-danger" type="button" value="Cancelar" onclick="" />
+        <input class="btn btn-danger" type="reset" value="Cancelar" onclick="" />
         <input class="btn btn-success" type="submit" value="Guardar" onclick=""/><br><br>
       </div>
     </form>

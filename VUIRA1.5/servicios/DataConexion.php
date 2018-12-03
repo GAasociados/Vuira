@@ -3,7 +3,7 @@
     {
     	private $conn;
     	private $user="root";
-		private $pwd="root";
+		private $pwd="YES";
 		private $host="localhost";
 		private $dataBase="natural7_vuira";
 
