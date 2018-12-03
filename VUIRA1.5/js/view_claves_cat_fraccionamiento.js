@@ -7,7 +7,7 @@ var id_bd =0;
 
 function dirigir_main_page()
 {
-  window.location.replace("https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamientom");
+  window.location.replace("https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamiento");
 }
 
 function realizarSubmit()
