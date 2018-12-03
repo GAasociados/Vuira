@@ -124,8 +124,8 @@ class view_claves_fraccionamiento
 {
   constructor()
   {
-      this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "http://localhost/Source/";
+      //this.basePath = "https://vuira.irapuato.gob.mx/";
+      this.basePath = "http://localhost/Vuira/";
   }
 
   get_predial(predialNum)
@@ -277,6 +277,9 @@ class view_claves_fraccionamiento
      innerTableContent += "<td><input type='button' name='"+data.CUENTA_PREDIAL+"' value='borrar' onclick='event_remove_clave(this)'></td>";
      innerTableContent += "</tr>";
      $("#tblinmubles").append(innerTableContent);
+
+     //limpia la caja de texto de la cuenta predial
+     $("#txtCuentaPredial").val("");
   }
 
   set_data_auxiliar(data)
