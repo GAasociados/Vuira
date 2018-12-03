@@ -2,8 +2,8 @@
     class conection
     {
     	private $conn;
-    	private $user="vuira";
-		private $pwd="irap.ga";
+    	private $user="root";
+		private $pwd="root";
 		private $host="localhost";
 		private $dataBase="natural7_vuira";
 
