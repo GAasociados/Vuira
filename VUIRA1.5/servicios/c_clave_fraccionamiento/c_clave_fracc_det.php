@@ -116,7 +116,8 @@ class detFracc
         INNER JOIN claves_catastrales_fraccionamientos_asignacion AS fraccAsign
         ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
         WHERE fraccAsign.Id_Fraccionamiento = '$id'
-        AND fraccAsign.Id_Auxiliar = '$uid'");
+        AND fraccAsign.Id_Auxiliar = '$uid'
+        GROUP BY fraccDet.Cuenta_Predial");
     }
 
     public function detDel($id)
