@@ -105,17 +105,18 @@ class detFracc
 
     public function detSel($id,$uid)
     {
-        return $this->con->executeQuerry("SELECT
-        claves_catastrales_fraccionamientos_detalles.Cuenta_Predial,
-        claves_catastrales_fraccionamientos_detalles.Calle,
-        claves_catastrales_fraccionamientos_detalles.Numero_Ext,
-        claves_catastrales_fraccionamientos_detalles.Numero_Int,
-        claves_catastrales_fraccionamientos_detalles.Colonia  
-        FROM claves_catastrales_fraccionamientos_detalles
-        INNER JOIN claves_catastrales_fraccionamientos_asignacion
-        ON claves_catastrales_fraccionamientos_detalles.Id_Fraccionamientos = claves_catastrales_fraccionamientos_asignacion.Id_Fraccionamiento
-        WHERE claves_catastrales_fraccionamientos_asignacion.Id_Fraccionamiento = '$id'
-        AND claves_catastrales_fraccionamientos_asignacion.Id_Auxiliar = '$uid';");
+        return $this->con->executeQuerry("
+        SELECT
+        fraccDet.Cuenta_Predial,
+        fraccDet.Calle,
+        fraccDet.Numero_Ext,
+        fraccDet.Numero_Int,
+        fraccDet.Colonia  
+        FROM claves_catastrales_fraccionamientos_detalles AS fraccDet
+        INNER JOIN claves_catastrales_fraccionamientos_asignacion AS fraccAsign
+        ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
+        WHERE fraccAsign.Id_Fraccionamiento = '$id'
+        AND fraccAsign.Id_Auxiliar = '$uid'");
     }
 
     public function detDel($id)
