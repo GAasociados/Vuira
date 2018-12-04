@@ -104,11 +104,13 @@ ini_set("display_errors",1);
               </select>
       </div>
       <br>
-      <div class="col-md-6">
-        <input class="btn btn-danger" type="button" value="Cancelar" onclick="dirigir_main_page()" />
-        <input class="btn btn-success" type="submit" value="Guardar" onclick=""/><br><br>
-      </div>
     </form>
+    <div class="row">
+      <div class="col-md-12">
+        <input class="btn btn-danger" type="button" value="Cancelar" onclick="dirigir_main_page()" />
+        <input class="btn btn-success" type="submit" value="Guardar"form="formVentanilla" onclick=""/><br><br>
+      </div>
+    </div>
     </div>
     </div>
     </div>

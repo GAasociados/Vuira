@@ -28,6 +28,15 @@ function event_add_cuenta_predial()
   }
 }
 
+function event_pulsar_enter(event)
+{
+  if (event.keyCode == 13) 
+  {
+    event.preventDefault();
+    event_add_cuenta_predial();
+  }
+}
+
 function event_remove_clave(buttonName)
 {
   console.log(buttonName.name);
@@ -77,19 +86,6 @@ function event_load_ventanilla()
       return false;
     }
   });
-
-  //evento para el boton ENTER
-  $("#txtCuentaPredial").on('keypress', function() {
-    event_add_cuenta_predial();
-  });
-
-  //Para deshabilitar el uso de la tecla "Enter"
-  // $("#formVentanilla").keypress(function( event ) {
-  //   if (event.which == 13)
-  //   {
-  //     return false;
-  //   }
-  // });
 }
 
 function event_select_entry(buttonName)

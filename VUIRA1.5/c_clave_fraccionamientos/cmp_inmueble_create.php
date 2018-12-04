@@ -20,11 +20,9 @@ ini_set("display_errors",1);
 			<br>
 			<h2> II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE </h2>
 			<br>
-			<form action="">
-			
 			<div class="form-group col-md-8">
             <label class="control-label" for="Cuenta_Predial">Cuenta predial *</label>
-            <input class="form-control" type="text" id="txtCuentaPredial"  placeholder="Cuenta Predial">
+            <input class="form-control" type="text" id="txtCuentaPredial"  placeholder="Cuenta Predial" onkeypress="event_pulsar_enter(event)">
 	        </div>
 			<div class="col-md-6 float-auto">
 			<input class="btn btn-success" type="Button" id="btAdd" value="Agregar" onclick="event_add_cuenta_predial()"/><br>
@@ -43,7 +41,6 @@ ini_set("display_errors",1);
 					<td> Acciones</td>
 				</tr>
 			</table>
-			</form>
 		</div>
 		
 	</div>
