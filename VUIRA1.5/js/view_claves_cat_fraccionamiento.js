@@ -49,6 +49,7 @@ function event_load_auxiliar()
 {
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
+  //objVista.get_data_details($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
 
   $( "#form" ).submit(function( event ) {
@@ -90,7 +91,7 @@ function event_load_ventanilla()
 function event_select_entry(buttonName)
 {
 
-  id_bd =$("#clave_ind_"+buttonName.name).val();
+  id_bd = $("#clave_ind_"+buttonName.name).val();
   console.log(id_bd);
 	var objVista =new view_claves_fraccionamiento();
 	objVista.cancelar_claveGen();
@@ -126,7 +127,6 @@ class view_claves_fraccionamiento
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
       this.basePath = "http://"+window.location.hostname+"/Vuira/";
-      
   }
 
   get_predial(predialNum)
@@ -308,11 +308,7 @@ class view_claves_fraccionamiento
      $("#txtCuentaPredial").val("");
   }
 
-  set_data_asignaciones(data)
-  {
-
-  }
-
+  
   set_data_auxiliar(data)
   {
     for(var field in data)

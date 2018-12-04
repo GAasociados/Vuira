@@ -111,7 +111,8 @@ class detFracc
         fraccDet.Calle,
         fraccDet.Numero_Ext,
         fraccDet.Numero_Int,
-        fraccDet.Colonia  
+        fraccDet.Colonia,
+        fraccDet.Id_Clave  
         FROM claves_catastrales_fraccionamientos_detalles AS fraccDet
         INNER JOIN claves_catastrales_fraccionamientos_asignacion AS fraccAsign
         ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
