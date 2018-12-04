@@ -23,6 +23,12 @@ ini_set("display_errors",1);
 						echo $_GET["Id"];
 				}
 			?>" />
+    <input type="hidden" name="uid" id="uid" value="<?php
+      if(isset($_GET['uid']))
+      {
+        echo $_GET["uid"];
+      }
+      ?>">
     <div class="container">
         <h2> I. DOCUMENTOS DEL INMUEBLE</h2>
         <br>

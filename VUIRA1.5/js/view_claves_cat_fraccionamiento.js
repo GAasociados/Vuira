@@ -49,10 +49,14 @@ function event_load_auxiliar()
 {
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
-  objVista.get_data_details($("#id").val());
+  //objVista.get_data_details($("#id").val());
+  objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
+
+
+  var uid = $("#uid").val();
+  console.log(uid);
 
   $( "#form" ).submit(function( event ) {
-    //event.preventDefault();
     objVista.update_status_fraccionamientos( $("#id").val() );
     if ( mensajeSubmitAux != "Exito")
       return false;
@@ -172,6 +176,31 @@ class view_claves_fraccionamiento
     });
   }
 
+  get_data_asignaciones(id,uid)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det.php?service_name=byiddet",
+      data:{id:id,uid:uid},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          var data = JSON.parse(jdata);
+          console.log("LOS SIGUIENTES SON DATA");
+          new view_claves_fraccionamiento().set_data_grid_aux(data);
+          console.log(data);
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
+
   get_data_clave(id)
   {
     $.ajax({
@@ -282,6 +311,11 @@ class view_claves_fraccionamiento
 
      //limpia la caja de texto de la cuenta predial
      $("#txtCuentaPredial").val("");
+  }
+
+  set_data_asignaciones(data)
+  {
+
   }
 
   set_data_auxiliar(data)

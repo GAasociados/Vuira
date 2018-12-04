@@ -17,7 +17,7 @@ if(isset($_GET['service_name']))
             print_r(json_encode($objD->detInsert($_POST["data"]), JSON_UNESCAPED_SLASHES));
 			break;
         case 'byiddet':
-            print_r(json_encode($objD->detSel((isset($_GET["id"]) ? $_GET["id"] : (isset($_POST["id"]) ? $_POST["id"] : -1))), JSON_UNESCAPED_SLASHES));
+            print_r(json_encode($objD->detSel($_POST['id'], $_POST['uid']), JSON_UNESCAPED_SLASHES));
             break;
 		case 'updatedet': //EL DICCIONARIO DE DATOS PASA POR POST AL IGUAL QUE EL ID
 						var_dump($_POST);
@@ -103,9 +103,19 @@ class detFracc
         return $x;
     }
 
-    public function detSel($id)
+    public function detSel($id,$uid)
     {
-        return $this->con->executeQuerry("SELECT * FROM Claves_Catastrales_Fraccionamientos_Detalles WHERE Id_Fraccionamientos = '$id'");
+        return $this->con->executeQuerry("SELECT
+        claves_catastrales_fraccionamientos_detalles.Cuenta_Predial,
+        claves_catastrales_fraccionamientos_detalles.Calle,
+        claves_catastrales_fraccionamientos_detalles.Numero_Ext,
+        claves_catastrales_fraccionamientos_detalles.Numero_Int,
+        claves_catastrales_fraccionamientos_detalles.Colonia  
+        FROM claves_catastrales_fraccionamientos_detalles
+        INNER JOIN claves_catastrales_fraccionamientos_asignacion
+        ON claves_catastrales_fraccionamientos_detalles.Id_Fraccionamientos = claves_catastrales_fraccionamientos_asignacion.Id_Fraccionamiento
+        WHERE claves_catastrales_fraccionamientos_asignacion.Id_Fraccionamiento = '$id'
+        AND claves_catastrales_fraccionamientos_asignacion.Id_Auxiliar = '$uid';");
     }
 
     public function detDel($id)
