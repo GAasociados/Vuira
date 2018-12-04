@@ -49,17 +49,12 @@ function event_load_auxiliar()
 {
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
-  //objVista.get_data_details($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
-
-
-  var uid = $("#uid").val();
-  console.log(uid);
 
   $( "#form" ).submit(function( event ) {
     objVista.update_status_fraccionamientos( $("#id").val() );
-    if ( mensajeSubmitAux != "Exito")
-      return false;
+    if ( mensajeSubmitAux == 0)
+      return true;
   });
 }
 
@@ -696,13 +691,10 @@ class view_claves_fraccionamiento
         console.log(jdata);
         if(jdata != "Error")
         {
-          //var data = JSON.parse(jdata);
-          mensajeSubmitAux = jdata;
           console.log(jdata);
         }
         else
         {
-          mensajeSubmitAux = jdata;
           alert (jdata);
         }
       }

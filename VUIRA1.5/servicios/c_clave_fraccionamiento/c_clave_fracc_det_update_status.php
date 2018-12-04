@@ -15,18 +15,9 @@ for ($i = 0; $i < count($obj); $i++)
 }
 
 if ( $bandera )
-	echo $objD->executeQuery($_POST['id']);
+	echo $objD->update_fraccionamiento($_POST['id']);
 else
 	echo "Error";
-
-// if ( $id_clave != 0 || !empty($id_clave))
-// {
-// 	echo $objD->executeQuery($_POST['id']);
-// }
-// else 
-// {
-// 	echo "Variable es diferente pero no esta vacia";
-// }
 
 class dataFraccionamientosDetalles
 {
@@ -41,12 +32,12 @@ class dataFraccionamientosDetalles
 		return json_encode($this->con->executeQuerry($query));
 	}
 
-	public function executeQuery($id)
+	public function update_fraccionamiento($id)
 	{
 		$query = "UPDATE Claves_Catastrales_Fraccionamientos 
 		SET Status = 'terminado' 
 		WHERE Id = {$id}";
-		$mensaje = $this->con->executeSimpleQuery($query);
+		$mensaje = $this->con->sqlOperations($query);
 		return $mensaje;
 	}
 }
