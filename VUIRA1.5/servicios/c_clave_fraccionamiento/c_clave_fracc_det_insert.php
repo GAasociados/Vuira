@@ -20,7 +20,7 @@ class dataFraccionamientos_detalles
 	{
 		$query = "INSERT INTO Claves_Catastrales_Fraccionamientos_Detalles(Id_Fraccionamientos, Cuenta_Predial, Calle, Numero_Ext, Numero_Int, Colonia, Id_Clave) 
 			VALUES ($id, '$cuenta_predial', '$calle', $numero_ext, '$numero_int', '$colonia', $id_clave)";
-		$mensaje = $this->con->executeSimpleQuery($query);
+		$mensaje = $this->con->sqlOperations($query);
 		return $mensaje;
 	}
 }

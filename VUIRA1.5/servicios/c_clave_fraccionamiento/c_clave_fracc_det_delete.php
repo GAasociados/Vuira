@@ -18,7 +18,7 @@ class dataFraccionamientos_detalles
 	public function delete_fraccionamientos_detalle( $id, $cuenta_predial)
 	{
 		$query = "DELETE FROM Claves_Catastrales_Fraccionamientos_Detalles WHERE Id_Fraccionamientos = $id and Cuenta_Predial = '$cuenta_predial'";
-		$mensaje = $this->con->executeSimpleQuery($query);
+		$mensaje = $this->con->sqlOperations($query);
 		return $mensaje;
 	}
 }

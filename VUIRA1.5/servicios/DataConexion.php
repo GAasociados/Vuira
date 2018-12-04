@@ -56,20 +56,5 @@
 			}
       return $lastId;
 		}
-
-		//esta función sirve para UPDATE y DELETE 
-		public function executeSimpleQuery($query)
-		{
-			$mensaje = "Exito";
-			$this->conect();
-			if(!$result = $this->conn->query($query))
-			{
-				printf("Mysql Error: %s\n", $this->conn->error);
-				$this->conn->close();
-				$mensaje = "Error";
-				return $mensaje;
-			}
-			return $mensaje;
-		}
     }
 ?>
