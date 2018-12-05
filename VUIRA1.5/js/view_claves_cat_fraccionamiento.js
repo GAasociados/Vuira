@@ -61,6 +61,9 @@ function event_load_auxiliar()
 
 function event_load_ventanilla()
 {
+
+
+  //valida la caja cuenta predial
   if($("#id").val()!="")
   {
     var objVista=new view_claves_fraccionamiento();
@@ -77,14 +80,23 @@ function event_load_ventanilla()
 
   //valida el boton guardar
   $( "#formVentanilla" ).submit(function( event ) {
+    event.preventDefault();
     var tbody = $('tbody');
     if ( tbody.children().length >= 2)
-      return true;
+    {
+      $('#exampleModal').modal('show');
+    }
     else
     {
       alert("Debe agregar por lo menos una cuenta predial");
-      return false;
     }
+  });
+
+  $("#imprimirTalon").click( function()
+  {
+    window.open('http://www.vicolin.net', '_blank');
+    event_generar_talon();
+    //document.getElementById('formVentanilla').submit();
   });
 }
 
@@ -119,6 +131,12 @@ function event_generar_clave(buttonName)
   {
     alert("Se deben llenar todos los campos");
   }
+}
+
+function event_generar_talon()
+{
+  console.log( $("#fecha-inicio").val() );
+  console.log( $("#fecha-entrega").val() );
 }
 
 class view_claves_fraccionamiento
@@ -397,9 +415,9 @@ class view_claves_fraccionamiento
 
   set_template_to_record()
   {
-     if($("#propietario").val()=="")
-		 $("#propietario").val($("#Propietario").val());
-     if($("#caracter").val()=="")
+    if($("#propietario").val()=="")
+		$("#propietario").val($("#Propietario").val());
+    if($("#caracter").val()=="")
 		$("#caracter").val($("#p_caracter").val());
 	 if($("#superficie").val()=="")
 		$("#superficie").val($("#p_superficie").val());
@@ -417,6 +435,12 @@ class view_claves_fraccionamiento
 		$("#estado_escitura").val($("#p_estado_escritura").val());
 	 if($("#ciudad_escritura").val()=="")
 		$("#ciudad_escritura").val($("#p_ciudad_escritura").val());
+  }
+
+
+  setup_generate_talon()
+  {
+
   }
 
   setup_generate_clave()
@@ -442,7 +466,8 @@ class view_claves_fraccionamiento
                                                               $("#id").val(),
                                                               $("#Cuenta_Predial").val());
           }
-    		  var url = "https://vuira.irapuato.gob.mx/DocPrint/DocPrint.php?id="+jdata;
+          //var url = "https://vuira.irapuato.gob.mx/DocPrint/DocPrint.php?id="+jdata;
+    		  var url = "../DocPrint/DocPrint.php?id="+jdata;
     		  window.open(url, '_blank');
         }
         else
@@ -452,6 +477,7 @@ class view_claves_fraccionamiento
       }
     });
   }
+
   update_Detalles(data,id_frac,predial)
   {
 	   $.ajax({
