@@ -94,9 +94,10 @@ function event_load_ventanilla()
 
   $("#imprimirTalon").click( function()
   {
-    window.open('http://www.vicolin.net', '_blank');
-    event_generar_talon();
-    //document.getElementById('formVentanilla').submit();
+    var fecha_ini = $("#fecha-inicio").val();
+    var fecha_final = $("#fecha-entrega").val();
+    window.open("../../PDFGen/pdfGenTalon.php?fecha_ini="+fecha_ini+"&"+"fecha_final="+fecha_final, "_blank");
+    document.getElementById('formVentanilla').submit();
   });
 }
 
@@ -131,12 +132,6 @@ function event_generar_clave(buttonName)
   {
     alert("Se deben llenar todos los campos");
   }
-}
-
-function event_generar_talon()
-{
-  console.log( $("#fecha-inicio").val() );
-  console.log( $("#fecha-entrega").val() );
 }
 
 class view_claves_fraccionamiento
