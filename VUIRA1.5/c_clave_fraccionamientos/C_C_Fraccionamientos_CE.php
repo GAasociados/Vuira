@@ -32,7 +32,13 @@ include("../servicios/c_clave_fraccionamiento/c_clave_fracc_det.php");
   {
       $obj->coreUpdate($data_header, $_FILES,$_POST["id"]);
   }
-  header("Location: Clave_Catastral_Listado.php"); /* Redirect browser */
-  exit();
+
+  echo "<script type=\"text/javascript\">
+                  window.onload=function(){
+                     // document.forms['docF'].submit();
+  				              window.location.href='https://vuira.irapuato.gob.mx/VUIRA1.5/c_clave_fracionamientos/Clave_Catastral_Listado.php';
+                  }
+         </script>";
+
 
  ?>
