@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set("display_errors",1);
 
 $mensaje = "Error";
-if (isset($_GET['no'])) {
+if (isset($_POST['no'])) {
 	$archivo = fopen("../../../assets/no_seguimiento_bk.txt", "r");
 	$linea = fgets($archivo);
 	$valor = intval($linea);
-	$contador = $valor + $_GET['no'];
+	$contador = $valor + $_POST['no'];
 	fclose($archivo);
 
 	$numeros_consecutivos = [];

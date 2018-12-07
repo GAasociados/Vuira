@@ -4,6 +4,7 @@ var esPrimerCuenta = "si";
 var esPrimerCarga = 1;
 var mensajeSubmitAux = "Error";
 var id_bd =0;
+var cuentas_asignadas = 0;
 
 function dirigir_main_page()
 {
@@ -198,6 +199,8 @@ class view_claves_fraccionamiento
         {
           var data = JSON.parse(jdata);
           console.log("LOS SIGUIENTES SON DATA");
+          cuentas_asignadas = data;
+          new view_claves_fraccionamiento().get_numeros_consecutivos();
           new view_claves_fraccionamiento().set_data_grid_aux(data);
           console.log(data);
         }
@@ -436,6 +439,65 @@ class view_claves_fraccionamiento
   setup_generate_talon()
   {
 
+  }
+
+
+  get_numeros_consecutivos()
+  {
+    console.log( cuentas_asignadas.length );
+
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/actualizacion_no_seguimiento.php",
+      data:{no:cuentas_asignadas.length},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          var data = JSON.parse(jdata);
+          console.log("LOS NUMEROS CONSECUTIVOS SON");
+          console.log(data);
+          new view_claves_fraccionamiento().set_folio_fracc_detalles(data);
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
+
+  set_folio_fracc_detalles(data)
+  {
+    var numeros = Object.keys(data).map(function (key) { return data[key]; });
+    var url = this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/actualizacion_no_seguimiento.php";
+    for (var i = 0; i < numeros.length; i++) 
+    {
+      (function (i) 
+        {
+          $.ajax({
+            type:"post",
+            url:url,
+            data:{no:numeros[i]},
+            async:true,
+            success: function (jdata)
+            {
+              console.log(jdata);
+              if(jdata != "Error")
+              {
+                 console.log("CUENTA PREDIAL: "+ cuentas_asignadas[i]["Cuenta_Predial"] +" VALOR DE I:" +numeros[i]);
+              }
+              else
+              {
+                  alert (jdata);
+              }
+            }
+          });
+        })
+      (i); 
+    }
   }
 
   setup_generate_clave()
