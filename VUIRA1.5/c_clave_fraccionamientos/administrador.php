@@ -8,7 +8,7 @@
 
 		<title> SIPREG </title>
 		<meta name="description" content="">
-		<link rel="shortcut icon" href="/img/irapuato.png">
+		<link rel="shortcut icon" href="../..assets_muni/img/irapuato.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!--#region CSS  -->
@@ -76,88 +76,88 @@
 
 		<!-- Favicons -->
 
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/icons/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/icons/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/icons/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="assets/images/icons/apple-touch-icon-57-precomposed.png">
-		<link rel="shortcut icon" href="img/logoIrapuato.png">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../assets_muni/assets/images/icons/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../assets_muni/images/icons/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../assets_muni/assets/images/icons/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="../../assets_muni/assets/images/icons/apple-touch-icon-57-precomposed.png">
+		<link rel="shortcut icon" href="../../assets_muni/img/logoIrapuato.png">
 
-		<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-		<script type="text/javascript" src="assets/bootstrap/js/popper.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/bootstrap/css/bootstrap.min.css">
+		<script type="text/javascript" src="../../assets_muni/assets/bootstrap/js/popper.min.js"></script>
 
 		<!-- Admin theme -->
 
-		<link rel="stylesheet" type="text/css" href="assets/themes/admin/layout.css">
-		<link rel="stylesheet" type="text/css" href="assets/themes/admin/color-schemes/default.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/themes/admin/layout.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/themes/admin/color-schemes/default.css">
 
 		<!-- Components theme -->
 
-		<link rel="stylesheet" type="text/css" href="assets/themes/components/default.css">
-		<link rel="stylesheet" type="text/css" href="assets/themes/components/border-radius.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/themes/components/default.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/themes/components/border-radius.css">
 
 		<!-- Admin responsive -->
 
-		<link rel="stylesheet" type="text/css" href="assets/helpers/responsive-elements.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/admin-responsive.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/responsive-elements.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/admin-responsive.css">
 
 		<!-- HELPERS -->
 
-		<link rel="stylesheet" type="text/css" href="assets/helpers/animate.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/backgrounds.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/boilerplate.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/border-radius.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/grid.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/page-transitions.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/spacing.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/typography.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/utils.css">
-		<link rel="stylesheet" type="text/css" href="assets/helpers/colors.css">
-		<link rel="stylesheet" type="text/css" href="assets/elements/images.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/animate.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/backgrounds.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/boilerplate.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/border-radius.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/grid.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/page-transitions.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/spacing.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/typography.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/utils.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/helpers/colors.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/images.css">
 
 		<!-- SNIPPETS -->
 
-		<link rel="stylesheet" type="text/css" href="assets/snippets/login-box.css">
-		<link rel="stylesheet" type="text/css" href="assets/snippets/user-profile.css">
-		<link rel="stylesheet" type="text/css" href="assets/snippets/mobile-navigation.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/login-box.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/user-profile.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/mobile-navigation.css">
 
 		<!-- ELEMENTS -->
 
-		<link rel="stylesheet" type="text/css" href="assets/elements/badges.css">
-		<link rel="stylesheet" type="text/css" href="assets/elements/buttons.css">
-		<link rel="stylesheet" type="text/css" href="assets/elements/content-box.css">
-		<link rel="stylesheet" type="text/css" href="assets/elements/dashboard-box.css">
-		<link rel="stylesheet" type="text/css" href="assets/elements/forms.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/badges.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/buttons.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/content-box.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/dashboard-box.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/forms.css">
 
 		<!-- ICONS -->
 
-		<link rel="stylesheet" type="text/css" href="assets/icons/fontawesome/fontawesome.css">
-		<link rel="stylesheet" type="text/css" href="assets/icons/linecons/linecons.css">
-		<link rel="stylesheet" type="text/css" href="assets/icons/spinnericon/spinnericon.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/fontawesome/fontawesome.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/linecons/linecons.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/spinnericon/spinnericon.css">
 
-		<link rel="stylesheet" type="text/css" href="assets/widgets/accordion-ui/accordion.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/accordion-ui/accordion.css">
 
 		<!-- WIDGETS -->
 
-    <link rel="stylesheet" type="text/css" href="assets/widgets/modal/modal.css">
-		<link rel="stylesheet" type="text/css" href="assets/widgets/dropdown/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/modal/modal.css">
+		<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/dropdown/dropdown.css">
 
-	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="../../assets_muni/css/global.css">
 		<!--#endregion -->
 
 		<!--#region JS  -->
 
 		<!-- JQuery -->
-		<script type="text/javascript" src="assets/js-core/jquery-core.js"></script>
+		<script type="text/javascript" src="../../assets_muni/assets/js-core/jquery-core.js"></script>
 
 		<!-- Bootstrap -->
-		<script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../assets_muni/assets/bootstrap/js/bootstrap.js"></script>
 
 		<!-- JQuery UI -->
 		<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 		<!-- <script type="text/javascript" src="assets/js-core/jquery-ui-core.js"></script> -->
 
-		<script type="text/javascript" src="assets/js-core/modernizr.js"></script>
-		<script type="text/javascript" src="js/funciones.js"></script>
+		<script type="text/javascript" src="../../assets_muni/assets/js-core/modernizr.js"></script>
+		<script type="text/javascript" src="../../assets_muni/js/funciones.js"></script>
 
 
 		<script type="text/javascript">
@@ -219,14 +219,14 @@
   						<div id="header-nav-right">
                   <div class=" dropdown user-account-btnn">
                     <a href="#" title="Soy Administrador" class="user-profile " data-toggle="dropdown">
-                      <img width="28" src="assets/image-resources/gravatar.jpg" alt="Administrador">
+                      <img width="28" src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="Administrador">
                     </a>
                     <div class="dropdown-menu ">
                       <div class="box-sm">
                         <div class="login-box clearfix">
                           <div class="user-img">
                             <a href="#" title="" class="change-img">Cambiar foto</a>
-                            <img src="assets/image-resources/gravatar.jpg" alt="">
+                            <img src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="">
                           </div>
                           <div class="user-info">
                             <span>
@@ -524,7 +524,7 @@
 																		<div class="container footercontainer">
 																			<div class="row">
 																				<div class="col-lg-6 col-md-12 footerseccion1">
-																					<img src="img/logo_vedablanco.svg" width="45%"></img>
+																					<img src="../../assets_muni/img/logo_vedablanco.svg" width="45%"></img>
 																					<h5 class=" sistema">SIPREG</h5>
 																					<p class="nombreSistema">Sistema De Planeación de Recursos Gubernamentales</p>
 																				</div>
@@ -560,21 +560,21 @@
 											<script type="text/javascript">var base_url = "";</script>
 
 											<!-- SELECT CHOSEN-->
-											<link rel="stylesheet" type="text/css" href="assets/widgets/chosen/chosen.css">
-											<script type="text/javascript" src="assets/widgets/chosen/chosen.js"></script>
-											<script type="text/javascript" src="assets/widgets/chosen/chosen-demo.js"></script>
+											<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/chosen/chosen.css">
+											<script type="text/javascript" src="../../assets_muni/assets/widgets/chosen/chosen.js"></script>
+											<script type="text/javascript" src="../../assets_muni/assets/widgets/chosen/chosen-demo.js"></script>
 
 											<!-- INPUT SWITCH -->
-											<link rel="stylesheet" type="text/css" href="assets/widgets/input-switch/inputswitch.css">
-											<link rel="stylesheet" type="text/css" href="assets/widgets/input-switch/inputswitch-alt.css">
-											<link rel="stylesheet" type="text/css" href="assets/widgets/theme-switcher/themeswitcher.css">
-											<script type="text/javascript" src="assets/widgets/input-switch/inputswitch.js"></script>
+											<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/input-switch/inputswitch.css">
+											<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/input-switch/inputswitch-alt.css">
+											<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/theme-switcher/themeswitcher.css">
+											<script type="text/javascript" src="../../assets_muni/assets/widgets/input-switch/inputswitch.js"></script>
 
 
 
 											<!-- DATEPICKER -->
-											<link rel="stylesheet" type="text/css" href="assets/widgets/datepicker/datepicker.css">
-											<script type="text/javascript" src="assets/widgets/datepicker/datepicker.js"></script>
+											<link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/datepicker/datepicker.css">
+											<script type="text/javascript" src="../../assets_muni/assets/widgets/datepicker/datepicker.js"></script>
 
 											<script>
 											         $(function()
