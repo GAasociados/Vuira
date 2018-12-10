@@ -362,7 +362,7 @@ class view_claves_fraccionamiento
          innerTableContent += "<input type='hidden' id='clave_ind_"+data[i].Cuenta_Predial+"' name='id_clave_ind' value='"+data[i][element]+"' >"
        }
 		 }
-		 innerTableContent += "<td><input type='button' name='"+data[i].Cuenta_Predial+"' value='Seleccionar' onclick='event_select_entry(this)'></td>";
+		 innerTableContent += "<td><input type='button' class='btn btn-info' name='"+data[i].Cuenta_Predial+"' value='Seleccionar' onclick='event_select_entry(this)'></td>";
 		 innerTableContent += "</tr>";
 	 }
      $("#tblinmubles").append(innerTableContent);

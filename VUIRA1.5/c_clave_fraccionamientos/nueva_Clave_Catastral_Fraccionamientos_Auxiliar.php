@@ -162,6 +162,9 @@ ini_set("display_errors",1);
 	<script type="text/javascript" src="../../assets_muni/assets/js-core/modernizr.js"></script>
 	<script type="text/javascript" src="../../assets_muni/js/funciones.js"></script>
 
+	<!-- NUESTRO SCRIPT -->
+	<script type="text/javascript" src="./../js/view_claves_cat_fraccionamiento.js"></script>
+
 
 	<script type="text/javascript">
 		$(window).load(function () {
@@ -409,8 +412,7 @@ ini_set("display_errors",1);
 
 										      <div id="panel-datos-cuenta-suspendida" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
-										        
-										         
+										        	<?php include_once ('cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
 
