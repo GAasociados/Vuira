@@ -3,8 +3,11 @@ rowSelectedContent="";
 var esPrimerCuenta = "si";
 var esPrimerCarga = 1;
 var mensajeSubmitAux = "Error";
-var id_bd =0;
+var id_bd = 0;
+//se utiliza en ventanilla y auxiliae
 var cuentas_asignadas = 0;
+//se utiliza en ventanilla
+var numeros_asignados = 0;
 
 function dirigir_main_page()
 {
@@ -50,7 +53,6 @@ function event_load_auxiliar()
 {
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
-  //objVista.get_data_details($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
 
   $( "#form" ).submit(function( event ) {
@@ -62,15 +64,10 @@ function event_load_auxiliar()
 
 function event_load_ventanilla()
 {
+  var objVista=new view_claves_fraccionamiento();
+  objVista.load_data_fraccionamientos( $("#id").val() );
+  objVista.load_data_fraccionamientos_detalles( $("#id").val() );
 
-
-  //valida la caja cuenta predial
-  if($("#id").val()!="")
-  {
-    var objVista=new view_claves_fraccionamiento();
-    objVista.load_data_fraccionamientos( $("#id").val() );
-    objVista.load_data_fraccionamientos_detalles( $("#id").val() );
-  }
   //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
   $(".custom-file-input").change(function(event){
     var padre = $(this).parent()
@@ -93,12 +90,10 @@ function event_load_ventanilla()
     }
   });
 
+  //evento para generar el talon
   $("#imprimirTalon").click( function()
   {
-    var fecha_ini = $("#fecha-inicio").val();
-    var fecha_final = $("#fecha-entrega").val();
-    window.open("../../PDFGen/pdfGenTalon.php?fecha_ini="+fecha_ini+"&"+"fecha_final="+fecha_final, "_blank");
-    document.getElementById('formVentanilla').submit();
+    new view_claves_fraccionamiento().setup_generate_talon();
   });
 }
 
@@ -404,8 +399,8 @@ class view_claves_fraccionamiento
     innerTableContent += "</div>"
   	innerTableContent += "</td>";
   	innerTableContent += "<td>";
-  	innerTableContent += "<input type='button' name='' value='Generar Clave' onclick='event_generar_clave(this)'>";
-  	innerTableContent += "<input type='button' name='' value='Cancelar' onclick='event_cancelar_selection()'>";
+  	innerTableContent += "<input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'>";
+  	innerTableContent += "<input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'>";
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();
@@ -438,18 +433,24 @@ class view_claves_fraccionamiento
 
   setup_generate_talon()
   {
+    var fecha_ini = $("#fecha-inicio").val();
+    var fecha_final = $("#fecha-entrega").val();
+    window.open("../../PDFGen/pdfGenTalon.php?fecha_ini="+fecha_ini+"&"+"fecha_final="+fecha_final, "_blank");
+    //document.getElementById('formVentanilla').submit();
+    for (var i = 0; i < numeros_asignados.length; i++) 
+    {
+      new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
+    }
 
   }
 
 
-  get_numeros_consecutivos()
+  get_numeros_consecutivos(numero)
   {
-    console.log( cuentas_asignadas.length );
-
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/actualizacion_no_seguimiento.php",
-      data:{no:cuentas_asignadas.length},
+      data:{no:numero},
       async:true,
       success: function (jdata)
       {
@@ -457,9 +458,8 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
-          console.log("LOS NUMEROS CONSECUTIVOS SON");
-          console.log(data);
-          new view_claves_fraccionamiento().set_folio_fracc_detalles(data);
+          //obtiene solo los valores de la llave
+          numeros_asignados = Object.keys(data).map(function (key) { return data[key]; });
         }
         else
         {
@@ -469,25 +469,24 @@ class view_claves_fraccionamiento
     });
   }
 
-  set_folio_fracc_detalles(data)
+  set_folio_fracc_detalles(indice)
   {
-    var numeros = Object.keys(data).map(function (key) { return data[key]; });
-    var url = this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/actualizacion_no_seguimiento.php";
-    for (var i = 0; i < numeros.length; i++) 
+    //var url = this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php";
+    /*for (var i = 0; i < numeros_asignados.length; i++) 
     {
       (function (i) 
         {
           $.ajax({
             type:"post",
             url:url,
-            data:{no:numeros[i]},
+            data:{id:$("#id").val, cuenta_predial:cuentas_asignadas[i]["Cuenta_Predial"], folio:numeros_asignados[i]},
             async:true,
             success: function (jdata)
             {
               console.log(jdata);
               if(jdata != "Error")
               {
-                 console.log("CUENTA PREDIAL: "+ cuentas_asignadas[i]["Cuenta_Predial"] +" VALOR DE I:" +numeros[i]);
+                 console.log("CUENTA PREDIAL: "+ cuentas_asignadas[i]["Cuenta_Predial"] +" VALOR DE I:" +numeros_asignados[i]);
               }
               else
               {
@@ -497,7 +496,27 @@ class view_claves_fraccionamiento
           });
         })
       (i); 
-    }
+    }*/
+
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php",
+      data:{id:$("#id").val(),cuenta_predial:cuentas_asignadas[indice]["Cuenta_Predial"],folio:numeros_asignados[indice]},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+
+          console.log(jdata);
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
   }
 
   setup_generate_clave()
@@ -572,7 +591,6 @@ class view_claves_fraccionamiento
     for (var i = 0; i < Object.keys(data).length; i++)
     {
       new view_claves_fraccionamiento().get_predial( data[i]["Cuenta_Predial"] );
-      console.log("NUMERO DE ENVIOS DE CUENTAS"+Object.keys(data).length);
     }
   }
 
@@ -689,6 +707,8 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           console.log(data);
           new view_claves_fraccionamiento().set_data_form_detalles(data);
+          cuentas_asignadas = data;
+          new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
         }
         else
         {

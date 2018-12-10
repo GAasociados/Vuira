@@ -6,17 +6,14 @@ ini_set("display_errors",1);
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-	<meta charset="UTF-8">
-
-	<title> Auxiliar Clave Catastral Fraccionamientos </title>
-	<meta name="description" content="">
-	<link rel="shortcut icon" href="../..assets_muni/img/irapuato.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+	<head>
+		<meta charset="UTF-8">
+		<title> Auxiliar Clave Cambiartastral Fraccionamientos </title>
+		<meta name="description" content="">
+		<link rel="shortcut icon" href="../..assets_muni/img/irapuato.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<!--#region CSS  -->
-
-	<style>
+		<style>
 		/* Loading Spinner */
 		.spinner {
 			margin: 0;
@@ -165,7 +162,6 @@ ini_set("display_errors",1);
 	<!-- NUESTRO SCRIPT -->
 	<script type="text/javascript" src="./../js/view_claves_cat_fraccionamiento.js"></script>
 
-
 	<script type="text/javascript">
 		$(window).load(function () {
 			setTimeout(function () {
@@ -177,15 +173,13 @@ ini_set("display_errors",1);
 		  $('[data-toggle="tooltip"]').tooltip()
 		});
 
-
 	</script>
 
 	<!--#endregion -->
 
-</head>
+	</head>
 	<body onload="event_load_auxiliar()">
-		<!-- <div id="sb-site"> -->
-			<div id="baseUrl" base-url=""></div>
+		<div id="baseUrl" base-url=""></div>
 			<div id="loading">
 				<div class="spinner">
 					<div class="bounce1"></div>
@@ -194,159 +188,149 @@ ini_set("display_errors",1);
 				</div>
 			</div>
 			<!-- FIN loading -->
-
-				<div id="page-wrapper">
-					<div id="page-header" class="bg-gradient-9">
-						<div id="mobile-navigation">
-							<button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar">
-								<span></span>
-							</button>
-							<a href="" class="logo-content-small" title="SIPREG"></a>
-						</div>
-						<div id="header-logo" class="logo-bg">
-							<a href="" class="logo-content-big" title="SIPREG">
-								SIPREG
-								<span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
-							</a>
-							<a href="" class="logo-content-small" title="SIPREG">
-								SIPREG
-								<span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
-							</a>
-							<a id="close-sidebar" href="#" title="Close sidebar">
-								<i class="glyph-icon icon-angle-left"></i>
-							</a>
-                      </div>
-
-
-						<!-- #header-nav-right -->
-
-						<div id="header-nav-right">
-              <div class=" dropdown user-account-btnn">
-                <a href="#" title="Soy Administrador" class="user-profile " data-toggle="dropdown">
-                  <img width="28" src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="Administrador">
-                </a>
-                <div class="dropdown-menu ">
-                  <div class="box-sm">
-                    <div class="login-box clearfix">
-                      <div class="user-img">
-                        <a href="#" title="" class="change-img">Cambiar foto</a>
-                        <img src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="">
-                      </div>
-                      <div class="user-info">
-                        <span>
-														Soy Administrador
-                          <i>DTI Desarrollador</i>
-                        </span>
-                        <a href="#" title="Editar perfíl">Perfíl</a>
-                        <a href="#" title="Ver Notificaciones">Notificaciones</a>
-                      </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="pad5A button-pane button-pane-alt text-center">
-                      <a href="logout/" class="btn display-block font-normal btn-danger">
-                        <i class="glyph-icon icon-power-off"></i>
-                        Salir
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-							<a href="#" class="hdr-btn iconos" id="fullscreen-btn" title="Pantalla completa">
-								<i class="glyph-icon icon-arrows-alt"></i>
-							</a>
-
-							<a class="header-btn iconos" id="logout-btn"href="logout/" title="Bloquear">
-								<i class="glyph-icon icon-linecons-lock"></i>
-							</a>
-
-						</div>
-						<!-- #header-nav-right -->
-
+			<div id="page-wrapper">
+				<div id="page-header" class="bg-gradient-9">
+					<div id="mobile-navigation">
+						<button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar">
+							<span></span>
+						</button>
+						<a href="" class="logo-content-small" title="SIPREG"></a>
 					</div>
+					<div id="header-logo" class="logo-bg">
+						<a href="" class="logo-content-big" title="SIPREG">
+							SIPREG
+							<span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
+						</a>
+						<a href="" class="logo-content-small" title="SIPREG">
+							SIPREG
+							<span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
+						</a>
+						<a id="close-sidebar" href="#" title="Close sidebar">
+							<i class="glyph-icon icon-angle-left"></i>
+						</a>
+					</div>
+					<!-- #header-nav-right -->
+					<div id="header-nav-right">
+						<div class=" dropdown user-account-btnn">
+							<a href="#" title="Soy Administrador" class="user-profile " data-toggle="dropdown">
+								<img width="28" src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="Administrador">
+							</a>
+							<div class="dropdown-menu ">
+								<div class="box-sm">
+									<div class="login-box clearfix">
+										<div class="user-img">
+											<a href="#" title="" class="change-img">Cambiar foto</a>
+											<img src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="">
+										</div>
+										<div class="user-info">
+											<span>
+												Soy Administrador
+												<i>DTI Desarrollador</i>
+											</span>
+											<a href="#" title="Editar perfíl">Perfíl</a>
+											<a href="#" title="Ver Notificaciones">Notificaciones</a>
+										</div>
+									</div>
+									<div class="divider">
+									</div>
+									<div class="pad5A button-pane button-pane-alt text-center">
+										<a href="logout/" class="btn display-block font-normal btn-danger">
+											<i class="glyph-icon icon-power-off"></i>
+											Salir
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="hdr-btn iconos" id="fullscreen-btn" title="Pantalla completa">
+							<i class="glyph-icon icon-arrows-alt"></i>
+						</a>
+						<a class="header-btn iconos" id="logout-btn"href="logout/" title="Bloquear">
+							<i class="glyph-icon icon-linecons-lock"></i>
+						</a>
+					</div>
+					<!-- #header-nav-right -->
 				</div>
-              <!-- FIN page-wrapper -->
-								<!--#region Menú  -->
-								<div id="page-sidebar">
-								<div class="scroll-sidebar">
-									<ul id="sidebar-menu">
-										<li class="header">
-											<span>CLAVE CATASTRAL FRACCIONAMIENTOS</span>
+			</div>
+			<!-- FIN page-wrapper -->
+			<!--#region Menú  -->
+			<div id="page-sidebar">
+				<div class="scroll-sidebar">
+					<ul id="sidebar-menu">
+						<li class="header">
+							<span>CLAVE CATASTRAL FRACCIONAMIENTOS</span>
+						</li>
+						<li>
+							<li>
+								<a href="">
+									<i class="glyph-icon icon-ban"></i>
+									<span>Acción 1 del Trámite </span>
+								</a>
+							</li>
+							<li class="header">
+								<span>IMPUESTOS INMOBILIARIOS</span>
+							</li>
+							<li>
+								<a class="sf-with-ul" href="#" title="Menú 2">
+									<i class="glyph-icon icon-home"></i>
+									<span>PREDIAL</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul >
+										<li style="display: block">
+											<span>Constancias</span>
 										</li>
-										<li>
-										<li>
-											<a href="">
-												<i class="glyph-icon icon-ban"></i>
-												<span>Acción 1 del Trámite </span>
-											</a>
+										<li style="display: block">
+											<a href=""><span>Constancia de Propiedad</span></a>
 										</li>
-
-										<li class="header">
-											<span>IMPUESTOS INMOBILIARIOS</span>
+										<li style="display: block" class="header">
+											<span>Catalogos</span>
 										</li>
-										<li>
-											<a class="sf-with-ul" href="#" title="Menú 2">
-												<i class="glyph-icon icon-home"></i>
-												<span>PREDIAL</span>
-											</a>
-								      <div class="sidebar-submenu">
-												<ul >
-													<li style="display: block">
-														<span>Constancias</span>
-													</li>
-													<li style="display: block">
-															<a href=""><span>Constancia de Propiedad</span></a>
-													</li>
-													<li style="display: block" class="header">
-														<span>Catalogos</span>
-													</li>
-													<li style="display: block">
-														<a href="" title="Cuota minima"><span>Cuota minima</span></a>
-													</li>
-
-
-												</ul>
-								      </div>
+										<li style="display: block">
+											<a href="" title="Cuota minima"><span>Cuota minima</span></a>
 										</li>
-
-
 									</ul>
 								</div>
-								</div>
-								<!--#endregion Menú  -->
-
-								<!-- FIN page-sidebar -->
-
-								<div id="page-content-wrapper">
-								<div id="page-content">
-									<div class="container">
-										<h2>CLAVE CATASTRAL FRACCIONAMIENTOS</h2><br>
-										<div id="panel-captura-avaluo" class="panel">
-										  <div class="panel-body">
-										    <button class="btn btn-success float" title="Guardar Cuenta" id="btnGuardarCtaSuspendida">
-										      Guardar Trámite
-										        <!-- <i class="glyph-icon icon-save"></i> -->
-										    </button>
-										    <form id="frmCuentaSuspendida">
-										    	<input type="hidden" name="id" id="id" value="<?php
-										    	if(isset($_GET["Id"]))
-										    	{
-										    		echo $_GET["Id"];
-										    	}
-										    	?>" />
-										    	<input type="hidden" name="uid" id="uid" value="<?php
-										    	if(isset($_GET['uid']))
-										    	{
-										    		echo $_GET["uid"];
-										    	}
-										    	?>">
-										    	<div id="panel-fecha_recep" class="content-box border-top border-blue">
-										        <div class="content-box-wrapper">
-										        <h3 class="title-hero">I. Documentos del Inmueble</h3>
-										          <div class="row">
-										            <div class="col-md-6">
-										            	<div class="form-group">
-										            		<label for="">Identificación de Propietario (INE,Pasaporte,Cédula Profesional)</label>
-										            		<a id="Doc_Identificacion" name="Doc_Identificacion" href="" target="_blank"> Ver Documento </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--#endregion Menú  -->
+				<!-- FIN page-sidebar -->
+				<div id="page-content-wrapper">
+					<div id="page-content">
+						<div class="container">
+							<h2>CLAVE CATASTRAL FRACCIONAMIENTOS</h2><br>
+							<div id="panel-captura-avaluo" class="panel">
+								<div class="panel-body">
+									<button class="btn btn-success float" title="Guardar Cuenta" id="btnGuardarFracc">
+										Guardar
+										<!-- <i class="glyph-icon icon-save"></i> -->
+									</button>
+									<button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;">
+										Cancelar
+									</button>
+									<form id="frmCuentaSuspendida">
+										<input type="hidden" name="id" id="id" value="<?php
+										if(isset($_GET["Id"]))
+										{
+											echo $_GET["Id"];
+										}
+										?>"/>
+										<input type="hidden" name="uid" id="uid" value="<?php
+										if(isset($_GET['uid']))
+										{
+											echo $_GET["uid"];
+										}
+										?>">
+										<div id="panel-fecha_recep" class="content-box border-top border-blue">
+											<div class="content-box-wrapper">
+												<h3 class="title-hero">I. Documentos del Inmueble</h3>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="">Identificación de Propietario INE,Pasaporte,Cédula Profesional)</label>
+															<a id="Doc_Identificacion" name="Doc_Identificacion" href="" target="_blank"> Ver Documento </a>
 										            	</div>
 										            </div>
 										            <div class="col-md-6">
@@ -355,11 +339,11 @@ ini_set("display_errors",1);
 										            		<a id="Doc_Oficio_Traza" name="Doc_Oficio_Traza" href="" target="_blank"> Ver Documento </a>
 										            	</div>
 										            </div>
-										          </div>
-										          <div class="row">
-										            <div class="col-md-6">
-										            	<div class="form-group">
-										            		<label for="">Recibo Predial actualizado general y/o Cuentas Prediales Individuales</label>
+										        </div>
+										        <div class="row">
+										        	<div class="col-md-6">
+										        		<div class="form-group">
+										        			<label for="">Recibo Predial actualizado general y/o Cuentas Prediales Individuales</label>
 										            		<a id="Doc_Resibo_Predial" name="Doc_Resibo_Predial" href="" target="_blank"> Ver Documento </a>
 										            	</div>
 										            </div>
@@ -418,38 +402,37 @@ ini_set("display_errors",1);
 
 										      <div id="panel-datos-cuenta-suspendida2" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
-										          <h3 class="title-hero">II. IDENTIFICACI&Oacute;N Y UBICACI&Oacute;N DEL INMUEBLE</h3>
+										          <h3 class="title-hero">III. DATOS DEL PROPIETARIO Y/O REPRESENTANTE</h3>
 										          <div class="bordered-row">
 										            <div class="row">
 										              <div class="col-md-5">
 										                <div class="form-group">
-										                  <label class="control-label">Col./Fracc./Cond./Barrio/C./Predio/Ejido</label>
-										                  <select class="chosen-select"  data-placeholder="Seleccione una Opción" id="select-colonia_inmueble" name="colonia_id_inmueble" value=""></select>
+										                  <label class="control-label">Nombre completo del propietario</label>
+										                  <input type="text" class="form-control" id="Propietario" name="Propietario" value=""></select>
 										                </div>
 										                <div class="form-group">
-										                  <label class="control-label">Calle</label>
-										                  <select type="text" data-placeholder="Seleccione una Opción" class="chosen-select"  id="input-calle_inmueble" name="calle_id_inmueble" value="" ></select>
+										                  <label class="control-label">Correo Electronico</label>
+										                  <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  value="" ></select>
 										                </div>
 
 										              </div>
 
 										              <div class="col-md-7" id="Superficie">
 										                <div class="form-group">
-										                  <label>Superficie</label>
+										                  <label>Telefono</label>
 										                  <div class="row">
 										                    <div class="col-xs-6 col-md-6">
-										                     <input type="text" class="form-control" id="input-superficie_inmueble" name="superficie_inmueble" value="" >
-										                    </div>
-										                    <div class="col-xs-3 col-md-6">
-										                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi" checked name="sup_inmueble_swi" value="M">M<sup>2</sup></label>
-										                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="sup_inmueble_swi" value="H">HAS</label>
+										                     <input type="text" class="form-control" id="Telefono" name="Telefono" value="" >
 										                    </div>
 										                  </div>
 										                </div>
-
 										                <div class="form-group" >
-										                  <label class="control-label">Uso Actual</label>
-										                  <select id="select-uso_actual" name="uso_predio_id" data-placeholder="Seleccione una Opción" class="chosen-select" required autofocus></select>
+										                  <label class="control-label">Tipo de Tramite que solicita</label>
+										                  <select id="Tipo_Tramite" name="Tipo_Tramite"data-placeholder="Seleccione una Opción" class="chosen-select" >
+										                  	 <option selected>Elegir trámite...</option>
+											                 <option value="1">Asignación de Claves Catastrales</option>
+											                 <option value="2">Modificación de Clave Catastrales</option>
+										                  </select>
 										                </div>
 
 										              </div><!-- FIN SUPERFICE-->
@@ -457,36 +440,6 @@ ini_set("display_errors",1);
 										          </div>
 										        </div>
 										      </div>
-													<div id="panel-fecha_recep" class="content-box border-top border-blue">
-														<div class="content-box-wrapper">
-															 <h3 class="title-hero">III. EXPEDIENTES</h3>
-															<div class="row">
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label for="">Formato de solicitud suscrito por el propietario, representante legal o referente del mismo</label>
-																		<input  type="file" name="reporte_fotografico-1[]" id="reporte_fotografico-1" multiple/>
-																	</div>
-																	<div class="form-group">
-																		<label for="">Copia de identificaci&oacute;n oficial de propietario/a</label>
-																		<input type="file" name="reporte_fotografico-2[]" id="reporte_fotografico-2" multiple/>
-																	</div>
-
-																</div>
-																<div class="col-md-6">
-
-																	<div class="form-group">
-																		<label for="">Copia de t&iacute;tulo de propiedad (para predios r&uacute;sticos)</label>
-																		<input type="file" name="reporte_fotografico-6[]" id="reporte_fotografico-6" multiple/>
-																	</div>
-																	<div class="form-group">
-																		<label for="">Copia de recibo predial actualizado o edo. de cuenta</label>
-																		<input type="file" name="reporte_fotografico-7" id="reporte_fotografico-7"/>
-																	</div>
-
-																</div>
-															</div>
-														</div>
-													</div>
 										    </form>
 										  </div>
 										</div>

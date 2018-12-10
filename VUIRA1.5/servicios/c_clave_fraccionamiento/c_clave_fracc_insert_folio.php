@@ -20,7 +20,7 @@ class dataFraccionamientos_detalles
 		$query = "UPDATE claves_catastrales_fraccionamientos_detalles 
 				SET Folio = $folio 
 				WHERE claves_catastrales_fraccionamientos_detalles.Cuenta_Predial = '$cuenta_predial'
-				AND claves_catastrales_fraccionamientos_detalles.Id_Fraccionamientos = ;";
+				AND claves_catastrales_fraccionamientos_detalles.Id_Fraccionamientos = '$id'";
 		$mensaje = $this->con->sqlOperations($query);
 		return $mensaje;
 	}
