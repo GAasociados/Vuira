@@ -109,6 +109,8 @@ class detFracc
         SELECT
         fraccDet.Cuenta_Predial,
         fraccDet.Calle,
+        fraccDet.Manzana,
+        fraccDet.Lote,
         fraccDet.Numero_Ext,
         fraccDet.Numero_Int,
         fraccDet.Colonia,

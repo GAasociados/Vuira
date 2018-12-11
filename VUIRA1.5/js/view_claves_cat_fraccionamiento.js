@@ -80,6 +80,7 @@ function event_load_auxiliar()
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
 
   $( "#form" ).submit(function( event ) {
+    event.preventDefault();
     objVista.update_status_fraccionamientos( $("#id").val() );
     if ( mensajeSubmitAux == 0)
       return true;
@@ -99,14 +100,6 @@ function event_load_ventanilla()
   {
     console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
   }
-
-  //sirve para insertar el lote y manzana en la tabla detalles
-  $(".btn-manzana").click(function(){
-    console.log("SE HA MANZANA");
-  });
-  $(".btn-lote").click(function(){
-    console.log("SE HA LOTE");
-  });
 
   //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
   $(".custom-file-input").change(function(event){
@@ -424,7 +417,7 @@ class view_claves_fraccionamiento
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='numero_oficio' class='control-label'> Número de Oficio * <input type='text' id='numero_oficio' class='form-control'></div>";
     innerTableContent += "</div>"
     innerTableContent += "<div class='form-row'>"
-  	innerTableContent += "<div class='form-group col-md-4 col'><label for='estado_escritura' class='control-label'>Estado de Escritura *</label> <input type='text' id='estado_escitura' class='form-control'></div>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='estado_escritura' class='control-label'>Entidad Federativa *</label> <input type='text' id='estado_escitura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='ciudad_escritura' class='control-label'>Ciudad de Escritura *</label> <input type='text' id='ciudad_escritura' class='form-control'></div>";
     innerTableContent += "</div>"
   	innerTableContent += "</td>";

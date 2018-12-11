@@ -303,14 +303,14 @@ ini_set("display_errors",1);
 							<h2>CLAVE CATASTRAL FRACCIONAMIENTOS</h2><br>
 							<div id="panel-captura-avaluo" class="panel">
 								<div class="panel-body">
-									<button class="btn btn-success float" title="Guardar Cuenta" id="btnGuardarFracc">
+									<button class="btn btn-success float" title="Guardar Cuenta" id="btnGuardarFracc" form="form">
 										Guardar
 										<!-- <i class="glyph-icon icon-save"></i> -->
 									</button>
 									<button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;">
 										Cancelar
 									</button>
-									<form id="frmCuentaSuspendida">
+									<form id="form">
 										<input type="hidden" name="id" id="id" value="<?php
 										if(isset($_GET["Id"]))
 										{
@@ -408,11 +408,11 @@ ini_set("display_errors",1);
 										              <div class="col-md-5">
 										                <div class="form-group">
 										                  <label class="control-label">Nombre completo del propietario</label>
-										                  <input type="text" class="form-control" id="Propietario" name="Propietario" value=""></select>
+										                  <input type="text" class="form-control" id="Propietario" name="Propietario" value="" required></select>
 										                </div>
 										                <div class="form-group">
 										                  <label class="control-label">Correo Electronico</label>
-										                  <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  value="" ></select>
+										                  <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  value="" required></select>
 										                </div>
 
 										              </div>
@@ -422,13 +422,13 @@ ini_set("display_errors",1);
 										                  <label>Telefono</label>
 										                  <div class="row">
 										                    <div class="col-xs-6 col-md-6">
-										                     <input type="text" class="form-control" id="Telefono" name="Telefono" value="" >
+										                     <input type="text" class="form-control" id="Telefono" name="Telefono" value="" required>
 										                    </div>
 										                  </div>
 										                </div>
 										                <div class="form-group" >
 										                  <label class="control-label">Tipo de Tramite que solicita</label>
-										                  <select id="Tipo_Tramite" name="Tipo_Tramite"data-placeholder="Seleccione una Opción" class="chosen-select" >
+										                  <select id="Tipo_Tramite" name="Tipo_Tramite"data-placeholder="Seleccione una Opción" class="chosen-select" required>
 										                  	 <option selected>Elegir trámite...</option>
 											                 <option value="1">Asignación de Claves Catastrales</option>
 											                 <option value="2">Modificación de Clave Catastrales</option>
