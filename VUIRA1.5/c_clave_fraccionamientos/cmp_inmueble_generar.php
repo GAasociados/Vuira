@@ -31,7 +31,7 @@ ini_set("display_errors",1);
 	<input class="form-control" type="text" id="p_numero_oficio">
 </div>
 <div class="form-group col-md-6">
-	<label class="control-label">Estado de Escritura *</label>
+	<label class="control-label">Entidad Federativa *</label>
 	<input class="form-control" type="text" id="p_estado_escritura">
 </div>
 <div class="form-group col-md-6">
@@ -48,6 +48,8 @@ ini_set("display_errors",1);
 				<th scope="col"> Calle </th>
 				<th scope="col"> Numero Exterior </th>
 				<th scope="col"> Numero Interior </th>
+				<th scope="col"> Manzana </th>
+				<th scope="col"> Lote </th>
 				<th scope="col"> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido </th>
 				<th scope="col"> Acciones </th>
 			</tr>

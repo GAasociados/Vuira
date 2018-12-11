@@ -1,23 +1,12 @@
 rowSelected = "";
 rowSelectedContent="";
 var esPrimerCuenta = "si";
-var esPrimerCarga = 1;
 var mensajeSubmitAux = "Error";
 var id_bd = 0;
 //se utiliza en ventanilla y auxiliae
 var cuentas_asignadas = 0;
 //se utiliza en ventanilla
 var numeros_asignados = 0;
-
-function dirigir_main_page()
-{
-  window.location.replace("https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamiento");
-}
-
-function realizarSubmit()
-{
-  $( "#form" ).submit();
-}
 
 function event_add_cuenta_predial()
 {
@@ -40,6 +29,41 @@ function event_pulsar_enter(event)
     event_add_cuenta_predial();
   }
 }
+
+function event_update_manzana(inputName)
+{
+  if (event.keyCode == 13) 
+  {
+    event.preventDefault();
+    if ( inputName.value != "")
+    {
+      console.log( inputName.name );
+      new view_claves_fraccionamiento().update_manzana(inputName.name, inputName.value);
+    }
+    else
+    {
+      alert("DEBE INGRESAR INFORMACION");
+    }
+  }
+}
+
+function event_update_lote(inputName)
+{
+  if (event.keyCode == 13) 
+  {
+    event.preventDefault();
+    if ( inputName.value != "")
+    {
+      console.log( inputName.name );
+      new view_claves_fraccionamiento().update_lote(inputName.name, inputName.value);
+    }
+    else
+    {
+      alert("DEBE INGRESAR INFORMACION");
+    }
+  }
+}
+
 
 function event_remove_clave(buttonName)
 {
@@ -64,9 +88,25 @@ function event_load_auxiliar()
 
 function event_load_ventanilla()
 {
-  var objVista=new view_claves_fraccionamiento();
-  objVista.load_data_fraccionamientos( $("#id").val() );
-  objVista.load_data_fraccionamientos_detalles( $("#id").val() );
+  var id = $("#id").val();
+  if ( id !== "")
+  {
+    var objVista=new view_claves_fraccionamiento();
+    objVista.load_data_fraccionamientos( $("#id").val() );
+    objVista.load_data_fraccionamientos_detalles( $("#id").val() );
+  }
+  else
+  {
+    console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
+  }
+
+  //sirve para insertar el lote y manzana en la tabla detalles
+  $(".btn-manzana").click(function(){
+    console.log("SE HA MANZANA");
+  });
+  $(".btn-lote").click(function(){
+    console.log("SE HA LOTE");
+  });
 
   //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
   $(".custom-file-input").change(function(event){
@@ -150,27 +190,11 @@ class view_claves_fraccionamiento
         console.log(jdata);
         if(jdata != "Error")
         {
-          var id = $("#id").val();
           var data = JSON.parse(jdata);
           new view_claves_fraccionamiento().set_nombre_propietario(data);
-
-          //si es nuevo trámite
-          if (typeof id == undefined)
-          {
-            new view_claves_fraccionamiento().set_to_grid(data);
-          }
-          // si se edita un trámite existente
-          else if ( esPrimerCarga === 0 )
-          {
-            new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
-            new view_claves_fraccionamiento().set_to_grid(data);
-          }
-          // para mostrar la cuenta de un trámite existente
-          else
-          {
-            esPrimerCarga = 0;
-            new view_claves_fraccionamiento().set_to_grid(data);
-          }
+          new view_claves_fraccionamiento().set_to_grid(data);
+          new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
+          console.log(data);
         }
         else
         {
@@ -195,7 +219,6 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           console.log("LOS SIGUIENTES SON DATA");
           cuentas_asignadas = data;
-          new view_claves_fraccionamiento().get_numeros_consecutivos();
           new view_claves_fraccionamiento().set_data_grid_aux(data);
           console.log(data);
         }
@@ -303,14 +326,21 @@ class view_claves_fraccionamiento
      var innerTableContent = "<tr id='"+data.CUENTA_PREDIAL+"'>";
      innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"'>"+ data.CUENTA_PREDIAL;
      innerTableContent += "<input type='hidden' name='S1_C_"+data.CUENTA_PREDIAL+"' value='"+data.CUENTA_PREDIAL+"' ></td>";
-     innerTableContent += "<td name='"+data.CALLE_ID+"'>"+ data.CALLE_ID+
-          "<input type='hidden' name='S1_CC_"+data.CUENTA_PREDIAL+"' value='"+data.CALLE_ID+"' ></td>";
+     innerTableContent += "<td name='"+data.NOMBRE_CALLE+"'>"+ data.NOMBRE_CALLE+
+          "<input type='hidden' name='S1_CC_"+data.CUENTA_PREDIAL+"' value='"+data.NOMBRE_CALLE+"' ></td>";
+      //MANZANA
+     innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
+          "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_manzana(this)'></td>";
+     //LOTE  
+     innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
+          "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_lote(this)'></td>";
+
      innerTableContent += "<td name='"+data.NO_EXTERIOR+"'>"+ data.NO_EXTERIOR+
           "<input type='hidden' name='S1_NE_"+data.CUENTA_PREDIAL+"' value='"+data.NO_EXTERIOR+"' ></td>";
      innerTableContent += "<td name='"+data.NO_INTERIOR+"'>"+ data.NO_INTERIOR+
           "<input type='hidden' name='S1_NI_"+data.CUENTA_PREDIAL+"' value='"+data.NO_INTERIOR+"' ></td>";
-     innerTableContent += "<td name='"+data.COLONIA_ID+"'>"+ data.COLONIA_ID+
-          "<input type='hidden' name='S1_CCC_"+data.CUENTA_PREDIAL+"' value='"+data.COLONIA_ID+"' ></td>";
+     innerTableContent += "<td name='"+data.NOMBRE_COLONIA+"'>"+ data.NOMBRE_COLONIA+
+          "<input type='hidden' name='S1_CCC_"+data.CUENTA_PREDIAL+"' value='"+data.NOMBRE_COLONIA+"' ></td>";
      innerTableContent += "<td><input type='button' name='"+data.CUENTA_PREDIAL+"' value='borrar' onclick='event_remove_clave(this)'></td>";
      innerTableContent += "</tr>";
      $("#tblinmubles").append(innerTableContent);
@@ -440,13 +470,13 @@ class view_claves_fraccionamiento
     var correo = $("#Correo_Electronico").val();
     var tipo_tramite = $("#Tipo_Tramite").val();
 
-    new view_claves_fraccionamiento().generate_talon(nombre_propietario);
-    //window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo+"&folios="+numeros_asignados, "_blank");
+    //new view_claves_fraccionamiento().generate_talon(nombre_propietario);
+    window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo+"&folios="+numeros_asignados, "_blank");
     for (var i = 0; i < numeros_asignados.length; i++) 
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    //document.getElementById('formVentanilla').submit();
+    document.getElementById('formVentanilla').submit();
   }
 
   generate_talon(nombre_propietario)
@@ -797,6 +827,51 @@ class view_claves_fraccionamiento
         }
       }
     });
+  }
 
+  update_manzana(cuenta_predial,valor)
+  {
+    var id = $("#id").val();
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det_update_manzana.php",
+      data:{id:id,cuenta_predial:cuenta_predial,valor:valor},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          console.log(jdata);
+        }
+        else
+        {
+          alert (jdata);
+        }
+      }
+    });
+  }
+
+  update_lote(cuenta_predial,valor)
+  {
+    var id = $("#id").val();
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det_update_lote.php",
+      data:{id:id,cuenta_predial:cuenta_predial,valor:valor},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          console.log(jdata);
+        }
+        else
+        {
+          alert (jdata);
+        }
+      }
+    });
   }
 }
