@@ -7,14 +7,15 @@ require_once('tcpdf_include.php');
 //$Tipo_Tramite="Escritura Publica";
 //$Tipo_Tramite="Solicitud IMUVII";
 //$Tipo_Tramite="Constancia Ejidal";
-
 $fecha_inicial = "";
 $fecha_final = "";
+$nombre="";
 
-if ( isset($_GET['fecha_ini']) && isset($_GET['fecha_final']) )
+if ( isset($_GET['fecha_ini']) && isset($_GET['fecha_final']) && isset($_POST['nombre']))
 {
 	$fecha_inicial = $_GET['fecha_ini'];
 	$fecha_final = $_GET['fecha_final'];
+	$nombre = $_POST['nombre'];
 }
 
 $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -92,16 +93,6 @@ class CCPDF extends TCPDF {
 		 $this->SetY(-30);
 		 $this->SetFont('helvetica', '', 8);
 	$html2 = <<<EOD
-	<div style=" text-align:Left;padding:0px 0px 0px 0px;">
-	ARCHIVO<br />
-	CAH/CAJ/$this->InF<br />
-	TESORERIA MUNICIPAL / CATASTRO
-	<hr>
-	Álvaro Obregón no. 100 Zona Centro, CP 36500,<br />
-	Tel. 01 (462) 606  99 99 ext. 1566 y 1568<br />
-	Irapuato, Gto.
-
-	</div>
 EOD;
 		$this->writeHTML($html2,true,false,false,false,'L');
     }
@@ -250,30 +241,36 @@ $pdf->SetFont('helvetica', '', 9, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-
-/*Reglas de operacion para los diferentes documentos*/
-
-
-
-
+//aqui agregar el contenido
+//$telefono = $_GET['telefono'];
+//$tipo_tramite = $_GET['tipo_tramite'];
 $html = <<<EOD
-<div style="font-weight: bold; text-align:right;padding:0px 0px 0px 0px;">
-<br />TESORERÍA MUNICIPAL <br />
-DIRECCIÓN DE CATASTRO <br />
-DC/$c_docNum <br />
-Asunto: $tipotramitedp <br />
-Irapuato, Guanajuato, $Fecha <br />
-</div>
-EOD;
-$pdf->writeHTML($html,true,false,false,false,'R');
-
-
-$html = <<<EOD
-<h1>CONTENIDO</h1>
-<label>Fecha de Inicio:</label>
-$fecha_inicial
-<label>Fecha Final:</label>
-$fecha_final
+<table>
+<tr>
+  <td>Nombre</td>
+  <td>$nombre</td>
+</tr>
+<tr>
+  <td>Correo</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Asignacion de clave catastral</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Folios</td>
+  <td>60</td>
+</tr>
+<tr>
+  <td>Fecha Inicio</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Fecha Final</td>
+  <td></td>
+</tr>
+</table>
 EOD;
 $pdf->writeHTML($html,true,false,false,false,'L');
 

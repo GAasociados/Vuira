@@ -435,16 +435,42 @@ class view_claves_fraccionamiento
   {
     var fecha_ini = $("#fecha-inicio").val();
     var fecha_final = $("#fecha-entrega").val();
-    window.open("../../PDFGen/pdfGenTalon.php?fecha_ini="+fecha_ini+"&"+"fecha_final="+fecha_final, "_blank");
-    //document.getElementById('formVentanilla').submit();
+    var nombre_propietario = $("#Propietario").val();
+    var telefono = $("#Telefono").val();
+    var correo = $("#Correo_Electronico").val();
+    var tipo_tramite = $("#Tipo_Tramite").val();
+
+    new view_claves_fraccionamiento().generate_talon(nombre_propietario);
+    //window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo+"&folios="+numeros_asignados, "_blank");
     for (var i = 0; i < numeros_asignados.length; i++) 
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-
+    //document.getElementById('formVentanilla').submit();
   }
 
-
+  generate_talon(nombre_propietario)
+  {
+     $.ajax({
+      type:"post",
+      url:"../../PDFGen/pdfGenTalon.php",
+      data:{nombre:nombre_propietario},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          
+          window.open("../../PDFGen/pdfGenTalon.php", "_blank");
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
   get_numeros_consecutivos(numero)
   {
     $.ajax({
@@ -458,7 +484,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
-          //obtiene solo los valores de la llave
+          //obtiene solo los valores del json
           numeros_asignados = Object.keys(data).map(function (key) { return data[key]; });
         }
         else
@@ -471,33 +497,6 @@ class view_claves_fraccionamiento
 
   set_folio_fracc_detalles(indice)
   {
-    //var url = this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php";
-    /*for (var i = 0; i < numeros_asignados.length; i++) 
-    {
-      (function (i) 
-        {
-          $.ajax({
-            type:"post",
-            url:url,
-            data:{id:$("#id").val, cuenta_predial:cuentas_asignadas[i]["Cuenta_Predial"], folio:numeros_asignados[i]},
-            async:true,
-            success: function (jdata)
-            {
-              console.log(jdata);
-              if(jdata != "Error")
-              {
-                 console.log("CUENTA PREDIAL: "+ cuentas_asignadas[i]["Cuenta_Predial"] +" VALOR DE I:" +numeros_asignados[i]);
-              }
-              else
-              {
-                  alert (jdata);
-              }
-            }
-          });
-        })
-      (i); 
-    }*/
-
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php",
