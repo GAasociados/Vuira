@@ -467,7 +467,7 @@ class view_claves_fraccionamiento
     var telefono = $("#Telefono").val();
     var correo = $("#Correo_Electronico").val();
     var tipo_tramite = $("#Tipo_Tramite").val();
-    var 
+    var clave = cuentas_asignadas[0]["Cuenta_Predial"];
 
     var folios = JSON.stringify(numeros_asignados);
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo

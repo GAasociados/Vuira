@@ -12,15 +12,16 @@ $nombre="";
 $correo = "";
 $folios = "";
 $folios_html = "";
-$clave_catastral = "";
+$clave = "";
 
-if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inicial']) && isset($_GET['fecha_final']) && isset($_GET['folios']) && isset($_GET['clave'])) 
+if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inicial']) && isset($_GET['fecha_final']) && isset($_GET['folios']) && isset($_GET['clave']) ) 
 {
 	$nombre = $_GET['nombre'];
 	$correo = $_GET['correo'];
 	$fecha_inicial = $_GET['fecha_inicial'];
 	$fecha_final = $_GET['fecha_final'];
 	$folios = json_decode($_GET['folios'], true);
+	$clave = $_GET['clave'];
 	error_log("EL NOMBRE ES:".$folios[0]);
 
 	for ($i = 0; $i < count($folios); $i++)
@@ -130,32 +131,45 @@ $pdf->AddPage();
 //$tipo_tramite = $_GET['tipo_tramite'];
 $html = <<<EOD
 <table>
-<tr>
-  <td align="center">Nombre</td>
+<tr align="center">
+  <td>Nombre</td>
 </tr>
 <tr align="center">
-	<td>$nombre</td>
+  <td>$nombre</td>
+</tr>
+<br>
+<tr align="center">
+  <td>Correo</td>
 </tr>
 <tr align="center">
-  	<td>Correo</td>
+  <td>$correo</td>
 </tr>
+<br>
 <tr align="center">
-	<td>$correo</td>
-</tr>
-<tr>
   <td>Asignacion de clave catastral</td>
-  <td></td>
 </tr>
-<tr>
+<tr align="center">
+  <td>$clave</td>
+</tr>
+<br>
+<tr align="center">
   <td>Folios</td>
+</tr>
+<tr align="center">
   <td>$folios_html</td>
 </tr>
-<tr>
+<br>
+<tr align="center">
   <td>Fecha Inicio</td>
+</tr>
+<tr align="center">
   <td>$fecha_inicial</td>
 </tr>
-<tr>
+<br>
+<tr align="center">
   <td>Fecha Final</td>
+</tr>
+<tr align="center">
   <td>$fecha_final</td>
 </tr>
 </table>
