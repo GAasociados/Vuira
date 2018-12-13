@@ -22,8 +22,6 @@ if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inic
 	$fecha_final = $_GET['fecha_final'];
 	$folios = json_decode($_GET['folios'], true);
 	$clave = $_GET['clave'];
-	error_log("EL NOMBRE ES:".$folios[0]);
-
 	for ($i = 0; $i < count($folios); $i++)
 	{
 		$folios_html .= $folios[$i].", ";
@@ -120,7 +118,7 @@ $pdf->setFontSubsetting(true);
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-$pdf->SetFont('helvetica', '', 9, '', true);
+$pdf->SetFont('helvetica', '', 15, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
