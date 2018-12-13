@@ -8,7 +8,7 @@ ini_set("display_errors",1);
 
 	<head>
 		<meta charset="UTF-8">
-		<title> Auxiliar Clave Cambiartastral Fraccionamientos </title>
+		<title> Auxiliar Clave Catastral Fraccionamientos </title>
 		<meta name="description" content="">
 		<link rel="shortcut icon" href="../..assets_muni/img/irapuato.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -385,7 +385,7 @@ ini_set("display_errors",1);
 										        	<!-- <div class="alert alert-info" role="alert" align="center">
 													  <strong>PLANTILLA</strong>
 													</div> -->
-										        	<?php include_once ('cmp_inmueble_generar.php')?>
+										        	<?php include_once ('nueva_cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
 

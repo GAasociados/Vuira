@@ -310,7 +310,7 @@ ini_set("display_errors",1);
                   <button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;">
                     Cancelar
                   </button>
-                  <form id="form">
+                  <form id="formVentanilla">
                     <input type="hidden" name="id" id="id" value="<?php
                     if(isset($_GET["Id"]))
                     {

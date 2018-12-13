@@ -467,38 +467,18 @@ class view_claves_fraccionamiento
     var telefono = $("#Telefono").val();
     var correo = $("#Correo_Electronico").val();
     var tipo_tramite = $("#Tipo_Tramite").val();
+    var 
 
-    //new view_claves_fraccionamiento().generate_talon(nombre_propietario);
-    window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo+"&folios="+numeros_asignados, "_blank");
+    var folios = JSON.stringify(numeros_asignados);
+    window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
+      +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
     for (var i = 0; i < numeros_asignados.length; i++) 
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    document.getElementById('formVentanilla').submit();
+    //document.getElementById('formVentanilla').submit();
   }
 
-  generate_talon(nombre_propietario)
-  {
-     $.ajax({
-      type:"post",
-      url:"../../PDFGen/pdfGenTalon.php",
-      data:{nombre:nombre_propietario},
-      async:true,
-      success: function (jdata)
-      {
-        console.log(jdata);
-        if(jdata != "Error")
-        {
-          
-          window.open("../../PDFGen/pdfGenTalon.php", "_blank");
-        }
-        else
-        {
-            alert (jdata);
-        }
-      }
-    });
-  }
   get_numeros_consecutivos(numero)
   {
     $.ajax({
