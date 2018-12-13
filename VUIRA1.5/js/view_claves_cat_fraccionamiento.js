@@ -26,7 +26,7 @@ function event_pulsar_enter(event)
   if (event.keyCode == 13) 
   {
     event.preventDefault();
-    event_add_cuenta_predial();
+    event.add_cuenta_predial();
   }
 }
 
@@ -75,6 +75,7 @@ function event_remove_clave(buttonName)
 
 function event_load_auxiliar()
 {
+  $("#tipo_de_tramite").val("2").change();
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
@@ -359,6 +360,8 @@ class view_claves_fraccionamiento
           $("#"+field).val(data[field]);
       }
     }
+    //se agregó por que al parecer es el unico campo que no establece su valor
+
   }
 
   set_data_grid_aux(data)
@@ -394,10 +397,12 @@ class view_claves_fraccionamiento
 
     tmpHidden+= "<input type='hidden' id='Cuenta_Predial' value='"+hidden[0].value+"' />";
     tmpHidden+= "<input type='hidden' id='Calle' value='"+hidden[1].value+"' />";
-    tmpHidden+= "<input type='hidden' id='Num_Ext' value='"+hidden[2].value+"' />";
-    tmpHidden+= "<input type='hidden' id='Num_Int' value='"+hidden[3].value+"' />";
-    tmpHidden+= "<input type='hidden' id='Colonia' value='"+hidden[4].value+"' />";
-    tmpHidden+= "<input type='hidden' id='Id_clave' value='"+hidden[5].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Manzana' value='"+hidden[2].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Lote' value='"+hidden[3].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Num_Ext' value='"+hidden[4].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Num_Int' value='"+hidden[5].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Colonia' value='"+hidden[6].value+"' />";
+    tmpHidden+= "<input type='hidden' id='Id_clave' value='"+hidden[7].value+"' />";
 
   	var innerTableContent = "<td colspan='5' ><div class='container-fluid'>";
     innerTableContent += "<div style='display: none;'>"+tmpHidden+"</div>";

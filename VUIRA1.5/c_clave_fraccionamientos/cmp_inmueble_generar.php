@@ -46,10 +46,10 @@ ini_set("display_errors",1);
 			<tr>
 				<th scope="col"> Cuenta Predial </th>
 				<th scope="col"> Calle </th>
+				<th scope="col"> Manzana </th>
+				<th scope="col"> Lote</th>
 				<th scope="col"> Numero Exterior </th>
 				<th scope="col"> Numero Interior </th>
-				<th scope="col"> Manzana </th>
-				<th scope="col"> Lote </th>
 				<th scope="col"> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido </th>
 				<th scope="col"> Acciones </th>
 			</tr>

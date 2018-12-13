@@ -396,6 +396,10 @@ ini_set("display_errors",1);
 
 										      <div id="panel-datos-cuenta-suspendida" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
+										        	<h3 class="title-hero">II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE</h3>
+										        	<div class="alert alert-info" role="alert" align="center">
+													  <strong>PLANTILLA</strong>
+													</div>
 										        	<?php include_once ('cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
@@ -428,8 +432,8 @@ ini_set("display_errors",1);
 										                </div>
 										                <div class="form-group" >
 										                  <label class="control-label">Tipo de Tramite que solicita</label>
-										                  <select id="Tipo_Tramite" name="Tipo_Tramite"data-placeholder="Seleccione una Opción" class="chosen-select" required>
-										                  	 <option selected>Elegir trámite...</option>
+										                  <select id="tipo_de_tramite" name="tipo_de_tramite" class="chosen-select">
+										                  	 <option value="0">Elegir trámite...</option>
 											                 <option value="1">Asignación de Claves Catastrales</option>
 											                 <option value="2">Modificación de Clave Catastrales</option>
 										                  </select>
