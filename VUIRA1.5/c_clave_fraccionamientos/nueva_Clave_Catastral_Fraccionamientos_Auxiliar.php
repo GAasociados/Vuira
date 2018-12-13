@@ -357,38 +357,23 @@ ini_set("display_errors",1);
 										          <div class="row">
 										            <div class="col-md-6">
 										            	<div class="form-group">
-										            		<label for="">Plano físico de Traza autorizada por la Dirección General de Desarrollo Territorial</label>
-										            		<a id="Doc_Plano_Fisico" name="Doc_Plano_Fisico" href="" target="_blank"> Ver Documento </a>
-										            	</div>
-										            </div>
-										            <div class="col-md-6">
-										            	<div class="form-group">
-										            		<label for="">Escritura Pública de Propiedad que contenga la Hoja Registral y ampare la Superficie Registrada (en caso de no contener la hoja registral anexar copia de Libertad de Gravamen)</label>
+										          			<label for="">Escritura Pública de Propiedad que contenga la Hoja Registral y ampare la Superficie Registrada (en caso de no contener la hoja registral anexar copia de Libertad de Gravamen)</label>
 										            		<a id="Doc_Escritura_Publica" name="Doc_Escritura_Publica" href="" target="_blank" > Ver Documento </a>
 										            	</div>
 										            </div>
-										          </div>
-										          <div class="row">
-										            <div class="col-md-6">
-										            	<div class="form-group">
-										            		<label for="">Plano físico de Traza autorizada por la Dirección General de Desarrollo Territorial</label>
-										            		<a id="Doc_Acta" name="Doc_Acta" href="" target="_blank"  > Ver Documento </a>
-										            	</div>
-										            </div>
-										            <div class="col-md-6">
-										            	<div class="form-group">
-										            		<label for="">Escritura Pública de Propiedad que contenga la Hoja Registral y ampare la Superficie Registrada (en caso de no contener la hoja registral anexar copia de Libertad de Gravamen)</label>
-										            		<a id="Doc_Escritura_Publica" name="Doc_Escritura_Publica" href="" target="_blank" > Ver Documento </a>
-										            	</div>
-										            </div>
-										          </div>
-										          <div class="row">
 										            <div class="col-md-6">
 										            	<div class="form-group">
 										            		<label for="">Poder Notarial para representación de persona moral</label>
 										            		<a id="Doc_Acta" name="Doc_Acta" href="" target="_blank"  > Ver Documento </a>
 										            	</div>
 										            </div>
+										          </div>
+										          <div class="row">
+										          	<div class="col-md-6">
+										          		<div class="form-group">
+										            		<label for="" >Presentar Plano físico de Traza autorizada por la Dirección General de Desarrollo Territorial</label>
+										            	</div>
+										          	</div>
 										          </div>
 										        </div>
 										      </div>
@@ -397,9 +382,9 @@ ini_set("display_errors",1);
 										      <div id="panel-datos-cuenta-suspendida" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
 										        	<h3 class="title-hero">II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE</h3>
-										        	<div class="alert alert-info" role="alert" align="center">
+										        	<!-- <div class="alert alert-info" role="alert" align="center">
 													  <strong>PLANTILLA</strong>
-													</div>
+													</div> -->
 										        	<?php include_once ('cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
