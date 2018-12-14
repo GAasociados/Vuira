@@ -25,6 +25,11 @@ if(isset($_GET['service_name']))
 		case 'getAll':
 						print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
 		break;
+
+        case 'getFoFi':
+                        print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
 		break;
@@ -66,6 +71,12 @@ class coreFracc
     {
 				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc INNER JOIN   claves_catastrales_fraccionamientos_detalles AS fraccDet
                     ON fracc.Id = fraccDet.Id_Fraccionamientos GROUP BY fracc.Id";
+        return $this->con->executeQuerry($sql);
+    }
+
+        public function getFolioFinalFracc($id)
+    {
+                $sql = "SELECT fraccDet.Folio FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
         return $this->con->executeQuerry($sql);
     }
 

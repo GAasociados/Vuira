@@ -1,19 +1,13 @@
 var rowSelected="";
 var rowSelectedContent="";
-var registros = [""];
+var fila = 0;
+var folioFinal = 0;
 
 function event_load()
 {
   var Operation = $("#operation").val()
   if(Operation=="Ventanilla")
-  {
     new view_claves_cat_fraccionamiento_list().get_All_Fraccionamientos();
-    var filas = $("#tblcontent tr");
-    console.log(filas);
-    for (var i = 0; i < filas.length; i++) {
-      console.log(filas[i].textContent);
-    }
-  }
   else if (Operation=="Auxiliar")
     new view_claves_cat_fraccionamiento_list().get_Fraccionamientos_by_Auxiliar($("#uid").val());
   else if (Operation=="Asignar")
@@ -49,18 +43,18 @@ class view_claves_cat_fraccionamiento_list
       this.basePath = "http://localhost/Vuira/";
   }
 
-  get_folio_final()
+  get_folio_final(id, fila)
   {
      $.ajax({
       type:"post",
       data:{id,id},
-      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getAll",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getFoFi",
 
       async:true,
       success: function (jdata)
       {
         var data = JSON.parse(jdata);
-        new view_claves_cat_fraccionamiento_list().setup_Listado_Fraccionamientos(data,"Ventanilla","");
+        fila[5].innerText = data[0]["Folio"];
       }
     });
   }
@@ -110,12 +104,17 @@ class view_claves_cat_fraccionamiento_list
     });
   }
 
+  set_ultimo_folio_fracc(data)
+  {
+    //console.log(fila[5].innerText+" "+data[0]["Folio"]);
+    //fila[5].innerText = data[0]["Folio"];
+  }
+
   setup_Listado_Fraccionamientos(data,opcion,auxiliar)
   {
       var innerConent = "";
       for(var i=0; i< data.length;i++)
       {
-        registros.push(data[i].Id);
         innerConent+="<tr id='"+data[i].Id+"'>";
         innerConent+="<td>"+ data[i].Id + "</td>";
         innerConent+="<td>"+ data[i].Propietario + "</td>";
@@ -136,6 +135,17 @@ class view_claves_cat_fraccionamiento_list
         innerConent+="</tr>";
       }
       $("#tblcontent").append(innerConent);
+      $('#tblcontent tr').each(function() {
+        if ( this.id != "")
+        {
+          console.log(this.id);
+          var hijos = jQuery(this).children();
+          console.log(hijos[5].innerText);
+          fila = jQuery(this).children();
+          new view_claves_cat_fraccionamiento_list().get_folio_final(this.id, jQuery(this).children());
+
+        }
+      });
   }
 
   get_all_auxiliares()
