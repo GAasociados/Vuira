@@ -64,7 +64,8 @@ class coreFracc
 
 		public function getAllFraccionamientos()
     {
-				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos";
+				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc INNER JOIN   claves_catastrales_fraccionamientos_detalles AS fraccDet
+                    ON fracc.Id = fraccDet.Id_Fraccionamientos GROUP BY fracc.Id";
         return $this->con->executeQuerry($sql);
     }
 

@@ -1,11 +1,19 @@
 var rowSelected="";
 var rowSelectedContent="";
+var registros = [""];
 
 function event_load()
 {
   var Operation = $("#operation").val()
   if(Operation=="Ventanilla")
+  {
     new view_claves_cat_fraccionamiento_list().get_All_Fraccionamientos();
+    var filas = $("#tblcontent tr");
+    console.log(filas);
+    for (var i = 0; i < filas.length; i++) {
+      console.log(filas[i].textContent);
+    }
+  }
   else if (Operation=="Auxiliar")
     new view_claves_cat_fraccionamiento_list().get_Fraccionamientos_by_Auxiliar($("#uid").val());
   else if (Operation=="Asignar")
@@ -37,8 +45,24 @@ class view_claves_cat_fraccionamiento_list
 {
   constructor()
   {
-      this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "http://localhost/Source/";
+      //this.basePath = "https://vuira.irapuato.gob.mx/";
+      this.basePath = "http://localhost/Vuira/";
+  }
+
+  get_folio_final()
+  {
+     $.ajax({
+      type:"post",
+      data:{id,id},
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getAll",
+
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+        new view_claves_cat_fraccionamiento_list().setup_Listado_Fraccionamientos(data,"Ventanilla","");
+      }
+    });
   }
 
   get_All_Fraccionamientos()
@@ -58,6 +82,7 @@ class view_claves_cat_fraccionamiento_list
 
   get_Fraccionamientos_by_Auxiliar(Auxiliar)
   {
+
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getByAuxiliar",
@@ -90,9 +115,14 @@ class view_claves_cat_fraccionamiento_list
       var innerConent = "";
       for(var i=0; i< data.length;i++)
       {
+        registros.push(data[i].Id);
         innerConent+="<tr id='"+data[i].Id+"'>";
         innerConent+="<td>"+ data[i].Id + "</td>";
         innerConent+="<td>"+ data[i].Propietario + "</td>";
+        innerConent+="<td>"+ data[i].Colonia + "</td>";
+        innerConent+="<td>"+ "CANTIDAD DE CLAVES" + "</td>";
+        innerConent+="<td>"+ data[i].Folio + "</td>";
+        innerConent+="<td>"+ "Folio Final" + "</td>";
         innerConent+="<td>"+ data[i].Correo_Electronico + "</td>";
         innerConent+="<td>"+ data[i].Telefono + "</td>";
         if(opcion=="Ventanilla")

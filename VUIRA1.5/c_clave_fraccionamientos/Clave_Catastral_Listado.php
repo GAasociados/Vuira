@@ -28,6 +28,18 @@ ini_set("display_errors",1);
                   Propietario
                 </td>
                 <td>
+                  Colonia
+                </td>
+                <td>
+                  Cantidad de Claves
+                </td>
+                <td>
+                  Folio Inicial
+                </td>
+                <td>
+                  Folio Final
+                </td>
+                <td>
                   Correo Electronico
                 </td>
                 <td>
