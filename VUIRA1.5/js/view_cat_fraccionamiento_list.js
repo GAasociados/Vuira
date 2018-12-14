@@ -1,7 +1,5 @@
 var rowSelected="";
 var rowSelectedContent="";
-var fila = 0;
-var folioFinal = 0;
 
 function event_load()
 {
@@ -150,7 +148,6 @@ class view_claves_cat_fraccionamiento_list
         {
           new view_claves_cat_fraccionamiento_list().get_folio_final(this.id, jQuery(this).children());
           new view_claves_cat_fraccionamiento_list().get_no_claves(this.id, jQuery(this).children());
-
         }
       });
   }
