@@ -59,6 +59,22 @@ class view_claves_cat_fraccionamiento_list
     });
   }
 
+   get_no_claves(id, fila)
+  {
+     $.ajax({
+      type:"post",
+      data:{id,id},
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=noClaves",
+
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+        fila[3].innerText = data[0]["Claves"];
+      }
+    });
+  }
+
   get_All_Fraccionamientos()
   {
     $.ajax({
@@ -104,12 +120,6 @@ class view_claves_cat_fraccionamiento_list
     });
   }
 
-  set_ultimo_folio_fracc(data)
-  {
-    //console.log(fila[5].innerText+" "+data[0]["Folio"]);
-    //fila[5].innerText = data[0]["Folio"];
-  }
-
   setup_Listado_Fraccionamientos(data,opcion,auxiliar)
   {
       var innerConent = "";
@@ -138,11 +148,8 @@ class view_claves_cat_fraccionamiento_list
       $('#tblcontent tr').each(function() {
         if ( this.id != "")
         {
-          console.log(this.id);
-          var hijos = jQuery(this).children();
-          console.log(hijos[5].innerText);
-          fila = jQuery(this).children();
           new view_claves_cat_fraccionamiento_list().get_folio_final(this.id, jQuery(this).children());
+          new view_claves_cat_fraccionamiento_list().get_no_claves(this.id, jQuery(this).children());
 
         }
       });

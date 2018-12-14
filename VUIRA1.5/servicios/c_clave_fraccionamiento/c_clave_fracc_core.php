@@ -29,6 +29,9 @@ if(isset($_GET['service_name']))
         case 'getFoFi':
                         print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
         break;
+        case 'noClaves':
+                        print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
 
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
@@ -79,6 +82,13 @@ class coreFracc
                 $sql = "SELECT fraccDet.Folio FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
         return $this->con->executeQuerry($sql);
     }
+
+        public function getNoClaves($id)
+    {
+                $sql = "SELECT COUNT(*) AS Claves FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id}";
+        return $this->con->executeQuerry($sql);
+    }
+
 
 		public function getAllFraccionamientosByAuxiliar($idAuxiliar)
     {
