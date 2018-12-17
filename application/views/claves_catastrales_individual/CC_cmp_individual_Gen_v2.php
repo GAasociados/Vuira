@@ -17,7 +17,7 @@
                                                 <i class="fa fa-file"></i> Ver Otra Documentación
                                             </a>
                                         <?php endif; ?>
-                                        
+
                                         <?php if ($mdocaux1): ?>
                                             <a class="btn btn-primary" style="margin-bottom: 5px;" target="_blank" href="<?php echo base_url() . "assets/tramites/clavescatastralesindividual/" . $mdocaux1; ?>">
                                                 <i class="fa fa-file"></i> Ver Otra Documentación
@@ -105,12 +105,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-																
+
 																	 <div class="form-group hidden col-md-4" id="TIPO_TRAMITE">
                                                                             <label for="varchar"> Tipo de tramite </label> <label>*</label>
                                                                             <input autocomplete="off" hidden id="tipotramite" required style="text-transform:uppercase;" name="Tipo_Tramite" placeholder="" class="form-control"/>
                                                                      </div>
-																		
+
 																	 <div class="form-group col-md-4 hidden" id="CALLEE">
                                                                             <label for="varchar">Calle </label> <label>*</label>
                                                                             <input autocomplete="off" value="<?php echo $calleui; ?>" id="CALLE" name="Calle" title="Ingrese la calle si es necesario" placeholder="Calle" style="text-transform:uppercase;" class="form-control"/>
@@ -127,9 +127,11 @@
 																		?>
 																	 <div class="form-group col-md-4 imuvii hidden" id="COLONIA">
                                                                             <label for="coloniaui">Colonia </label> <label>*</label>
-                                                                            <input type="text" id="coloniaui1" name="Colonia" 
-																			value="<?php echo strtoupper($arraycolonia->NOMBRE)=="COLONIA NO ASIGNADA"?$coloniados:strtoupper($arraycolonia->NOMBRE); ?>" 
+                                                                            <input type="text" id="coloniaui1" name="Colonia"
+																			value="<?php echo $coloniados!=""?$coloniados:strtoupper($arraycolonia->NOMBRE); ?>" 
+
 																			placeholder="Colonia" style="text-transform:uppercase;" class="form-control"/>
+
                                                                      </div>
 																	 <div class="form-group hidden col-md-4">
                                                                             <label for="varchar"> Predial </label> <label>*</label>
@@ -139,25 +141,25 @@
                                                                             <label for="varchar">N&uacute;mero Interior </label> <label>*</label>
                                                                             <input autocomplete="off" value="<?php echo $nooficialinui; ?>"  name="nooficialinui"  id="nooficialinui2" title="" placeholder="N&uacute;mero interior" style="text-transform:uppercase;"  class="form-control"/>
                                                                       </div>
-																	  
+
 																	  <div class="form-group col-md-4 hidden" id="Colonia2">
-                                                                            
+
                                                                             <input autocomplete="off" value="<?php echo $coloniados; ?>"  name="coloniados" id="coloniados" title="" placeholder="N&uacute;mero interior" style="text-transform:uppercase;" class="form-control"/>
                                                                       </div>
-																		
+
                                                                      <div class="form-group">
 																		<!-- AQUI TODOS LOS INPUTS -->
-																		<?php 
+																		<?php
                                           error_reporting(E_ALL);
 ini_set("display_errors",1);
                                           include_once("./CC_Modal_Gen/Gen_Template_Modal_Impl.php");
 
-                                          //include("./CC_Modal_Gen/Gen_Template_Data.php"); 
+                                          //include("./CC_Modal_Gen/Gen_Template_Data.php");
                                       $obj = new Gen_Extractor_Data($ID);
                                     ?>
 																		<div class="form-group col-md-4 egi hidden" id="ESTADO_ESCRITURA">
                                                                             <label for="varchar">Estado de Escritura</label>  <label>*</label>
-                                                                            
+
                                                                             <select class="form-control" style="text-transform:uppercase;" tabindex="-1"  name="CE_Estado_Escritura" id="CE_Estado_Escritura">
                                                                                 <?php if ($estado): ?>
                                                                                     <option value="<?php echo $estado; ?>"><?php echo $estado; ?></option>
@@ -207,10 +209,10 @@ ini_set("display_errors",1);
 																					                                         <?php endif;?>
                                                                                  name="CE_Ciudad_Escritura" placeholder="Ciudad De Escritura" style="text-transform:uppercase;" class="form-control" autocomplete="on"/>
                                                                         </div>
-																		
+
 																		<div class="form-group col-md-4 escpu hidden" id="ESTADO_ESCRITURA2">
                                                                             <label for="varchar">Estado de Escritura</label>  <label>*</label>
-                                                                            
+
                                                                             <select class="form-control" tabindex="-1"  name="Es_Estado_Escritura" id="Estado_Escritura">
                                                                                 <?php if ($estado): ?>
                                                                                     <option value="<?php echo $estado; ?>"><?php echo $estado; ?></option>
@@ -260,37 +262,37 @@ ini_set("display_errors",1);
 																					                                         <?php endif;?>
                                                                                  name="Es_Ciudad_Escritura" placeholder="Es_Ciudad_Escritura" class="form-control" autocomplete="on"/>
                                                                         </div>
-																		
+
 
                                                                      </div>
 																</td>
 															</tr>
                                                             <tr>
                                                                 <td>
-																	
+
                                                                     <div class="form-group col-md-12 escpu infonavit cor ">
                                                                         <label>Por favor indicar si la propiedad se encuentra en régimen</label>
                                                                         <br>
                                                                         <div class="col-md-12" id="Area_P_Container" style="margin-bottom:10px;">
                                                                             <input <?php echo $areap == 1 ? 'checked' : ""; ?> type="checkbox" id="priv" value="Área Privativa">
-                                                                            &Aacute;rea Privativa 
+                                                                            &Aacute;rea Privativa
                                                                             <input id="privt" name="privt" class="<?php echo $areap == 1 ? '' : "hidden"; ?>" type="text" autocomplete="off" value="<?php echo ($obj->get_Value_Tramite('Area_Privativa') == null) ? $areapt : $obj->get_Value_Tramite('Area_Privativa'); ?>">
                                                                         </div>
-                                                                        
+
                                                                         <div class="col-md-12 " style="margin-bottom:10px;">
                                                                             <input <?php echo $areac == 1 ? 'checked' : ""; ?> type="checkbox" name="Comun" id="com" value="Área Común">
-                                                                            &Aacute;rea Común 
+                                                                            &Aacute;rea Común
                                                                             <input name="Area_Comun" id="comt" name="comt" class="<?php echo $areac == 1 ? '' : "hidden"; ?>" type="text" autocomplete="off" value="<?php echo ($obj->get_Value_Tramite('Area_Comun') == null) ? $areact : $obj->get_Value_Tramite('Area_Comun'); ?>">
                                                                         </div>
 
                                                                         <div class="col-md-12 hidden" id="Area_C_Container" style="margin-bottom:10px;">
                                                                             <div class="col-md-6">
                                                                                 <input <?php echo $acc == 1 ? 'checked' : ""; ?> type="checkbox" name="Cubiertac" id="Cub" value="Área Común Cubierta">
-                                                                                &Aacute;rea Común Cubierta 
+                                                                                &Aacute;rea Común Cubierta
                                                                                 <input name="Area_Comun_Cubierta" id="Cubt" name="Cubt" class="<?php echo $acc == 1 ? '' : "hidden"; ?>" type="text" autocomplete="off" value="<?php echo ($obj->get_Value_Tramite('Area_Comun_Cubierta') == null) ? $acct : $obj->get_Value_Tramite('Area_Comun_Cubierta'); ?>">
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <input <?php echo $acd == 1 ? 'checked' : ""; ?> type="checkbox" name="Cubiertad" id="Cub1" value="Área Común Descubierta"> 
+                                                                                <input <?php echo $acd == 1 ? 'checked' : ""; ?> type="checkbox" name="Cubiertad" id="Cub1" value="Área Común Descubierta">
                                                                                 &Aacute;rea Común Descubierta
                                                                                 <input name="Cubiertatd" id="Cubt1" name="Cubt1" class="<?php echo $acd == 1 ? '' : "hidden"; ?>" autocomplete="off" type="text" value="<?php echo ($obj->get_Value_Tramite('Area_Comun_Descubierta') == null) ? $acdt : $obj->get_Value_Tramite('Area_Comun_Descubierta'); ?>">
                                                                             </div>
@@ -307,44 +309,44 @@ ini_set("display_errors",1);
                                                                             <input name="Total_Indiviso" id="indtt" name="indtt" class="<?php echo $totalind == 1 ? '' : "hidden"; ?>" type="text" autocomplete="off" value="<?php echo ($obj->get_Value_Tramite('Total_Indiviso') == null) ? $totalindt : $obj->get_Value_Tramite('Total_Indiviso'); ?>">
                                                                             <br>
                                                                         </div>
-                                                                        
+
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6 hidden" id="Por_In_Container" style="margin-bottom:10px;">
                                                                                 <input <?php echo $porcent == 1 ? 'checked' : ""; ?> type="checkbox" name="Indivisop" id="indp" value="Porcenta">
-                                                                                Porcentaje Indiviso 
+                                                                                Porcentaje Indiviso
                                                                                 <input name="Porcentaje_Indiviso" id="indpt" name="indpt" class="<?php echo $porcent == 1 ? '' : "hidden"; ?>" type="text" autocomplete="off" value="<?php echo ($obj->get_Value_Tramite('Porcentaje_Indiviso') == null) ? $porcentt : $obj->get_Value_Tramite('Porcentaje_Indiviso'); ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                     
+
 																	 <script>
                                                                         //validaciones
 
 
-                                                                        $('#SUPERFICIE').on('input', function () { 
+                                                                        $('#SUPERFICIE').on('input', function () {
                                                                             //this.value = this.value.replace(/[0-9]+(.)?\d{1,4}/g,'');
                                                                         });
-                                                                        $('#privt').on('input', function () { 
+                                                                        $('#privt').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
-                                                                        $('#comt').on('input', function () { 
+                                                                        $('#comt').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
-                                                                        $('#Cubt').on('input', function () { 
+                                                                        $('#Cubt').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
-                                                                        $('#Cubt1').on('input', function () { 
+                                                                        $('#Cubt1').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
-                                                                         $('#indtt').on('input', function () { 
+                                                                         $('#indtt').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
-                                                                        $('#indpt').on('input', function () { 
+                                                                        $('#indpt').on('input', function () {
                                                                             this.value = this.value.replace(/[^0-9]\./g,'');
                                                                         });
                                                                         </script>
 
-                                                                        
+
                                                                         <script>
 
                                                                             $("#priv").on("click", function () {
@@ -359,7 +361,7 @@ ini_set("display_errors",1);
                                                                                 if ($("#comt").hasClass('hidden')) {
                                                                                     $("#comt").removeClass('hidden');
                                                                                     $("#Area_C_Container").removeClass('hidden');
-                                                                                    
+
                                                                                 } else {
                                                                                     $("#comt").addClass('hidden');
                                                                                     $("#Area_C_Container").addClass('hidden');
@@ -368,8 +370,8 @@ ini_set("display_errors",1);
                                                                                     $("#Cubt").val("");
                                                                                     $("#Cubt1").val("");
                                                                                     $("#comt").val("");
-                                                                                    $("#Cub").prop('checked', false); 
-                                                                                    $("#Cub1").prop('checked', false); 
+                                                                                    $("#Cub").prop('checked', false);
+                                                                                    $("#Cub1").prop('checked', false);
                                                                                 }
                                                                             });
                                                                             $("#Cub").on("click", function () {
@@ -392,16 +394,16 @@ ini_set("display_errors",1);
                                                                                 if ($("#indtt").hasClass('hidden')) {
                                                                                     $("#indtt").removeClass('hidden');
                                                                                     $("#Por_In_Container").removeClass('hidden');
-                                                                                    
+
                                                                                 } else {
                                                                                     $("#indtt").addClass('hidden');
                                                                                     $("#Por_In_Container").addClass('hidden');
-                                                                                    $("#indp").prop('checked', false); 
+                                                                                    $("#indp").prop('checked', false);
                                                                                     $("#indpt").addClass('hidden');
-                                                                                    
+
                                                                                     $("#indtt").val("");
                                                                                     $("#indpt").val("");
-                                                                                    
+
                                                                                 }
                                                                             });
                                                                             $("#indp").on("click", function () {
@@ -413,7 +415,7 @@ ini_set("display_errors",1);
                                                                                 }
                                                                             });
                                                                         </script>
-                                                                    
+
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -435,7 +437,7 @@ ini_set("display_errors",1);
                                                                             </textarea>
                                                                         </div>
                                                                     <div class="form-group col-sm-6">
-                                                                        <label>Imagen Croquis</label>                                   
+                                                                        <label>Imagen Croquis</label>
                                                                         <input name="autocat" id="autocat" type="file" value='Subir Archivo' />
                                                                         <input type="button" onclick="uploadFile()" value="Subir Archivo" />
                                                                         <input type="hidden" id="Croquis_URL" name="Croquis_URL" value="<?php echo $obj->get_Value_Tramite('Croquis_URL'); ?>" />
@@ -446,7 +448,6 @@ ini_set("display_errors",1);
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                                  </select>
 
 
                     </tbody>
@@ -465,8 +466,8 @@ ini_set("display_errors",1);
 
 <script>
     $(document).ready(function() {
-        $('#CE_Estado_Escritura').val("<?php echo($obj->get_Value_Tramite('CE_Estado_Escritura'));?>"); 
-		
+        $('#CE_Estado_Escritura').val("<?php echo($obj->get_Value_Tramite('CE_Estado_Escritura'));?>");
+
 		if($("#Numero_Lote").val()=="")
 			$("#Numero_Lote").val($("#noloteui").val());
 		if($("#Manzana").val()=="")
