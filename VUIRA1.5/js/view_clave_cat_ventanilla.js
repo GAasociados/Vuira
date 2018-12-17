@@ -142,3 +142,20 @@ function Get_Doctos(id1){
 
 	return flag;
 }
+
+function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+}
+
+function addDaysTalon()
+{
+  var today = new Date();
+  var weekDay = today.getDay();
+  if(weekDay >0 && weekDay <=3)
+    return addDays(today,2);
+  else {
+    return addDays(today,4);
+  }
+}

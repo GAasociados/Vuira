@@ -25,6 +25,7 @@ foreach ($noficial->result() as $row) {
     $nooficialar .= $row->archivo;
 //    die(print_r($row, TRUE));
 }
+
 ?>
 
 
@@ -39,8 +40,9 @@ foreach ($noficial->result() as $row) {
 <!-- BEGIN HEAD -->
 
 <head>
-   
+
     <?php $this->load->view('base/head - css'); ?>
+    <script type="text/javascript" src="https://vuira.irapuato.gob.mx/VUIRA1.5/js/view_clave_cat_ventanilla.js"></script>
 </head>
 <style>
     .btnAyuda {
@@ -257,8 +259,8 @@ foreach ($noficial->result() as $row) {
                                                                 Documento</a>
                                                         <?php endif; ?>
                                                     </div>
-                                                    
-                                            
+
+
                                                 <div class="form-group col-md-4" id="paso13">
                                                     <label for="varchar">Documento legal que acredite la propiedad;
                                                         debidamente inscrito en el Registro Público de la Propiedad (Con
@@ -306,8 +308,8 @@ foreach ($noficial->result() as $row) {
                                                         <?php endif; ?>
                                                     </div>
                                                 <?php endif; ?>
-                                            
-                                        
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -383,16 +385,16 @@ foreach ($noficial->result() as $row) {
                                             <div class="form-group col-md-6">
                                                 <label for="varchar">Colonia</label>
                                                 <input autocomplete="off" type="text"
-                                                                                  
-                                                                                  
+
+
                                                                                   style="text-transform:uppercase;"
                                                                                   class="form-control"
-                                                                                  name="cbocoloniaui" 
+                                                                                  name="cbocoloniaui"
                                                                                   placeholder="Colonia"
                                                                                   value="<?php /*echo strtoupper($arraycolonia->NOMBRE)=="COLONIA NO ASIGNADA"?$coloniados:strtoupper($arraycolonia->NOMBRE);*/ ?>"
                                                                                   />
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="row" id="paso5">
@@ -443,7 +445,7 @@ foreach ($noficial->result() as $row) {
                                                                                   placeholder="Manzana"
                                                                                   value="<?php echo $nomanzanaui; ?>"/>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="row" id="paso6">
@@ -979,7 +981,7 @@ foreach ($noficial->result() as $row) {
                                     </div>
                                     <script>
 
-                                        
+
 
                                         function getTipoDocumento(opcion){
                                             if (opcion.value == 1) {
@@ -1008,16 +1010,16 @@ foreach ($noficial->result() as $row) {
                                                 }
                                             });
                                         });
-										
+
 										function uploadFile()
 										{
 											if($("#autocat").val() != "")
 											{
 												var file_data = $('#autocat').prop('files')[0];
 												var form_data = new FormData();
-												 
+
 												form_data.append('file', file_data);
-												 
+
 												$.ajax({
 													url: '<?php echo base_url(); ?>/DocPrint/uploadFile.php', // point to server-side PHP script
 													dataType: 'text', // what to expect back from the PHP script, if anything
@@ -1040,8 +1042,8 @@ foreach ($noficial->result() as $row) {
 											{
 												alert("Please select file!");
 											}
-										}		
-										
+										}
+
                                     </script>
 
 
@@ -1050,9 +1052,9 @@ foreach ($noficial->result() as $row) {
                                                 Documento Negación</b></a>
                                     </div>
 
-                                    
+
                                 </div>
-                              
+
                                 <div class="row">
                                     <div class=" form-group col-sm-6">
                                         <label for="varchar"> <b>Documento
@@ -1063,7 +1065,7 @@ foreach ($noficial->result() as $row) {
                                                href="<?php echo base_url() . "assets/tramites/clavescatastralesindividual/" . $doctofinal; ?>">Descargar</a>
                                         <?php endif; ?>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="row">
@@ -1106,8 +1108,8 @@ foreach ($noficial->result() as $row) {
                                             }
                                         }
                                     });
-									
-									
+
+
                                 </script>
 
                             <?php endif; ?>
@@ -1153,7 +1155,7 @@ foreach ($noficial->result() as $row) {
                                 <input type="hidden" id="id_tramite" name="ID" value="<?php echo $ID; ?>"/>
 
                                 <!--<button class="btn btn-info" id="Regresar_Tramite">Regresar tr&aacute;mite</button>-->
-                                
+
                                 <button type="submit" class="btn btn-primary  <?php echo $this->session->userdata('tipo') == 15? "hidden" : true ?>" onclick="guardarTramite()" >Guardar tr&aacute;mite
                                 </button>
 
@@ -1203,12 +1205,12 @@ foreach ($noficial->result() as $row) {
                                           id="formdocto"
                                           action="<?php echo base_url(); ?>DocPrint/SaveDocDb.php"
                                           method="post" target="_blank">
-                                        
+
 										<?php include_once("CC_cmp_individual_Gen_v2.php");?>
-                                        
+
                                     </form>
-                                    
-                                    <script>                                        
+
+                                    <script>
 
                                         $('#docnormal').on('click',function(){
                                             if($('#cmbtipodocumento2').val()==""){
@@ -1246,10 +1248,10 @@ foreach ($noficial->result() as $row) {
                                                     $('.parce').each(function(){
                                                         $(this).addClass('hidden');
                                                     });
-                                                    
+
                                                 }
                                                 else if($('#cmbtipodocumento2').val()=="Constancia Ejidal"){
-                                                    
+
 
                                                     $('.imuvii').each(function(){
                                                         $(this).addClass('hidden');
@@ -1281,7 +1283,7 @@ foreach ($noficial->result() as $row) {
                                                         $(this).removeClass('hidden');
                                                     });
                                                 }
-                                                else if($('#cmbtipodocumento2').val()=="Escritura Publica"){                                       
+                                                else if($('#cmbtipodocumento2').val()=="Escritura Publica"){
 
                                                     $('.infonavit').each(function(){
                                                         $(this).addClass('hidden');
@@ -1315,7 +1317,7 @@ foreach ($noficial->result() as $row) {
 
                                                 }
                                                 else if($('#cmbtipodocumento2').val()=="INFONAVIT"){
-                        
+
                                                     $('.egi').each(function(){
                                                         $(this).addClass('hidden');
                                                     });
@@ -1345,9 +1347,9 @@ foreach ($noficial->result() as $row) {
 													$('.infonavit').each(function(){
                                                         $(this).removeClass('hidden');
                                                     });
-                                                } 
+                                                }
                                                 else if($('#cmbtipodocumento2').val()=="CORETT"){
-                                                    
+
                                                     $('.egi').each(function(){
                                                         $(this).addClass('hidden');
                                                     });
@@ -1411,7 +1413,7 @@ foreach ($noficial->result() as $row) {
                                                     });
                                                 }
                                                 else if($('#cmbtipodocumento2').val()=="Sentencia Juridica"){
-                                                    
+
                                                     $('.egi').each(function(){
                                                         $(this).addClass('hidden');
                                                     });
@@ -1475,7 +1477,7 @@ foreach ($noficial->result() as $row) {
                                                     $('.imuvii').each(function(){
                                                         $(this).addClass('hidden');
                                                     });
-                                                }   
+                                                }
                                                 //envio de datos otro form
                                                 var colo=$('#select2-cbocoloniaui-container').text();
                                                 $('#coloniaui').val(colo.trim());
@@ -1498,7 +1500,7 @@ foreach ($noficial->result() as $row) {
                                                             if(respuesta.length<1){
                                                                 var res=respuesta.toString().replace(/\?/g, 'Ñ');
                                                                 $('#Copropietarios').val(res);
-                                                                //$('#Caracter').val("Copropietarios");        
+                                                                //$('#Caracter').val("Copropietarios");
                                                             }
                                                             else{
                                                                 for(var i in aux){
@@ -1509,9 +1511,9 @@ foreach ($noficial->result() as $row) {
                                                             }
                                                             var res=fintext.toString().replace(/\?/g, 'Ñ')
                                                             $('#Copropietarios').val(res);
-                                                            //$('#Caracter').val("Copropietarios");  
+                                                            //$('#Caracter').val("Copropietarios");
                                                             }
-                                                            
+
                                                         }
                                                     },
                                                     error:function(error){}
@@ -1522,7 +1524,7 @@ foreach ($noficial->result() as $row) {
                                             }
                                         });
 
-                                        
+
 
                                         $('#formdocto').submit(function(e){
                                             //e.preventDefault();
@@ -1912,7 +1914,7 @@ foreach ($noficial->result() as $row) {
                                                                 var mm = /*(today.getMonth() + 1 < 10) ? "0" + (today.getMonth() + 1) : */today.getMonth() + 1; //January is 0!
                                                                 var yyyy = today.getFullYear();
                                                                 var week = today.getDay();
-                                                                var dm = new Date(yyyy, mm, 0).getDate(); 
+                                                                var dm = new Date(yyyy, mm, 0).getDate();
 
                                                                 if(week == 0)
                                                                 {
@@ -1954,31 +1956,10 @@ foreach ($noficial->result() as $row) {
                                                         <i class="fa fa-calendar"></i>
                                                     </button>
                                                     <script type="text/javascript">
-                                                                var dd2 = dd + 3, mm2 = mm, yyyy2 = yyyy;
-                                                                var dm2 = new Date(yyyy2, mm2, 0).getDate(); 
-                                                                
-                                                                week += 3;
-                                                                if(week > 6)
-                                                                    week -= 7;
-                                                                
-                                                                if(week == 0)
-                                                                    dd2 += 4;
-                                                                else if(week == 6)
-                                                                    dd2 += 2;
-                                                                else if(week == 1)
-                                                                    dd2 += 2;
-
-                                                                if(dd2 > dm2)
-                                                                {
-                                                                    dd -= dm;
-                                                                    mm2++;
-                                                                    if(mm2 > 11)
-                                                                    {
-                                                                        mm2 = 0;
-                                                                        yyyy2 += 1;
-                                                                    }
-                                                                }
-                                                                today2 = dd2 + '/' + mm2 + '/' + yyyy2;
+                                                                var fechaEntrega = addDaysTalon();
+                                                                console.log(fechaEntrega);
+                                                                today2 = fechaEntrega.getDate() + '/' + (fechaEntrega.getMonth()+1) + '/' + fechaEntrega.getFullYear();
+                                                                console.log(today2);
                                                                 $('#fecha_exp').val(today2);
                                                             </script>
                                                         </div>
@@ -2044,7 +2025,7 @@ foreach ($noficial->result() as $row) {
                             type="text/javascript"></script>
 
                     <!--javascripts chidotes-->
-                     <script type="text/javascript" src="https://vuira.irapuato.gob.mx/VUIRA1.5/js/view_clave_cat_ventanilla.js"></script>
+
                     <!-- END CORE PLUGINS -->
                     <!-- BEGIN PAGE LEVEL PLUGINS -->
                     <script src="<?php echo base_url(); ?>assets/global/plugins/moment.min.js"
@@ -2557,7 +2538,7 @@ foreach ($noficial->result() as $row) {
                                                         $('#cbocoloniaui').val(col);
 														//$('#cbocoloniaui').val("Fuck you");
                                                         $('#Neig').val(col);
-                                                        
+
                                                     }
                                                     else
                                                     {
@@ -2609,7 +2590,7 @@ foreach ($noficial->result() as $row) {
                                                         $('#coloniauno').addClass('hidden');
                                                         $("#colonia2").attr("required", "true");
                                                     }
-//                    
+//
 
                                                     initMap();
                                                 } else {
@@ -2652,7 +2633,7 @@ foreach ($noficial->result() as $row) {
 
                             $("#formclave").submit(function (e) {
                                 alert("Recuerde: Falsear Información esta penado según el Artículo 234 del Código Penal para el Estado de Guanajuato."); //                e.preventDefauly();
-                                
+
                             });
 
 
@@ -2661,7 +2642,7 @@ foreach ($noficial->result() as $row) {
 
                     <script>
                         $(document).ready(function() {
-                            if ( ($("#Superficie").val() == '') || ($("#Superficie").val() == null)) 
+                            if ( ($("#Superficie").val() == '') || ($("#Superficie").val() == null))
                             {
                                 var Clave = $('#predialui').val();
                                 if (Clave != "APERTURA") {
@@ -2682,7 +2663,7 @@ foreach ($noficial->result() as $row) {
                                             }
                                         });
                                     }
-                                }                                
+                                }
                             }
                         });
 
@@ -2697,8 +2678,8 @@ foreach ($noficial->result() as $row) {
                                     data: { predialui: $("#predialui").val() },
                                     dataType: "text",
                                     async: false,
-                                    success: function(data) 
-                                    {   
+                                    success: function(data)
+                                    {
                                         data = jQuery.parseJSON(data);
 
                                         if(data.length > 0)
