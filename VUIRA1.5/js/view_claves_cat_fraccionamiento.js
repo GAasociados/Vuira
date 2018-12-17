@@ -21,6 +21,14 @@ function event_add_cuenta_predial()
   }
 }
 
+function event_get_croquis(event)
+{
+  alert("Se ha cargado un archivo");
+  var nombre = event.target.files[0].name;
+  var archivo = event.target.files[0];
+  new view_claves_fraccionamiento().save_croquis(archivo, nombre);
+}
+
 function event_pulsar_enter(event)
 {
   if (event.keyCode == 13) 
@@ -429,6 +437,7 @@ class view_claves_fraccionamiento
   	innerTableContent += "<td>";
   	innerTableContent += "<input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'>";
   	innerTableContent += "<input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'>";
+    innerTableContent += "<input type='file' name='croquis' id='croquis' value='' onchange='event_get_croquis(event)'>";
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();
@@ -550,7 +559,7 @@ class view_claves_fraccionamiento
                                                               $("#Cuenta_Predial").val());
           }
           //var url = "https://vuira.irapuato.gob.mx/DocPrint/DocPrint.php?id="+jdata;
-    		  var url = "../DocPrint/DocPrint.php?id="+jdata;
+    		  var url = "../../DocPrint/DocPrint.php?id="+jdata;
     		  window.open(url, '_blank');
         }
         else
@@ -805,6 +814,29 @@ class view_claves_fraccionamiento
         }
       }
     });
+  }
+
+  save_croquis(archivo, nombre)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=subirCroquis",
+      data:{file:archivo,name:nombre},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          var data = JSON.parse(jdata);
+          console.log(data);
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });    
   }
 
   update_manzana(cuenta_predial,valor)

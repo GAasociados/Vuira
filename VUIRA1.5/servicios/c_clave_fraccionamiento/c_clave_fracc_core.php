@@ -32,6 +32,9 @@ if(isset($_GET['service_name']))
         case 'noClaves':
                         print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
         break;
+         case 'subirCroquis':
+                        print_r(json_encode($obj->subirCroquis($_POST['file'], $_POST['name']), JSON_UNESCAPED_SLASHES));
+        break;
 
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
@@ -89,6 +92,12 @@ class coreFracc
         return $this->con->executeQuerry($sql);
     }
 
+        public function subirCroquis($file, $name)
+    {
+        $ruta = $this->subirArchivo($file, $name);
+        return $ruta;
+    }
+
 
 		public function getAllFraccionamientosByAuxiliar($idAuxiliar)
     {
@@ -143,7 +152,8 @@ EOD;
 
     function subirArchivo($file, $name)
     {
-        $dir_subida = "/var/www/html/vuira/assets/tramites/clavescatastralesfraccionamiento/";
+        //$dir_subida = "/var/www/html/vuira/assets/tramites/clavescatastralesfraccionamiento/";
+        $dir_subida = "../../assets/tramites/clavescatastralesfraccionamiento/";
         $ruta = $dir_subida  . "file-" . basename(date("YmdHis") . "_" . $name  . "_" . $file['name']);
 				$rutabd = "file-" . basename(date("YmdHis") . "_" . $name  . "_" . $file['name']);
         move_uploaded_file($file['tmp_name'], $ruta);
