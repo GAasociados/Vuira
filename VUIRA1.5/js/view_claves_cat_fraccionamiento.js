@@ -1,7 +1,6 @@
 rowSelected = "";
 rowSelectedContent="";
 var esPrimerCuenta = "si";
-var mensajeSubmitAux = "Error";
 var id_bd = 0;
 //se utiliza en ventanilla y auxiliae
 var cuentas_asignadas = 0;
@@ -23,10 +22,15 @@ function event_add_cuenta_predial()
 
 function event_get_croquis(event)
 {
-  alert("Se ha cargado un archivo");
-  var nombre = event.target.files[0].name;
-  var archivo = event.target.files[0];
-  new view_claves_fraccionamiento().save_croquis(archivo, nombre);
+  var data = new FormData(); 
+  //var archivo = event.prop('files')[0];
+  //var archivo = event.target.files[0];
+  data.append('croquis',event.target.files[0]);
+  //alert(data);
+  for (var p of data) {
+  console.log(p);
+  }
+  new view_claves_fraccionamiento().save_croquis();
 }
 
 function event_pulsar_enter(event)
@@ -91,8 +95,6 @@ function event_load_auxiliar()
   $( "#form" ).submit(function( event ) {
     event.preventDefault();
     objVista.update_status_fraccionamientos( $("#id").val() );
-    if ( mensajeSubmitAux == 0)
-      return true;
   });
 }
 
@@ -437,7 +439,7 @@ class view_claves_fraccionamiento
   	innerTableContent += "<td>";
   	innerTableContent += "<input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'>";
   	innerTableContent += "<input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'>";
-    innerTableContent += "<input type='file' name='croquis' id='croquis' value='' onchange='event_get_croquis(event)'>";
+    innerTableContent += "<input type='file' name='croquis' onchange='event_get_croquis(event)'>";
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();
@@ -807,6 +809,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           console.log(jdata);
+          document.getElementById('form').submit();
         }
         else
         {
@@ -816,12 +819,15 @@ class view_claves_fraccionamiento
     });
   }
 
-  save_croquis(archivo, nombre)
+  save_croquis()
   {
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=subirCroquis",
-      data:{file:archivo,name:nombre},
+      data:new FormData(this),
+      processData: false,
+      contentType: false,
+      cache: false,
       async:true,
       success: function (jdata)
       {

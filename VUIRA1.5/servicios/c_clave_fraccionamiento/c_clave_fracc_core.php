@@ -33,7 +33,7 @@ if(isset($_GET['service_name']))
                         print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
         break;
          case 'subirCroquis':
-                        print_r(json_encode($obj->subirCroquis($_POST['file'], $_POST['name']), JSON_UNESCAPED_SLASHES));
+                        print_r(json_encode($obj->subirCroquis($_FILES), JSON_UNESCAPED_SLASHES));
         break;
 
 		case 'getSinAsignar':
@@ -92,10 +92,14 @@ class coreFracc
         return $this->con->executeQuerry($sql);
     }
 
-        public function subirCroquis($file, $name)
+        public function subirCroquis($files)
     {
-        $ruta = $this->subirArchivo($file, $name);
-        return $ruta;
+        if ( !file_exists($files["croquis"]["tmp_name"]) || !is_uploaded_file($files["croquis"]["tmp_name"]) ) 
+        {
+                echo var_dump($files);
+        }
+        
+        //$this->subirArchivo($files["croquis"], "croquis");
     }
 
 
