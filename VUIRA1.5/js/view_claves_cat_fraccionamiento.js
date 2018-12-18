@@ -39,7 +39,8 @@ function event_pulsar_enter(event)
   if (event.keyCode == 13) 
   {
     event.preventDefault();
-    event.add_cuenta_predial();
+    console.log("SE HA PRESIONADO ENTER");
+    event_add_cuenta_predial($("#txtCuentaPredial").val());
   }
 }
 
