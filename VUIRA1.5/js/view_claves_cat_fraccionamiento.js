@@ -22,7 +22,8 @@ function event_add_cuenta_predial()
 
 function event_get_croquis(event)
 {
-  var data = new FormData(); 
+  var form = $("#form");
+  var data = new FormData(form); 
   //var archivo = event.prop('files')[0];
   //var archivo = event.target.files[0];
   data.append('croquis',event.target.files[0]);
@@ -30,7 +31,7 @@ function event_get_croquis(event)
   for (var p of data) {
   console.log(p);
   }
-  new view_claves_fraccionamiento().save_croquis();
+  new view_claves_fraccionamiento().save_croquis(data);
 }
 
 function event_pulsar_enter(event)
@@ -819,15 +820,12 @@ class view_claves_fraccionamiento
     });
   }
 
-  save_croquis()
+  save_croquis(data)
   {
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=subirCroquis",
-      data:new FormData(this),
-      processData: false,
-      contentType: false,
-      cache: false,
+      data:{data:data},
       async:true,
       success: function (jdata)
       {
