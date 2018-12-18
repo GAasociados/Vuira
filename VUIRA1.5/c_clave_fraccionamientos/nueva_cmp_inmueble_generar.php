@@ -39,22 +39,22 @@ ini_set("display_errors",1);
 	<input class="form-control" type="text" id="p_ciudad_escritura"">
 </div>
 <div class="row">
-	<div class="col-md-12">
+    <div class="col-md-12">
 		<div class="table-responsive">
-	<table class="table table-bordered table-hover" id="tblinmubles">
-		<thead>
-			<tr>
-				<th scope="col"> Cuenta Predial </th>
-				<th scope="col"> Calle </th>
-				<th scope="col"> Manzana </th>
-				<th scope="col"> Lote</th>
-				<th scope="col"> Numero Exterior </th>
-				<th scope="col"> Numero Interior </th>
-				<th scope="col"> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido </th>
-				<th scope="col"> Acciones </th>
-			</tr>
-		</thead>
-	</table>
-</div>	
+	       <table class="table table-bordered table-hover" id="tblinmubles">
+		      <thead>
+			     <tr>
+				    <th scope="col"> Cuenta Predial </th>
+				    <th scope="col"> Calle </th>
+				    <th scope="col"> Manzana </th>
+				    <th scope="col"> Lote</th>
+				    <th scope="col"> Numero Exterior </th>
+				    <th scope="col"> Numero Interior </th>
+				    <th scope="col"> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido </th>
+				    <th scope="col"> Acciones </th>
+			     </tr>
+		      </thead>
+	       </table>
+        </div>	
 	</div>
 </div>

@@ -346,7 +346,7 @@ class view_claves_fraccionamiento
           "<input type='hidden' name='S1_NI_"+data.CUENTA_PREDIAL+"' value='"+data.NO_INTERIOR+"' ></td>";
      innerTableContent += "<td name='"+data.NOMBRE_COLONIA+"'>"+ data.NOMBRE_COLONIA+
           "<input type='hidden' name='S1_CCC_"+data.CUENTA_PREDIAL+"' value='"+data.NOMBRE_COLONIA+"' ></td>";
-     innerTableContent += "<td><input type='button' name='"+data.CUENTA_PREDIAL+"' value='borrar' onclick='event_remove_clave(this)'></td>";
+     innerTableContent += "<td><button type='button' class='btn btn-danger' name='"+data.CUENTA_PREDIAL+"' value='borrar' onclick='event_remove_clave(this)'>Borrar</button></td>";
      innerTableContent += "</tr>";
      $("#tblinmubles").append(innerTableContent);
 

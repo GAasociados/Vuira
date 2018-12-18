@@ -1,9 +1,4 @@
-<?php
-error_reporting(E_ALL);
-ini_set("display_errors",1);
-?>
-
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 
   <head>
@@ -119,6 +114,7 @@ ini_set("display_errors",1);
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/login-box.css">
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/user-profile.css">
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/snippets/mobile-navigation.css">
+
   <!-- ELEMENTS -->
 
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/elements/badges.css">
@@ -129,7 +125,6 @@ ini_set("display_errors",1);
 
   <!-- ICONS -->
 
-      
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/fontawesome/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/linecons/linecons.css">
   <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/icons/spinnericon/spinnericon.css">
@@ -326,18 +321,6 @@ ini_set("display_errors",1);
                     <div id="panel-fecha_recep" class="content-box border-top border-blue">
                       <div class="content-box-wrapper">
                         <h3 class="title-hero">I. Documentos del Inmueble</h3>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="" >Presentar Plano Físico de Traza Autorizada por la Dirección General de Desarrollo Territorial</label>
-                                      <label>(Se lleva a oficinas)</label>
-                                  </div>
-                              </div>
-                              <div class="col-md-6">
-                                  <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi" name="sup_inmueble_swi" value="moral" checked>Personal Moral</label>
-                                  <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="sup_inmueble_swi" value="fisica">Persona Física</label>
-                              </div>
-                          </div>
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
@@ -355,7 +338,7 @@ ini_set("display_errors",1);
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for="">Recibo Predial Actualizado General y/o Cuentas Prediales Individuales</label>
+                              <label for="">Recibo Predial actualizado general y/o Cuentas Prediales Individuales</label>
                               <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Resibo_Predial" multiple="">
                             </div>
                           </div>
@@ -369,25 +352,35 @@ ini_set("display_errors",1);
                         <div class="row">
                           <div class="col-md-6">
                              <div class="form-group">
-                              <label for="">Poder Notarial para Representación de Persona Moral</label>
+                              <label for="">Poder Notarial para representación de persona moral</label>
                               <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Acta" multiple="">
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for="">Escritura Pública de Propiedad que Contenga la Hoja Registral y Ampare la Superficie Registrada (En Caso de No Contener la Hoja Registral Anexar Copia de Libertad de Gravamen)</label>
+                              <label for="">Escritura Pública de Propiedad que contenga la Hoja Registral y ampare la Superficie Registrada (en caso de no contener la hoja registral anexar copia de Libertad de Gravamen)</label>
                               <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Escritura_Publica" multiple="">
                             </div>
                           </div>
                         </div>
-                       
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="" >Presentar Plano físico de Traza autorizada por la Dirección General de Desarrollo Territorial</label>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <!-- SECCION II -->
                     <div id="panel-datos-cuenta-suspendida" class="content-box border-top border-blue">
                       <div class="content-box-wrapper">
-                          <h3 class="title-hero">II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE</h3>
+                        <div class="bordered-row">
+                          <div class="row">
+                            <h3 class="title-hero">II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE</h3>
                             <?php include_once ('nueva_cmp_inmueble_create.php')?>
+                          </div>
+                        </div>
                       </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
                     </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
                     <div id="panel-datos-cuenta-suspendida2" class="content-box border-top border-blue">
