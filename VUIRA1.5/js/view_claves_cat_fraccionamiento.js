@@ -138,7 +138,13 @@ function event_load_ventanilla()
     }
     else
     {
-      alert("Debe agregar por lo menos una cuenta predial");
+      //alert("Debe agregar por lo menos una cuenta predial");
+      new Noty({
+        type: 'error',
+        layout: 'topRight',
+        theme: 'sunset',
+        text: 'Debe Agregar Al Menos Una Cuenta Predial'
+      }).show();
     }
   });
 
@@ -630,7 +636,13 @@ class view_claves_fraccionamiento
     var nombre_nuevo = data.NOMBRE + " " + data.APELLIDO_PATERNO + " " + data.APELLIDO_MATERNO;
     if ( nombre_propietario_actual != nombre_nuevo)
     {
-      alert("Los Propietarios no son iguales");
+      //alert("Los Propietarios no son iguales");
+      new Noty({
+        type: 'warning',
+        layout: 'topRight',
+        theme: 'sunset',
+        text: 'Los Propietarios No Son Iguales'
+      }).show();
     }
   }
 
@@ -869,6 +881,12 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           console.log(jdata);
+          new Noty({
+            type: 'info',
+            layout: 'topRight',
+            theme: 'sunset',
+            text: 'Se Ha Actualizado La Cuenta Predial'
+          }).show();
         }
         else
         {
@@ -892,6 +910,12 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           console.log(jdata);
+          new Noty({
+            type: 'info',
+            layout: 'topRight',
+            theme: 'sunset',
+            text: 'Se Ha Actualizado La Cuenta Predial'
+          }).show();
         }
         else
         {

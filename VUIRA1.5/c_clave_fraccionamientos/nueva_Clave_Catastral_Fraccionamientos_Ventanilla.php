@@ -159,6 +159,10 @@ ini_set("display_errors",1);
   <script type="text/javascript" src="../../assets_muni/assets/js-core/modernizr.js"></script>
   <script type="text/javascript" src="../../assets_muni/js/funciones.js"></script>
 
+  <!-- LA NOTIFICACION QUE PIDIÓ EL MUNICIPIO-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" type="text/javascript"></script>
+  
   <!-- NUESTRO SCRIPT -->
   <script type="text/javascript" src="./../js/view_claves_cat_fraccionamiento.js"></script>
 
