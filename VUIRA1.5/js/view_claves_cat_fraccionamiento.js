@@ -498,7 +498,7 @@ class view_claves_fraccionamiento
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    //document.getElementById('formVentanilla').submit();
+    document.getElementById('formVentanilla').submit();
   }
 
   get_numeros_consecutivos(numero)
