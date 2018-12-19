@@ -638,7 +638,7 @@ class view_claves_fraccionamiento
     {
       //alert("Los Propietarios no son iguales");
       new Noty({
-        type: 'warning',
+        type: 'info',
         layout: 'topRight',
         theme: 'sunset',
         text: 'Los Propietarios No Son Iguales'
