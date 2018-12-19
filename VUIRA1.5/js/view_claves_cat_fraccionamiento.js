@@ -1,6 +1,5 @@
 rowSelected = "";
 rowSelectedContent="";
-var esPrimerCuenta = "si";
 var id_bd = 0;
 var contador = 0;
 var numero_cuentas = 0;
@@ -146,7 +145,7 @@ function event_load_ventanilla()
   //evento para generar el talon
   $("#imprimirTalon").click( function()
   {
-    new view_claves_fraccionamiento().setup_generate_talon();
+    new view_claves_fraccionamiento().load_data_fraccionamientos_detalles( $("#id").val() );
   });
 }
 
@@ -492,7 +491,6 @@ class view_claves_fraccionamiento
     var correo = $("#Correo_Electronico").val();
     var tipo_tramite = $("#Tipo_Tramite").val();
     var clave = cuentas_asignadas[0]["Cuenta_Predial"];
-
     var folios = JSON.stringify(numeros_asignados);
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
       +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
@@ -500,7 +498,7 @@ class view_claves_fraccionamiento
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    document.getElementById('formVentanilla').submit();
+    //document.getElementById('formVentanilla').submit();
   }
 
   get_numeros_consecutivos(numero)
@@ -518,10 +516,11 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           //obtiene solo los valores del json
           numeros_asignados = Object.keys(data).map(function (key) { return data[key]; });
+          new view_claves_fraccionamiento().setup_generate_talon();
         }
         else
         {
-            alert (jdata);
+          alert (jdata);
         }
       }
     });
@@ -629,12 +628,7 @@ class view_claves_fraccionamiento
   {
     var nombre_propietario_actual = $("#Propietario").val();
     var nombre_nuevo = data.NOMBRE + " " + data.APELLIDO_PATERNO + " " + data.APELLIDO_MATERNO;
-
-    if ( esPrimerCuenta === "si" )
-    {
-       $("#Propietario").val( nombre_nuevo );
-       esPrimerCuenta = "no";
-    } else if ( nombre_propietario_actual != nombre_nuevo)
+    if ( nombre_propietario_actual != nombre_nuevo)
     {
       alert("Los Propietarios no son iguales");
     }
@@ -737,9 +731,14 @@ class view_claves_fraccionamiento
         {
           var data = JSON.parse(jdata);
           console.log(data);
-          new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
+          
           contador =  Object.keys(data).length;
-          new view_claves_fraccionamiento().set_data_form_detalles(data);
+          if ( numero_cuentas !== 0)
+          {
+            new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
+          }
+          else
+            new view_claves_fraccionamiento().set_data_form_detalles(data);
           cuentas_asignadas = data;
         }
         else
