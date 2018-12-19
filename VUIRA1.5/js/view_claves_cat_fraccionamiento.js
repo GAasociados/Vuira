@@ -432,7 +432,7 @@ class view_claves_fraccionamiento
     tmpHidden+= "<input type='hidden' id='Colonia' value='"+hidden[6].value+"' />";
     tmpHidden+= "<input type='hidden' id='Id_clave' value='"+hidden[7].value+"' />";
 
-  	var innerTableContent = "<td colspan='5' ><div class='container-fluid'>";
+  	var innerTableContent = "<td colspan='7' ><div class='container-fluid'>";
     innerTableContent += "<div style='display: none;'>"+tmpHidden+"</div>";
     innerTableContent += "<div class='form-row'>"
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='claveCat' class='control-label'>Clave Catastral *</label> <input type='text'id='claveCat' class='form-control'> </div>";
@@ -449,15 +449,17 @@ class view_claves_fraccionamiento
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='fecha_escritura' class='control-label'> Fecha de Escrituras * <input type='date' id='fecha_escritura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='numero_oficio' class='control-label'> Número de Oficio * <input type='text' id='numero_oficio' class='form-control'></div>";
     innerTableContent += "</div>"
-    innerTableContent += "<div class='form-row'>"
+    innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='estado_escritura' class='control-label'>Entidad Federativa *</label> <input type='text' id='estado_escitura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='ciudad_escritura' class='control-label'>Ciudad de Escritura *</label> <input type='text' id='ciudad_escritura' class='form-control'></div>";
     innerTableContent += "</div>"
   	innerTableContent += "</td>";
   	innerTableContent += "<td>";
-  	innerTableContent += "<input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'>";
-  	innerTableContent += "<input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'>";
-    innerTableContent += "<input type='file' name='croquis' onchange='event_get_croquis(event)'>";
+     innerTableContent += "<div class='form-row'>";
+  	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
+  	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
+    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' onchange='event_get_croquis(event)'></div></div>";
+    innerTableContent += "</div>"
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();
