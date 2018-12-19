@@ -2,10 +2,17 @@ rowSelected = "";
 rowSelectedContent="";
 var esPrimerCuenta = "si";
 var id_bd = 0;
+var contador = 0;
+var numero_cuentas = 0;
 //se utiliza en ventanilla y auxiliae
 var cuentas_asignadas = 0;
 //se utiliza en ventanilla
 var numeros_asignados = 0;
+
+function realizarSubmit()
+{
+  document.getElementById('formVentanilla').submit();
+}
 
 function event_add_cuenta_predial()
 {
@@ -178,6 +185,7 @@ function event_generar_clave(buttonName)
 
 class view_claves_fraccionamiento
 {
+  //se define una propiedad estatico para que las demas instancia compartan su valor
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
@@ -199,7 +207,10 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           new view_claves_fraccionamiento().set_nombre_propietario(data);
           new view_claves_fraccionamiento().set_to_grid(data);
-          new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
+          if ( numero_cuentas === contador)
+            new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
+          else
+            numero_cuentas += 1;
           console.log(data);
         }
         else
@@ -602,7 +613,7 @@ class view_claves_fraccionamiento
     $("#Propietario").val( data[0]["Propietario"] );
     $("#Correo_Electronico").val( data[0]["Correo_Electronico"] );
     $("#Telefono").val( data[0]["Telefono"] );
-    $("#Tipo_Tramite").val( data[0]["Tipo_Tramite"] );
+    $("#Tipo_de_Tramite").val( data[0]["Tipo_Tramite"] );
   }
 
   set_data_form_detalles(data)
@@ -726,9 +737,10 @@ class view_claves_fraccionamiento
         {
           var data = JSON.parse(jdata);
           console.log(data);
+          new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
+          contador =  Object.keys(data).length;
           new view_claves_fraccionamiento().set_data_form_detalles(data);
           cuentas_asignadas = data;
-          new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
         }
         else
         {

@@ -303,26 +303,18 @@ ini_set("display_errors",1);
               <h2>CLAVE CATASTRAL FRACCIONAMIENTOS</h2><br>
               <div id="panel-captura-avaluo" class="panel">
                 <div class="panel-body">
-                  <button class="btn btn-success float" title="Guardar Cuenta" id="btnGuardarFracc" form="form">
-                    Guardar
+                  <input class="btn btn-success float" type="submit" value="Guardar"form="formVentanilla" onclick=""/>
                     <!-- <i class="glyph-icon icon-save"></i> -->
-                  </button>
                   <button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;">
                     Cancelar
                   </button>
-                  <form id="formVentanilla">
+                  <form action="C_C_Fraccionamientos_CE.php" id="formVentanilla" method="post" enctype="multipart/form-data" >
                     <input type="hidden" name="id" id="id" value="<?php
                     if(isset($_GET["Id"]))
                     {
                       echo $_GET["Id"];
                     }
                     ?>"/>
-                    <input type="hidden" name="uid" id="uid" value="<?php
-                    if(isset($_GET['uid']))
-                    {
-                      echo $_GET["uid"];
-                    }
-                    ?>">
                     <div id="panel-fecha_recep" class="content-box border-top border-blue">
                       <div class="content-box-wrapper">
                         <h3 class="title-hero">I. Documentos del Inmueble</h3>
@@ -398,11 +390,11 @@ ini_set("display_errors",1);
                               <div class="col-md-5">
                                 <div class="form-group">
                                   <label class="control-label">Nombre completo del propietario</label>
-                                    <input type="text" class="form-control" id="Propietario" name="Propietario" value="" required></select>
+                                    <input type="text" class="form-control" id="Propietario" name="Propietario" ></select>
                                   </div>
                                   <div class="form-group">
                                       <label class="control-label">Correo Electronico</label>
-                                      <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  value="" required></select>
+                                      <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  ></select>
                                     </div>
                                   </div>
                                   <div class="col-md-7">
@@ -410,14 +402,14 @@ ini_set("display_errors",1);
                                       <label>Telefono</label>
                                       <div class="row">
                                         <div class="col-xs-6 col-md-6">
-                                         <input type="text" class="form-control" id="Telefono" name="Telefono" value="" required>
+                                         <input type="text" class="form-control" id="Telefono" name="Telefono" >
                                         </div>
                                       </div>
                                     </div>
                                     <div class="form-group" >
                                       <label class="control-label">Tipo de Tramite que solicita</label>
-                                      <select id="tipo_de_tramite" name="tipo_de_tramite" class="chosen-select">
-                                         <option value="0">Elegir trámite...</option>
+                                      <select id="Tipo_de_Tramite" name="Tipo_de_Tramite" class="chosen-select">
+                                        <option value="0">Elegir trámite...</option>
                                        <option value="1">Asignación de Claves Catastrales</option>
                                        <option value="2">Modificación de Clave Catastrales</option>
                                       </select>
@@ -469,6 +461,32 @@ ini_set("display_errors",1);
                             <!-- page-content-wrapper -->
                         </div>
                         <!-- FIN sb-site -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Rango de Fechas</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Fecha de Inicio</label>
+                                  <input class="form-control" id="fecha-inicio" type="date">
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleFormControlInput1">Fecha de Entrega</label>
+                                  <input class="form-control" id="fecha-entrega" type="date">
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" id="imprimirTalon" >Imprimir Talon</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </body>
                     </html>
 
