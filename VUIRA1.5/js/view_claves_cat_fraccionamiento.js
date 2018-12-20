@@ -131,8 +131,7 @@ function event_load_ventanilla()
   //valida el boton guardar
   $( "#formVentanilla" ).submit(function( event ) {
     event.preventDefault();
-    var tbody = $('tbody');
-    if ( tbody.children().length >= 2)
+    if ( cuentas_asignadas.length >= 1)
     {
       $('#exampleModal').modal('show');
     }

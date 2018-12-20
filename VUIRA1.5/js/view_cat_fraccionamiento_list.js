@@ -133,9 +133,9 @@ class view_claves_cat_fraccionamiento_list
         innerConent+="<td>"+ data[i].Correo_Electronico + "</td>";
         innerConent+="<td>"+ data[i].Telefono + "</td>";
         if(opcion=="Ventanilla")
-          innerConent+="<td href=''><a href='Clave_Catastral_Fraccionamientos_Ventanilla.php?Id="+data[i].Id+"'>Ver Registro </a></td>";
+          innerConent+="<td href=''><a href='nueva_Clave_Catastral_Fraccionamientos_Ventanilla.php?Id="+data[i].Id+"'>Ver Registro </a></td>";
         else if(opcion=="Auxiliar")
-          innerConent+="<td href=''><a href='Clave_Catastral_Fraccionamientos_Auxiliar.php?Id="+data[i].Id+"&uid="+auxiliar+"'>Generar Clave</a></td>";
+          innerConent+="<td href=''><a href='_nueva_Clave_Catastral_Fraccionamientos_Auxiliar.php?Id="+data[i].Id+"&uid="+auxiliar+"'>Generar Clave</a></td>";
         else if(opcion=="Asignador")
             innerConent+="<td><input type='button' name='"+data[i].Id+"' onclick='event_Asignar(this)' value='Asignar' /></td>";
         else
