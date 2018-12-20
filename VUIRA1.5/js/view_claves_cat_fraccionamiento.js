@@ -209,12 +209,14 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
-          new view_claves_fraccionamiento().set_nombre_propietario(data);
-          new view_claves_fraccionamiento().set_to_grid(data);
           if ( numero_cuentas === contador)
             new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
           else
+          {
             numero_cuentas += 1;
+            new view_claves_fraccionamiento().set_nombre_propietario(data);
+            new view_claves_fraccionamiento().set_to_grid(data);
+          }
           console.log(data);
         }
         else
@@ -777,10 +779,18 @@ class view_claves_fraccionamiento
         if(jdata.includes("Error"))
         {
           console.log(jdata);
+          new Noty({
+            type: 'error',
+            layout: 'topRight',
+            theme: 'sunset',
+            text: 'La cuenta no existe o ya se ha agregado'
+          }).show();
         }
         else
         {
-          alert (jdata);
+          new view_claves_fraccionamiento().set_nombre_propietario(data);
+          new view_claves_fraccionamiento().set_to_grid(data);
+          //alert (jdata);
         }
       }
     });
