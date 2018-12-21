@@ -200,15 +200,28 @@ class view_claves_cat_fraccionamiento_list
   {
 	  var control="<table>";
 	  control+="<tr>";
-	  control+="<td>ID</td>";
-	  control+="<td>Nombre</td>";
-	  control+="<td>Cantidad</td>";
+	  control+="<td>Auxiliar</td>";
+	  control+="<td>Folio</td>";
+	  control+="<td>Manzana</td>";
+    control+="<td>Lote</td>";
+    control+="<td>Calle</td>";
 	  control+="</tr>";
 	  for(var i=0; i< data.length ; i++)
 	  {
-		control+="<td>"+data[i].Id_Auxiliar+"</td>";
+		/*control+="<td>"+data[i].Id_Auxiliar+"</td>";
 		control+="<td>"+data[i].Nombre+"</td>";
-		control+="<td>"+data[i].asignados+"</td>";
+		control+="<td>"+data[i].asignados+"</td>";*/
+    control+="<tr>";
+   
+    if ( data[i].Nombre == null) {
+      data[i].Nombre = "No capturado";
+    }
+    control+="<td>"+data[i].Nombre+"</td>";
+    control+="<td>"+data[i].Folio+"</td>";
+    control+="<td>"+data[i].Manzana+"</td>";
+    control+="<td>"+data[i].Lote+"</td>";
+    control+="<td>"+data[i].Calle+"</td>";
+    control+="</tr>";
 	  }
 	  control+="</table>";
 	  return control;
@@ -236,7 +249,7 @@ class view_claves_cat_fraccionamiento_list
 	 var frag_aux_asignados = this.setup_Auxiliares_Asignados(this.get_Auxiliares_Asignados(rowSelected));
    var maxAvilable = this.get_Sin_Asignar(rowSelected)[0];
 	 rowSelectedContent = tblRow.html()
-	 var innerHtml= "<td colspan='4'>";
+	 var innerHtml= "<td colspan='8'>";
 	 innerHtml+= "<h4>Asignacion de Auxiliares</h4>";
 	 innerHtml+= "Auxiliar:"+frag_auxiliares;
 	 innerHtml+= "Bloque: <input type='text' id='txtBloque'> Disponibles: <input type='hidden' id='hidSinAsignar' value='"+maxAvilable.Sin_Asignar+"'> "+maxAvilable.Sin_Asignar;
