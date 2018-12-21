@@ -207,6 +207,7 @@ class view_claves_cat_fraccionamiento_list
 	  control+="<th scope='col'>Manzana</td>";
     control+="<th scope='col'>Lote</td>";
     control+="<th scope='col'>Calle</td>";
+    control+="<th scope='col'></td>";
 	  control+="</tr>";
     control+="</thead>";
 	  for(var i=0; i< data.length ; i++)
@@ -237,6 +238,7 @@ class view_claves_cat_fraccionamiento_list
       control+="<td>"+data[i].Manzana+"</td>";
       control+="<td>"+data[i].Lote+"</td>";
       control+="<td>"+data[i].Calle+"</td>";
+      control+="<td  align='center'>"+"<button type='button' class='btn btn-danger'><i class='glyph-icon icon-trash'></i></button>"+"</td>";
       control+="</tr>";
 	  }
 	  control+="</table>";
