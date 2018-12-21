@@ -137,7 +137,7 @@ class view_claves_cat_fraccionamiento_list
         else if(opcion=="Auxiliar")
           innerConent+="<td href=''><a href='_nueva_Clave_Catastral_Fraccionamientos_Auxiliar.php?Id="+data[i].Id+"&uid="+auxiliar+"'>Generar Clave</a></td>";
         else if(opcion=="Asignador")
-            innerConent+="<td><input type='button' name='"+data[i].Id+"' onclick='event_Asignar(this)' value='Asignar' /></td>";
+            innerConent+="<td><input type='button' class='btn btn-info'' name='"+data[i].Id+"' onclick='event_Asignar(this)' value='Asignar' /></td>";
         else
             innerConent+="<td>Error opcion incorrecta</td>";
         innerConent+="</tr>";
@@ -170,7 +170,7 @@ class view_claves_cat_fraccionamiento_list
   setup_all_auxiliares(data)
   {
 
-	  var control="<select id='cmbAuxiliares'>";
+	  var control="<select id='cmbAuxiliares' class='chosen-select'>";
 	  for(var i=0; i< data.length ; i++)
 	  {
       var fullName = data[i].nombres+" "+(data[i].apellido_pat==null?"":data[i].apellido_pat)+" "+(data[i].apellido_mat==null?"":data[i].apellido_mat);
@@ -198,30 +198,46 @@ class view_claves_cat_fraccionamiento_list
 
   setup_Auxiliares_Asignados(data)
   {
-	  var control="<table>";
+
+	  var control="<table class='table table-bordered'>";
+    control+="<thead>";
 	  control+="<tr>";
-	  control+="<td>Auxiliar</td>";
-	  control+="<td>Folio</td>";
-	  control+="<td>Manzana</td>";
-    control+="<td>Lote</td>";
-    control+="<td>Calle</td>";
+	  control+="<th scope='col'>Auxiliar</td>";
+	  control+="<th scope='col'>Folio</td>";
+	  control+="<th scope='col'>Manzana</td>";
+    control+="<th scope='col'>Lote</td>";
+    control+="<th scope='col'>Calle</td>";
 	  control+="</tr>";
+    control+="</thead>";
 	  for(var i=0; i< data.length ; i++)
 	  {
-		/*control+="<td>"+data[i].Id_Auxiliar+"</td>";
-		control+="<td>"+data[i].Nombre+"</td>";
-		control+="<td>"+data[i].asignados+"</td>";*/
-    control+="<tr>";
-   
-    if ( data[i].Nombre == null) {
-      data[i].Nombre = "No capturado";
-    }
-    control+="<td>"+data[i].Nombre+"</td>";
-    control+="<td>"+data[i].Folio+"</td>";
-    control+="<td>"+data[i].Manzana+"</td>";
-    control+="<td>"+data[i].Lote+"</td>";
-    control+="<td>"+data[i].Calle+"</td>";
-    control+="</tr>";
+      control+="<tr>";
+      if ( data[i].Nombre == null ) 
+      {
+        data[i].Nombre = "No Capturado";
+      }
+      if ( data[i].Folio == null )
+      {
+        data[i].Folio == "No Capturado";
+      }
+      if ( data[i].Manzana == null )
+      {
+        data[i].Manzana == "No Capturado";
+      }
+      if ( data[i].Lote == null )
+      {
+        data[i].Lote == "No Capturado";
+      }
+      if ( data[i].Calle == null )
+      {
+        data[i].Calle == "No Capturado";
+      }
+      control+="<td>"+data[i].Nombre+"</td>";
+      control+="<td>"+data[i].Folio+"</td>";
+      control+="<td>"+data[i].Manzana+"</td>";
+      control+="<td>"+data[i].Lote+"</td>";
+      control+="<td>"+data[i].Calle+"</td>";
+      control+="</tr>";
 	  }
 	  control+="</table>";
 	  return control;
@@ -245,19 +261,26 @@ class view_claves_cat_fraccionamiento_list
 
   display_asignador_interface(tblRow)
   {
+ /*   <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary">Left</button>
+  <button type="button" class="btn btn-secondary">Middle</button>
+  <button type="button" class="btn btn-secondary">Right</button>
+</div>*/
 	 var frag_auxiliares =this.setup_all_auxiliares(this.get_all_auxiliares());
 	 var frag_aux_asignados = this.setup_Auxiliares_Asignados(this.get_Auxiliares_Asignados(rowSelected));
    var maxAvilable = this.get_Sin_Asignar(rowSelected)[0];
 	 rowSelectedContent = tblRow.html()
 	 var innerHtml= "<td colspan='8'>";
-	 innerHtml+= "<h4>Asignacion de Auxiliares</h4>";
+	 innerHtml+= "<h3>Asignacion de Auxiliares</h3>";
 	 innerHtml+= "Auxiliar:"+frag_auxiliares;
 	 innerHtml+= "Bloque: <input type='text' id='txtBloque'> Disponibles: <input type='hidden' id='hidSinAsignar' value='"+maxAvilable.Sin_Asignar+"'> "+maxAvilable.Sin_Asignar;
 	 innerHtml+= frag_aux_asignados;
 	 innerHtml+= "</td>";
 	 innerHtml+= "<td>";
-	 innerHtml+= "<input type='button' value='Asignar' onclick='event_Asignar_Auxiliar()'/>";
-	 innerHtml+= "<input type='button' value='Cancelar' onclick='event_Cancelar()' />";
+   innerHtml+= "<div class='btn-group-vertical' role='group' aria-label='acciones'>";
+	 innerHtml+= "<button type='button' class='btn btn-info' value='Asignar' onclick='event_Asignar_Auxiliar()'>Asignar</button>";
+	 innerHtml+= "<button type='button' class='btn btn-danger' value='Cancelar' onclick='event_Cancelar()'>Cancelar</button>";
+   innerHtml+= "</div>";
 	 innerHtml+= "</td>";
 	 tblRow.html(innerHtml);
   }
