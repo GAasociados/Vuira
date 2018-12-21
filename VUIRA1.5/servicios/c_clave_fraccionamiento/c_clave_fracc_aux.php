@@ -130,7 +130,17 @@ class auxiliarFracc
 
 	public function getAsignadosFraccionamiento($idFraccionamiento)
 	{
-		$sql = "SELECT asi.Id_Auxiliar, count(asi.Id_Auxiliar) as asignados, concat(u.nombres, ' ', u.apellido_pat, ' ', u.apellido_mat) as Nombre FROM Claves_Catastrales_Fraccionamientos_Asignacion as asi INNER JOIN usuarios as u on u.ID = asi.Id_Auxiliar  WHERE asi.Id_Fraccionamiento = '" . $idFraccionamiento . "' GROUP BY Id_Auxiliar;";
+		$sql = "SELECT 
+				concat(u.nombres, ' ', u.apellido_pat, ' ', u.apellido_mat) as Nombre,
+				detalles.Folio,
+				detalles.Manzana,
+				detalles.Lote,
+				detalles.Calle
+				FROM Claves_Catastrales_Fraccionamientos_Asignacion as asi 
+				INNER JOIN usuarios as u on u.ID = asi.Id_Auxiliar 
+				INNER JOIN claves_catastrales_fraccionamientos_detalles as detalles on asi.Id_Fraccionamiento = detalles.Id_Fraccionamientos and 
+				asi.Cuenta_Predial = detalles.Cuenta_Predial 
+				WHERE asi.Id_Fraccionamiento = {$idFraccionamiento}";
 		return $this->con->executeQuerry($sql);
 	}
 
