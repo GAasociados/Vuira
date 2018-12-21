@@ -12,7 +12,7 @@ ini_set("display_errors",1);
 <title>Auxiliar Clave Catastral Fraccionamientos</title>
 </head>
 <body onload="event_load_auxiliar()">
-<form method="post" id="form">
+<form method="post" id="form" enctype="multipart/form-data">
 <div class="container">
   <br>
     <h1> CLAVE CATASTRAL FRACCIONAMIENTOS</h1>
@@ -90,7 +90,7 @@ ini_set("display_errors",1);
       </div>
       <br>
       <div class="col-md-8">
-      <input class="btn btn-danger" type="button" value="Cancelar" onclick="dirigir_main_page()" />
+      <input class="btn btn-danger" type="button" value="Cancelar"  />
       <input class="btn btn-success" type="submit" value="Guardar" /><br><br>
       </div>
     </form>

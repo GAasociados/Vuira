@@ -22,12 +22,8 @@ include ("../colonias/colonias_serv.php");
         //echo $respuesta["CALLE_ID"];
         $obj = new colonia();
 		//echo $respuesta["CALLE_ID"]."<br>";
-		$CalleNombre = $obj->getDataCalleById($respuesta["CALLE_ID"]);
-    $Colonia = $obj->getAllDataColoniaById($respuesta["COLONIA_ID"]);
 		//var_dump($CalleNombre);
 		//if($CalleNombre!= null)
-		    $respuesta["CALLE_ID"] = isset($CalleNombre->NOMBRE)?$CalleNombre->NOMBRE:$respuesta["CALLE_ID"];
-        $respuesta["COLONIA_ID"] = isset($Colonia->NOMBRE)?$Colonia->NOMBRE:$respuesta["COLONIA_ID"];
         print (json_encode($respuesta));
     }
     else {

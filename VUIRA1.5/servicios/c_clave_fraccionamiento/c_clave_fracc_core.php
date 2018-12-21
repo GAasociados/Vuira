@@ -25,6 +25,17 @@ if(isset($_GET['service_name']))
 		case 'getAll':
 						print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
 		break;
+
+        case 'getFoFi':
+                        print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+        case 'noClaves':
+                        print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+         case 'subirCroquis':
+                        print_r(json_encode($obj->subirCroquis($_POST), JSON_UNESCAPED_SLASHES));
+        break;
+
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
 		break;
@@ -64,9 +75,34 @@ class coreFracc
 
 		public function getAllFraccionamientos()
     {
-				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos";
+				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc INNER JOIN   claves_catastrales_fraccionamientos_detalles AS fraccDet
+                    ON fracc.Id = fraccDet.Id_Fraccionamientos GROUP BY fracc.Id";
         return $this->con->executeQuerry($sql);
     }
+
+        public function getFolioFinalFracc($id)
+    {
+                $sql = "SELECT fraccDet.Folio FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
+        return $this->con->executeQuerry($sql);
+    }
+
+        public function getNoClaves($id)
+    {
+                $sql = "SELECT COUNT(*) AS Claves FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id}";
+        return $this->con->executeQuerry($sql);
+    }
+
+        public function subirCroquis($data)
+    {
+        echo("EL POST TRAE".var_dump($data));
+        // if ( !file_exists($files["croquis"]["tmp_name"]) || !is_uploaded_file($files["croquis"]["tmp_name"]) ) 
+        // {
+        //         echo var_dump($files);
+        // }
+        
+        //$this->subirArchivo($files["croquis"], "croquis");
+    }
+
 
 		public function getAllFraccionamientosByAuxiliar($idAuxiliar)
     {
@@ -83,7 +119,9 @@ EOD;
 
 		public function getAllFraccionamientosSinAsignar()
     {
-				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos where Status='Sin Asignar'";
+				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc
+                        INNER JOIN claves_catastrales_fraccionamientos_detalles AS fraccDet
+                        ON fracc.Id = fraccDet.Id_Fraccionamientos WHERE Status = 'Sin Asignar' GROUP BY fracc.Id;";
         return $this->con->executeQuerry($sql);
     }
 
@@ -121,7 +159,8 @@ EOD;
 
     function subirArchivo($file, $name)
     {
-        $dir_subida = "/var/www/html/vuira/assets/tramites/clavescatastralesfraccionamiento/";
+        //$dir_subida = "/var/www/html/vuira/assets/tramites/clavescatastralesfraccionamiento/";
+        $dir_subida = "../../assets/tramites/clavescatastralesfraccionamiento/";
         $ruta = $dir_subida  . "file-" . basename(date("YmdHis") . "_" . $name  . "_" . $file['name']);
 				$rutabd = "file-" . basename(date("YmdHis") . "_" . $name  . "_" . $file['name']);
         move_uploaded_file($file['tmp_name'], $ruta);

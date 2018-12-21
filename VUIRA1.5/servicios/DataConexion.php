@@ -5,7 +5,7 @@
     	private $user="vuira";
 		private $pwd="irap.ga";
 		private $host="localhost";
-		private $dataBase="natural7_vuira";
+		private $dataBase="natural7_vuira2";
 
 		public function conect()
 		{

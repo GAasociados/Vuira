@@ -37,8 +37,40 @@ class view_claves_cat_fraccionamiento_list
 {
   constructor()
   {
-      this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "http://localhost/Source/";
+      //this.basePath = "https://vuira.irapuato.gob.mx/";
+      this.basePath = "http://localhost/Vuira/";
+  }
+
+  get_folio_final(id, fila)
+  {
+     $.ajax({
+      type:"post",
+      data:{id,id},
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getFoFi",
+
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+        fila[5].innerText = data[0]["Folio"];
+      }
+    });
+  }
+
+   get_no_claves(id, fila)
+  {
+     $.ajax({
+      type:"post",
+      data:{id,id},
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=noClaves",
+
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+        fila[3].innerText = data[0]["Claves"];
+      }
+    });
   }
 
   get_All_Fraccionamientos()
@@ -58,6 +90,7 @@ class view_claves_cat_fraccionamiento_list
 
   get_Fraccionamientos_by_Auxiliar(Auxiliar)
   {
+
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getByAuxiliar",
@@ -93,12 +126,16 @@ class view_claves_cat_fraccionamiento_list
         innerConent+="<tr id='"+data[i].Id+"'>";
         innerConent+="<td>"+ data[i].Id + "</td>";
         innerConent+="<td>"+ data[i].Propietario + "</td>";
+        innerConent+="<td>"+ data[i].Colonia + "</td>";
+        innerConent+="<td>"+ "CANTIDAD DE CLAVES" + "</td>";
+        innerConent+="<td>"+ data[i].Folio + "</td>";
+        innerConent+="<td>"+ "Folio Final" + "</td>";
         innerConent+="<td>"+ data[i].Correo_Electronico + "</td>";
         innerConent+="<td>"+ data[i].Telefono + "</td>";
         if(opcion=="Ventanilla")
-          innerConent+="<td href=''><a href='Clave_Catastral_Fraccionamientos_Ventanilla.php?Id="+data[i].Id+"'>Ver Registro </a></td>";
+          innerConent+="<td href=''><a href='nueva_Clave_Catastral_Fraccionamientos_Ventanilla.php?Id="+data[i].Id+"'>Ver Registro </a></td>";
         else if(opcion=="Auxiliar")
-          innerConent+="<td href=''><a href='Clave_Catastral_Fraccionamientos_Auxiliar.php?Id="+data[i].Id+"&uid="+auxiliar+"'>Generar Clave</a></td>";
+          innerConent+="<td href=''><a href='_nueva_Clave_Catastral_Fraccionamientos_Auxiliar.php?Id="+data[i].Id+"&uid="+auxiliar+"'>Generar Clave</a></td>";
         else if(opcion=="Asignador")
             innerConent+="<td><input type='button' name='"+data[i].Id+"' onclick='event_Asignar(this)' value='Asignar' /></td>";
         else
@@ -106,6 +143,13 @@ class view_claves_cat_fraccionamiento_list
         innerConent+="</tr>";
       }
       $("#tblcontent").append(innerConent);
+      $('#tblcontent tr').each(function() {
+        if ( this.id != "")
+        {
+          new view_claves_cat_fraccionamiento_list().get_folio_final(this.id, jQuery(this).children());
+          new view_claves_cat_fraccionamiento_list().get_no_claves(this.id, jQuery(this).children());
+        }
+      });
   }
 
   get_all_auxiliares()

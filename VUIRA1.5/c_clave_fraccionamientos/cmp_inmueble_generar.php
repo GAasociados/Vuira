@@ -1,4 +1,4 @@
-<?php
+<?php 
 error_reporting(E_ALL);
 ini_set("display_errors",1);
 ?>
@@ -65,11 +65,13 @@ ini_set("display_errors",1);
     </form>
 	</div>
 	<div>
-		<table class="table table-bordered table-striped table-hover table-sm" id="tblinmubles">
-		<thead>
-				<tr>
+			<table class="table table-bordered table-striped table-hover table-sm" id="tblinmubles">
+				<thead>
+						<tr>
 					<th scope="col"> Cuenta Predial </th>
 					<th scope="col"> Calle </th>
+					<th scope="col"> Manzana </th>
+					<th scope="col"> Lote</th>
 					<th scope="col"> Numero Exterior </th>
 					<th scope="col"> Numero Interior </th>
 					<th scope="col"> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido </th>

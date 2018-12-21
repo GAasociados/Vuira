@@ -35,6 +35,8 @@ ini_set("display_errors",1);
 				<tr>
 					<td> Cuenta Predial</td>
 					<td> Calle</td>
+					<td> Manzana</td>
+					<td> Lote</td>
 					<td> Numero</td>
 					<td> Numero Interior</td>
 					<td> Fracc/Condominio/Colonia/Barrio/Comunidad/Predio/Ejido</td>
