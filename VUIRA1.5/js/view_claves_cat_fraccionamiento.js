@@ -746,6 +746,7 @@ class view_claves_fraccionamiento
         {
           var data = JSON.parse(jdata);
           console.log(data);
+          cuentas_asignadas = data;
           
           contador =  Object.keys(data).length;
           if ( numero_cuentas !== 0)
@@ -754,7 +755,7 @@ class view_claves_fraccionamiento
           }
           else
             new view_claves_fraccionamiento().set_data_form_detalles(data);
-          cuentas_asignadas = data;
+
         }
         else
         {

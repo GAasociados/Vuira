@@ -24,7 +24,9 @@ if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inic
 	$clave = $_GET['clave'];
 	for ($i = 0; $i < count($folios); $i++)
 	{
-		$folios_html .= $folios[$i].", ";
+		if($i>0)
+			$folios_html .=",";
+		$folios_html .= $folios[$i];
 	}
 }
 

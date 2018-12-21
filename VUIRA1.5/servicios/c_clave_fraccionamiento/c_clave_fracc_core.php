@@ -119,7 +119,9 @@ EOD;
 
 		public function getAllFraccionamientosSinAsignar()
     {
-				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos where Status='Sin Asignar'";
+				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc
+                        INNER JOIN claves_catastrales_fraccionamientos_detalles AS fraccDet
+                        ON fracc.Id = fraccDet.Id_Fraccionamientos WHERE Status = 'Sin Asignar' GROUP BY fracc.Id;";
         return $this->con->executeQuerry($sql);
     }
 
