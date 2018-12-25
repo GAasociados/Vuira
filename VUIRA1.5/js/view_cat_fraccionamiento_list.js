@@ -21,6 +21,14 @@ function event_Asignar(control)
 	objAuxiliar.display_asignador_interface($("#"+control.name));
 }
 
+function event_remover_asignacion(control)
+{
+  //MANDAR TRES PARAMETROS
+  new view_claves_cat_fraccionamiento_list().delete_asignado(control.id, control.name, control.value, control);
+  //console.log(control.name+" "+control.id+" "+control.value);
+  //$(control).closest("tr").remove();
+}
+
 function event_Cancelar()
 {
   var objAuxiliar = new view_claves_cat_fraccionamiento_list();
@@ -238,7 +246,7 @@ class view_claves_cat_fraccionamiento_list
       control+="<td>"+data[i].Manzana+"</td>";
       control+="<td>"+data[i].Lote+"</td>";
       control+="<td>"+data[i].Calle+"</td>";
-      control+="<td  align='center'>"+"<button type='button' class='btn btn-danger'><i class='glyph-icon icon-trash'></i></button>"+"</td>";
+      control+="<td  align='center'>"+"<button type='button' class='btn btn-danger' id='"+data[i].Id_Fraccionamiento+"' name='"+data[i].Cuenta_Predial+"' value='"+data[i].Id_Auxiliar+"' onclick='event_remover_asignacion(this)'><i class='glyph-icon icon-trash'></i></button>"+"</td>";
       control+="</tr>";
 	  }
 	  control+="</table>";
@@ -263,11 +271,6 @@ class view_claves_cat_fraccionamiento_list
 
   display_asignador_interface(tblRow)
   {
- /*   <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-</div>*/
 	 var frag_auxiliares =this.setup_all_auxiliares(this.get_all_auxiliares());
 	 var frag_aux_asignados = this.setup_Auxiliares_Asignados(this.get_Auxiliares_Asignados(rowSelected));
    var maxAvilable = this.get_Sin_Asignar(rowSelected)[0];
@@ -345,5 +348,31 @@ class view_claves_cat_fraccionamiento_list
         this.cambiar_status(dataA["Id_Fraccionamiento"],"Asignado");
       }
       this.cancelar_asignacion();
+  }
+
+  delete_asignado(id_fracc, cuenta, id_aux, fila)
+  {
+    $.ajax({
+      type:"post",
+      data:{id_fraccionamiento:id_fracc, cuenta:cuenta, id_auxiliar:id_aux},
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_aux.php?service_name=delete_asignado",
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+        console.log(data);
+
+        if ( data == 0 || data == "0")
+        {
+          $(fila).closest("tr").remove();
+          new Noty({
+            type: 'info',
+            layout: 'topRight',
+            theme: 'sunset',
+            text: 'Se ha quitado la asignación, vuelva a oprimir el boton Asignar'
+          }).show();
+        }
+      }
+    });
   }
 }

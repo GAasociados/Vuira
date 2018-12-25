@@ -39,6 +39,10 @@ if(isset($_GET['service_name']))
 			print_r(json_encode($obj->getAllAuxiliares()));
 		break;
 
+		case 'delete_asignado':
+			print_r(json_encode($obj->delete_asignado($_POST['id_fraccionamiento'], $_POST['cuenta'], $_POST['id_auxiliar'])));
+		break;
+
 		default:
 			echo "El servicio no existe. / Service doesn't exist.";
 			break;
@@ -130,7 +134,10 @@ class auxiliarFracc
 
 	public function getAsignadosFraccionamiento($idFraccionamiento)
 	{
-		$sql = "SELECT 
+		$sql = "SELECT
+				asi.Id_Fraccionamiento,
+				asi.Cuenta_Predial,
+				asi.Id_Auxiliar,
 				concat(u.nombres, ' ', u.apellido_pat, ' ', u.apellido_mat) as Nombre,
 				detalles.Folio,
 				detalles.Manzana,
@@ -151,6 +158,12 @@ class auxiliarFracc
 		$data->predial = $this->getDocumento($data->usuarioID, "PREDIAL");
 		$data->noficial = $this->getDocumento($data->usuarioID, "Numero Oficial");
 		return $data;
+	}
+
+	public function delete_asignado($id_fraccionamiento, $cuenta, $id_auxiliar)
+	{
+		$sql = "DELETE FROM claves_catastrales_fraccionamientos_asignacion WHERE Id_Fraccionamiento = {$id_fraccionamiento} AND Cuenta_Predial = '{$cuenta}' AND Id_Auxiliar = {$id_auxiliar}";
+		return $this->con->sqlOperations($sql);
 	}
 
 	function getFieldsVals($data)
