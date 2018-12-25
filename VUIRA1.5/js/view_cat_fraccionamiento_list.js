@@ -14,7 +14,6 @@ function event_load()
 
 function event_Asignar(control)
 {
-	//alert(button.name);
   var objAuxiliar = new view_claves_cat_fraccionamiento_list();
   objAuxiliar.cancelar_asignacion();
 	rowSelected = control.name;
@@ -23,10 +22,7 @@ function event_Asignar(control)
 
 function event_remover_asignacion(control)
 {
-  //MANDAR TRES PARAMETROS
   new view_claves_cat_fraccionamiento_list().delete_asignado(control.id, control.name, control.value, control);
-  //console.log(control.name+" "+control.id+" "+control.value);
-  //$(control).closest("tr").remove();
 }
 
 function event_Cancelar()
@@ -360,8 +356,6 @@ class view_claves_cat_fraccionamiento_list
       success: function (jdata)
       {
         var data = JSON.parse(jdata);
-        console.log(data);
-
         if ( data == 0 || data == "0")
         {
           $(fila).closest("tr").remove();
