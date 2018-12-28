@@ -385,7 +385,7 @@ ini_set("display_errors",1);
 										        	<!-- <div class="alert alert-info" role="alert" align="center">
 													  <strong>PLANTILLA</strong>
 													</div> -->
-										        	<?php include_once ('nueva_cmp_inmueble_generar.php')?>
+										        	<?php include_once ('cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
 

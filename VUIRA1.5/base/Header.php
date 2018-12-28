@@ -1,57 +1,64 @@
-
-<link rel="stylesheet" href="./../css/bootstrap.min.css">
-<link rel="stylesheet" href="./../css/custom.css">
-
-<script src="./../js/jquery-3.3.1.min.js"></script>
-<script src="./../js/bootstrap.min.js"></script>
-<script src="./../js/all.js"></script>
-
-
-<div class="" style="margin-bottom:0px;">
-    <img src="./../img/encabe.png" width="100%">
-</div>
-<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #4677b4;">
-    <!--<a href="" class="navbar-brand"><img src="img/logo.png" width="70px" height="70px"></a>-->
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapse_target">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#" style="color: #FFF;">Trámites y servicios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://vuira.irapuato.gob.mx/citas2/" style="color: #FFF;">Obtén una cita</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://sare.irapuato.gob.mx/" style="color: #FFF;">S@RE</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-warning" type="button">Ir</button>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <a href="#" class="btn btn-primary border-0 rounded-4 p-1.5" style="background-color:transparent;">
-                            <i class="fa fa-sign-in-alt align-middle" aria-hidden="true"></i>
-                            <span class="align-middle">Iniciar sesión</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <a href="#" class="btn btn-primary border-0 rounded-4 p-1.5" style="background-color:transparent;">
-                            <i class="fa fa-user-plus align-middle" aria-hidden="true"></i>
-                            <span class="align-middle">Registrarte</span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+<div id="page-wrapper">
+  <div id="page-header" class="bg-gradient-9">
+    <div id="mobile-navigation">
+      <button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar">
+        <span></span>
+      </button>
+      <a href="" class="logo-content-small" title="SIPREG"></a>
     </div>
-</nav>
+    <div id="header-logo" class="logo-bg">
+      <a href="" class="logo-content-big" title="SIPREG">
+        SIPREG
+        <span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
+      </a>
+      <a href="" class="logo-content-small" title="SIPREG">
+        SIPREG
+        <span>Sistema Integral de Planeación de Recursos Gubernamentales</span>
+      </a>
+      <a id="close-sidebar" href="#" title="Close sidebar">
+        <i class="glyph-icon icon-angle-left"></i>
+      </a>
+    </div>
+    <!-- #header-nav-right -->
+    <div id="header-nav-right">
+      <div class=" dropdown user-account-btnn">
+        <a href="#" title="Soy Administrador" class="user-profile " data-toggle="dropdown">
+          <img width="28" src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="Administrador">
+        </a>
+        <div class="dropdown-menu ">
+          <div class="box-sm">
+            <div class="login-box clearfix">
+              <div class="user-img">
+                <a href="#" title="" class="change-img">Cambiar foto</a>
+                <img src="../../assets_muni/assets/image-resources/gravatar.jpg" alt="">
+              </div>
+              <div class="user-info">
+                <span>
+                  Soy Administrador
+                  <i>DTI Desarrollador</i>
+                </span>
+                <a href="#" title="Editar perfíl">Perfíl</a>
+                <a href="#" title="Ver Notificaciones">Notificaciones</a>
+              </div>
+            </div>
+            <div class="divider">
+            </div>
+            <div class="pad5A button-pane button-pane-alt text-center">
+              <a href="logout/" class="btn display-block font-normal btn-danger">
+                <i class="glyph-icon icon-power-off"></i>
+                Salir
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="hdr-btn iconos" id="fullscreen-btn" title="Pantalla completa">
+        <i class="glyph-icon icon-arrows-alt"></i>
+      </a>
+      <a class="header-btn iconos" id="logout-btn"href="logout/" title="Bloquear">
+        <i class="glyph-icon icon-linecons-lock"></i>
+      </a>
+    </div>
+    <!-- #header-nav-right -->
+  </div>
+</div>

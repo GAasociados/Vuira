@@ -100,9 +100,9 @@ ini_set("display_errors",1);
     </div>
     <!-- FIN loading -->
     <!-- Se carga el header -->
-    <?php include_once("../base/nuevo_Header.php")?>
+    <?php include_once("../base/Header.php")?>
     <!-- Se carga el menu izquiero -->
-    <?php include_once("../base/nuevo_Menu_Izquierdo.php")?>
+    <?php include_once("../base/Menu_Izquierdo.php")?>
     <div id="page-content-wrapper">
       <div id="page-content">
         <div class="container">
@@ -185,7 +185,7 @@ ini_set("display_errors",1);
             <div id="panel-datos-cuenta-suspendida" class="content-box border-top border-blue">
               <div class="content-box-wrapper">
                 <h3 class="title-hero">II. IDENTIFICACIÓN Y UBICACIÓN DEL INMUEBLE</h3>
-                <?php include_once ('nueva_cmp_inmueble_create.php')?>
+                <?php include_once ('cmp_inmueble_create.php')?>
               </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
             </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
             <div id="panel-datos-cuenta-suspendida2" class="content-box border-top border-blue">
@@ -234,7 +234,7 @@ ini_set("display_errors",1);
 </div>
 <!-- page-content -->
 <!-- Se carga el footer-->
-<?php include_once("../base/nuevo_Footer.php")?>  
+<?php include_once("../base/Footer.php")?>  
 </div>
 <!-- page-content-wrapper -->
 </div>

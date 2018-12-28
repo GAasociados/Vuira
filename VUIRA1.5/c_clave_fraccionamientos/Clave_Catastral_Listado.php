@@ -96,9 +96,9 @@
     </div>
     <!-- FIN loading -->
     <!-- Se carga el header -->
-    <?php include_once("../base/nuevo_Header.php")?>
+    <?php include_once("../base/Header.php")?>
     <!-- Se carga el menu izquiero -->
-    <?php include_once("../base/nuevo_Menu_Izquierdo.php")?>
+    <?php include_once("../base/Menu_Izquierdo.php")?>
     <div id="page-content-wrapper">
       <div id="page-content">
         <div class="container">
@@ -140,7 +140,7 @@
         </div>
       </div>
         <!-- Se carga el footer-->
-    <?php include_once("../base/nuevo_Footer.php")?>  
+    <?php include_once("../base/Footer.php")?>  
     </div>
   </body>
 </html>
