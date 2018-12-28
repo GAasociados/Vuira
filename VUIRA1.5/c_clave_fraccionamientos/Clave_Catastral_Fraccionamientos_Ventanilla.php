@@ -9,7 +9,7 @@ ini_set("display_errors",1);
     <meta charset="UTF-8">
     <title> Ventanilla Clave Catastral Fraccionamientos </title>
     <meta name="description" content="">
-    <link rel="shortcut icon" href="../..assets_muni/img/irapuato.png">
+    <link rel="shortcut icon" href="../../assets_muni/img/irapuato.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!--#region CSS  -->
     <style>
@@ -234,7 +234,7 @@ ini_set("display_errors",1);
 </div>
 <!-- page-content -->
 <!-- Se carga el footer-->
-<?php include_once("../base/Footer.php")?>  
+<?php include_once("../base/Footer.php")?>
 </div>
 <!-- page-content-wrapper -->
 </div>
