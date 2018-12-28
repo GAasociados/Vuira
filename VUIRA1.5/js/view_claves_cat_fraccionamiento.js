@@ -29,7 +29,7 @@ function event_add_cuenta_predial()
 function event_get_croquis(event)
 {
   var form = $("#form");
-  var data = new FormData(form); 
+  var data = new FormData(form);
   //var archivo = event.prop('files')[0];
   //var archivo = event.target.files[0];
   data.append('croquis',event.target.files[0]);
@@ -42,7 +42,7 @@ function event_get_croquis(event)
 
 function event_pulsar_enter(event)
 {
-  if (event.keyCode == 13) 
+  if (event.keyCode == 13)
   {
     event.preventDefault();
     console.log("SE HA PRESIONADO ENTER");
@@ -52,7 +52,7 @@ function event_pulsar_enter(event)
 
 function event_update_manzana(inputName)
 {
-  if (event.keyCode == 13) 
+  if (event.keyCode == 13)
   {
     event.preventDefault();
     if ( inputName.value != "")
@@ -69,7 +69,7 @@ function event_update_manzana(inputName)
 
 function event_update_lote(inputName)
 {
-  if (event.keyCode == 13) 
+  if (event.keyCode == 13)
   {
     event.preventDefault();
     if ( inputName.value != "")
@@ -193,7 +193,14 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      this.basePath = "http://"+window.location.hostname+"/Vuira/";
+      this.basePath = "https://"+window.location.hostname+"/";
+  }
+
+  isUpdate()
+  {
+    if($("#id").val()!="")
+      return true;
+    return false;
   }
 
   get_predial(predialNum)
@@ -354,7 +361,7 @@ class view_claves_fraccionamiento
       //MANZANA
      innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
           "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_manzana(this)'></td>";
-     //LOTE  
+     //LOTE
      innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
           "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_lote(this)'></td>";
 
@@ -372,7 +379,7 @@ class view_claves_fraccionamiento
      $("#txtCuentaPredial").val("");
   }
 
-  
+
   set_data_auxiliar(data)
   {
     for(var field in data)
@@ -503,7 +510,7 @@ class view_claves_fraccionamiento
     var folios = JSON.stringify(numeros_asignados);
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
       +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
-    for (var i = 0; i < numeros_asignados.length; i++) 
+    for (var i = 0; i < numeros_asignados.length; i++)
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
@@ -747,7 +754,7 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           console.log(data);
           cuentas_asignadas = data;
-          
+
           contador =  Object.keys(data).length;
           if ( numero_cuentas !== 0)
           {
@@ -876,7 +883,7 @@ class view_claves_fraccionamiento
             alert (jdata);
         }
       }
-    });    
+    });
   }
 
   update_manzana(cuenta_predial,valor)
