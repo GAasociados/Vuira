@@ -4,7 +4,7 @@ var id_bd = 0;
 var contador = 0;
 var numero_cuentas = 0;
 //se utiliza en ventanilla y auxiliae
-var cuentas_asignadas = 0;
+var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
 
@@ -215,6 +215,7 @@ class view_claves_fraccionamiento
           var data = JSON.parse(jdata);
           var obj = new view_claves_fraccionamiento();
           var result = obj.isUpdate();
+          cuentas_asignadas.push(predialNum);
           if ( !result )
           {
             new view_claves_fraccionamiento().set_nombre_propietario(data);
