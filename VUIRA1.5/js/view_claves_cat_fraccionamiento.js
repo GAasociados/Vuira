@@ -217,15 +217,12 @@ class view_claves_fraccionamiento
           var result = obj.isUpdate();
           if ( !result )
           {
-            console.log("ES UN NUEVO REGISTRO");
-          }
-          if ( numero_cuentas === contador)
-            new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
-          else
-          {
-            numero_cuentas += 1;
             new view_claves_fraccionamiento().set_nombre_propietario(data);
             new view_claves_fraccionamiento().set_to_grid(data);
+          }
+          else
+          {
+            new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
           }
           console.log(data);
         }
