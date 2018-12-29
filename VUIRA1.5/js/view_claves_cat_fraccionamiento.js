@@ -30,10 +30,7 @@ function event_get_croquis(event)
 {
   var form = $("#form");
   var data = new FormData(form);
-  //var archivo = event.prop('files')[0];
-  //var archivo = event.target.files[0];
   data.append('croquis',event.target.files[0]);
-  //alert(data);
   for (var p of data) {
   console.log(p);
   }
@@ -216,6 +213,12 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
+          var obj = new view_claves_fraccionamiento();
+          var result = obj.isUpdate();
+          if ( !result )
+          {
+            console.log("ES UN NUEVO REGISTRO");
+          }
           if ( numero_cuentas === contador)
             new view_claves_fraccionamiento().insertar_cuenta_predial_detalles(data);
           else
@@ -247,7 +250,6 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
-          console.log("LOS SIGUIENTES SON DATA");
           cuentas_asignadas = data;
           new view_claves_fraccionamiento().set_data_grid_aux(data);
           console.log(data);
@@ -644,15 +646,17 @@ class view_claves_fraccionamiento
   {
     var nombre_propietario_actual = $("#Propietario").val();
     var nombre_nuevo = data.NOMBRE + " " + data.APELLIDO_PATERNO + " " + data.APELLIDO_MATERNO;
-    if ( nombre_propietario_actual != nombre_nuevo)
+    if ( nombre_propietario_actual != "")
     {
-      //alert("Los Propietarios no son iguales");
-      new Noty({
-        type: 'info',
-        layout: 'topRight',
-        theme: 'sunset',
-        text: 'Los Propietarios No Son Iguales'
-      }).show();
+      if ( nombre_propietario_actual != nombre_nuevo)
+      {
+        new Noty({
+          type: 'info',
+          layout: 'topRight',
+          theme: 'sunset',
+          text: 'Los Propietarios No Son Iguales'
+        }).show();
+      }
     }
   }
 
