@@ -655,6 +655,10 @@ class view_claves_fraccionamiento
         }).show();
       }
     }
+    else
+    {
+      $("#Propietario").val(nombre_nuevo);
+    }
   }
 
   get_data_generar_clave_ind()
