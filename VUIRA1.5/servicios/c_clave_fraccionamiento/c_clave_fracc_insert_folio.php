@@ -17,10 +17,10 @@ class dataFraccionamientos_detalles
 
 	public function insert_fraccionamientos_detalle($id,$cuenta_predial,$folio)
 	{
-		$query = "UPDATE claves_catastrales_fraccionamientos_detalles 
-				SET Folio = $folio 
-				WHERE claves_catastrales_fraccionamientos_detalles.Cuenta_Predial = '$cuenta_predial'
-				AND claves_catastrales_fraccionamientos_detalles.Id_Fraccionamientos = '$id'";
+		$query = "UPDATE Claves_Catastrales_Fraccionamientos_Detalles
+				SET Folio = $folio
+				WHERE Claves_Catastrales_Fraccionamientos_Detalles.Cuenta_Predial = '$cuenta_predial'
+				AND Claves_Catastrales_Fraccionamientos_Detalles.Id_Fraccionamientos = '$id'";
 		$mensaje = $this->con->sqlOperations($query);
 		return $mensaje;
 	}
