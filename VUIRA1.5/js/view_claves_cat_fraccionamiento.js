@@ -566,7 +566,7 @@ class view_claves_fraccionamiento
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    document.getElementById('formVentanilla').submit();
+    //document.getElementById('formVentanilla').submit();
   }
 
   init_fraccionamientoFolios(numero_cuentas)
@@ -816,6 +816,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
+          cuentas_asignadas = data;
           console.log(data);
           new view_claves_fraccionamiento().set_data_form_detalles(data);
         }
