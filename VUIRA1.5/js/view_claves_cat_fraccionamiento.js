@@ -8,6 +8,62 @@ var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
 
+function event_load_ventanilla()
+{
+  var id = $("#id").val();
+  if ( id !== "")
+  {
+    var objVista=new view_claves_fraccionamiento();
+    objVista.load_data_fraccionamientos( $("#id").val() );
+    objVista.load_data_fraccionamientos_detalles( $("#id").val() );
+  }
+  else
+  {
+    console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
+  }
+
+  //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
+  $(".custom-file-input").change(function(event){
+    var padre = $(this).parent()
+    var archivos = $(this).get(0).files;
+    var label = padre.children( ".custom-file-label" );
+    label.text( archivos[0]["name"] );
+  });
+
+  //valida el boton guardar
+  event_submit_ventanilla();
+  //evento para generar el talon
+  event_imprimirTalon_click();
+}
+
+function event_submit_ventanilla()
+{
+    $( "#formVentanilla" ).submit(function( event ) {
+      event.preventDefault();
+      if ( cuentas_asignadas.length >= 1)
+      {
+        $('#talonModal').modal('show');
+      }
+      else
+      {
+        mensajeError('Debe Agregar Al Menos Una Cuenta Predial');
+      }
+    });
+}
+
+function event_imprimirTalon_click()
+{
+  $("#imprimirTalon").click( function()
+  {
+    fraccionamiento= new view_claves_fraccionamiento()
+    if(fraccionamiento.isUpdate())
+      fraccionamiento.load_data_fraccionamientos_detalles( $("#id").val() );
+    else
+      document.forms['formVentanilla'].submit();
+  });
+}
+
+
 function realizarSubmit()
 {
   document.getElementById('formVentanilla').submit();
@@ -103,53 +159,6 @@ function event_load_auxiliar()
   });
 }
 
-function event_load_ventanilla()
-{
-  var id = $("#id").val();
-  if ( id !== "")
-  {
-    var objVista=new view_claves_fraccionamiento();
-    objVista.load_data_fraccionamientos( $("#id").val() );
-    objVista.load_data_fraccionamientos_detalles( $("#id").val() );
-  }
-  else
-  {
-    console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
-  }
-
-  //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
-  $(".custom-file-input").change(function(event){
-    var padre = $(this).parent()
-    var archivos = $(this).get(0).files;
-    var label = padre.children( ".custom-file-label" );
-    label.text( archivos[0]["name"] );
-  });
-
-  //valida el boton guardar
-  $( "#formVentanilla" ).submit(function( event ) {
-    event.preventDefault();
-    if ( cuentas_asignadas.length >= 1)
-    {
-      $('#exampleModal').modal('show');
-    }
-    else
-    {
-      //alert("Debe agregar por lo menos una cuenta predial");
-      new Noty({
-        type: 'error',
-        layout: 'topRight',
-        theme: 'sunset',
-        text: 'Debe Agregar Al Menos Una Cuenta Predial'
-      }).show();
-    }
-  });
-
-  //evento para generar el talon
-  $("#imprimirTalon").click( function()
-  {
-    new view_claves_fraccionamiento().load_data_fraccionamientos_detalles( $("#id").val() );
-  });
-}
 
 function event_select_entry(buttonName)
 {
@@ -360,10 +369,10 @@ class view_claves_fraccionamiento
           "<input type='hidden' name='S1_CC_"+data.CUENTA_PREDIAL+"' value='"+data.NOMBRE_CALLE+"' ></td>";
       //MANZANA
      innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
-          "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_manzana(this)'></td>";
+          "<input type='text' name='S1_MZ_"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_manzana(this)'></td>";
      //LOTE
      innerTableContent += "<td name='"+data.CUENTA_PREDIAL+"LOTE"+"'>"+
-          "<input type='text' name='"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_lote(this)'></td>";
+          "<input type='text' name='S1_LT_"+data.CUENTA_PREDIAL+"' value='' onkeypress='event_update_lote(this)'></td>";
 
      innerTableContent += "<td name='"+data.NO_EXTERIOR+"'>"+ data.NO_EXTERIOR+
           "<input type='hidden' name='S1_NE_"+data.CUENTA_PREDIAL+"' value='"+data.NO_EXTERIOR+"' ></td>";
@@ -648,12 +657,7 @@ class view_claves_fraccionamiento
     {
       if ( nombre_propietario_actual != nombre_nuevo)
       {
-        new Noty({
-          type: 'info',
-          layout: 'topRight',
-          theme: 'sunset',
-          text: 'Los Propietarios No Son Iguales'
-        }).show();
+        mensajeInfo('Los Propietarios No Son Iguales');
       }
     }
     else
@@ -793,12 +797,7 @@ class view_claves_fraccionamiento
         if(jdata.includes("Error"))
         {
           console.log(jdata);
-          new Noty({
-            type: 'error',
-            layout: 'topRight',
-            theme: 'sunset',
-            text: 'La cuenta no existe o ya se ha agregado'
-          }).show();
+          mensajeError('La cuenta no existe o ya se ha agregado');
         }
         else
         {
@@ -906,12 +905,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           console.log(jdata);
-          new Noty({
-            type: 'info',
-            layout: 'topRight',
-            theme: 'sunset',
-            text: 'Se Ha Actualizado La Cuenta Predial'
-          }).show();
+          mensajeInfo('Se Ha Actualizado La Cuenta Predial');
         }
         else
         {
@@ -935,12 +929,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           console.log(jdata);
-          new Noty({
-            type: 'info',
-            layout: 'topRight',
-            theme: 'sunset',
-            text: 'Se Ha Actualizado La Cuenta Predial'
-          }).show();
+          mensajeInfo('Se Ha Actualizado La Cuenta Predial');
         }
         else
         {
