@@ -132,8 +132,8 @@ ini_set("display_errors",1);
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi" name="sup_inmueble_swi" value="moral" checked>Personal Moral</label>
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="sup_inmueble_swi" value="fisica">Persona Física</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi"  value="moral" checked>Personal Moral</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"   value="fisica">Persona Física</label>
                     </div>
                   </div>
                   <div class="row">
@@ -214,7 +214,7 @@ ini_set("display_errors",1);
                      </div>
                      <div class="form-group" >
                       <label class="control-label">Tipo de Tramite que solicita</label>
-                      <select id="Tipo_de_Tramite" name="Tipo_de_Tramite" class="chosen-select">
+                      <select id="Tipo_Tramite" name="Tipo_Tramite" class="chosen-select">
                         <option value="0">Elegir trámite...</option>
                         <option value="1">Asignación de Claves Catastrales</option>
                         <option value="2">Modificación de Clave Catastrales</option>
@@ -239,11 +239,11 @@ ini_set("display_errors",1);
 <!-- page-content-wrapper -->
 </div>
 <!-- FIN sb-site -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="talonModal" tabindex="-1" role="dialog" aria-labelledby="talonModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Rango de Fechas</h5>
+        <h5 class="modal-title" id="talonModalLabel">Rango de Fechas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

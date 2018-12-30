@@ -65,7 +65,7 @@
 <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/modal/modal.css">
 <link rel="stylesheet" type="text/css" href="../../assets_muni/assets/widgets/dropdown/dropdown.css">
 
-<link rel="stylesheet" type="text/css" href="../../assets_muni/css/global.css">       
+<link rel="stylesheet" type="text/css" href="../../assets_muni/css/global.css">
 <!--#endregion -->
 
 <!--#region JS  -->
@@ -86,3 +86,4 @@
 <!-- LA NOTIFICACION QUE PIDIÓ EL MUNICIPIO-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" type="text/javascript"></script>
+<script type="text/javascript" src="./../js/Vuira_Messages.js"></script>
