@@ -121,6 +121,12 @@ ini_set("display_errors",1);
                   echo $_GET["Id"];
                 }
                 ?>"/>
+                <input type="hidden" id="operation" value="<?php
+                if(isset($_GET["operation"]))
+                {
+                  echo $_GET["operation"];
+                }
+                ?>"/>
               <div id="panel-fecha_recep" class="content-box border-top border-blue">
                 <div class="content-box-wrapper">
                   <h3 class="title-hero">I. Documentos del Inmueble</h3>

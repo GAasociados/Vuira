@@ -10,10 +10,11 @@ var numeros_asignados = 0;
 
 function event_load_ventanilla()
 {
+  var objVista=new view_claves_fraccionamiento();
   var id = $("#id").val();
   if ( id !== "")
   {
-    var objVista=new view_claves_fraccionamiento();
+
     objVista.load_data_fraccionamientos( $("#id").val() );
     objVista.load_data_fraccionamientos_detalles( $("#id").val() );
   }
@@ -34,6 +35,10 @@ function event_load_ventanilla()
   event_submit_ventanilla();
   //evento para generar el talon
   event_imprimirTalon_click();
+
+  if(objVista.isImprimirTalon())
+    event_imiprimirTalon();
+
 }
 
 function event_submit_ventanilla()
@@ -42,7 +47,7 @@ function event_submit_ventanilla()
       event.preventDefault();
       if ( cuentas_asignadas.length >= 1)
       {
-        $('#talonModal').modal('show');
+        document.forms['formVentanilla'].submit();
       }
       else
       {
@@ -51,15 +56,18 @@ function event_submit_ventanilla()
     });
 }
 
+function event_imiprimirTalon()
+{
+    $('#talonModal').modal('show');
+}
+
 function event_imprimirTalon_click()
 {
   $("#imprimirTalon").click( function()
   {
     fraccionamiento= new view_claves_fraccionamiento()
     if(fraccionamiento.isUpdate())
-      fraccionamiento.load_data_fraccionamientos_detalles( $("#id").val() );
-    else
-      document.forms['formVentanilla'].submit();
+      fraccionamiento.init_fraccionamientoFolios(numero_cuentas);
   });
 }
 
@@ -205,6 +213,13 @@ class view_claves_fraccionamiento
   isUpdate()
   {
     if($("#id").val()!="")
+      return true;
+    return false;
+  }
+
+  isImprimirTalon()
+  {
+    if($("#operation").val()=="ImprimirTalon")
       return true;
     return false;
   }
@@ -388,6 +403,34 @@ class view_claves_fraccionamiento
      $("#txtCuentaPredial").val("");
   }
 
+  load_detallesFraccionamiento(data)
+  {
+     var innerTableContent = "<tr id='"+data.Cuenta_Predial+"'>";
+     innerTableContent += "<td name='"+data.Cuenta_Predial+"'>"+ data.Cuenta_Predial;
+     innerTableContent += "<input type='hidden' name='S1_C_"+data.Cuenta_Predial+"' value='"+data.Cuenta_Predial+"' ></td>";
+     innerTableContent += "<td name='"+data.Calle+"'>"+ data.Calle+
+          "<input type='hidden' name='S1_CC_"+data.Cuenta_Predial+"' value='"+data.Calle+"' ></td>";
+      //MANZANA
+     innerTableContent += "<td name='"+data.Cuenta_Predial+"MZ"+"'>"+
+          "<input type='text' name='S1_MZ_"+data.Cuenta_Predial+"' value='"+data.Lote+"' onkeypress='event_update_manzana(this)'></td>";
+     //LOTE
+     innerTableContent += "<td name='"+data.Cuenta_Predial+"LOTE"+"'>"+
+          "<input type='text' name='S1_LT_"+data.Cuenta_Predial+"' value='"+data.Manzana+"' onkeypress='event_update_lote(this)'></td>";
+
+     innerTableContent += "<td name='"+data.Numero_Ext+"'>"+ data.Numero_Ext+
+          "<input type='hidden' name='S1_NE_"+data.Cuenta_Predial+"' value='"+data.Numero_Ext+"' ></td>";
+     innerTableContent += "<td name='"+data.Numero_Int+"'>"+ data.Numero_Int+
+          "<input type='hidden' name='S1_NI_"+data.Cuenta_Predial+"' value='"+data.Numero_Int+"' ></td>";
+     innerTableContent += "<td name='"+data.Colonia+"'>"+ data.Colonia+
+          "<input type='hidden' name='S1_CCC_"+data.Cuenta_Predial+"' value='"+data.Colonia+"' ></td>";
+     innerTableContent += "<td><button type='button' class='btn btn-danger' name='"+data.Cuenta_Predial+"' value='borrar' onclick='event_remove_clave(this)'>Borrar</button></td>";
+     innerTableContent += "</tr>";
+     $("#tblinmubles").append(innerTableContent);
+
+     //limpia la caja de texto de la cuenta predial
+     $("#txtCuentaPredial").val("");
+  }
+
 
   set_data_auxiliar(data)
   {
@@ -526,6 +569,16 @@ class view_claves_fraccionamiento
     document.getElementById('formVentanilla').submit();
   }
 
+  init_fraccionamientoFolios(numero_cuentas)
+  {
+    if ( numero_cuentas !== 0)
+    {
+      this.get_numeros_consecutivos(numero_cuentas);
+    }
+    else
+      mensajeError('El numero de cuentas no puede ser 0');
+  }
+
   get_numeros_consecutivos(numero)
   {
     $.ajax({
@@ -637,15 +690,16 @@ class view_claves_fraccionamiento
     $("#Propietario").val( data[0]["Propietario"] );
     $("#Correo_Electronico").val( data[0]["Correo_Electronico"] );
     $("#Telefono").val( data[0]["Telefono"] );
-    $("#Tipo_de_Tramite").val( data[0]["Tipo_Tramite"] );
+    $("#Tipo_Tramite")[0].selectedIndex= parseInt(data[0]["Tipo_Tramite"]);
   }
 
   set_data_form_detalles(data)
   {
-    $("#txtCuentaPredial").val( data[0]["Cuenta_Predial"] );
     for (var i = 0; i < Object.keys(data).length; i++)
     {
-      new view_claves_fraccionamiento().get_predial( data[i]["Cuenta_Predial"] );
+       console.log(data[i]);
+       this.load_detallesFraccionamiento(data[i]);
+       numero_cuentas++;
     }
   }
 
@@ -763,16 +817,7 @@ class view_claves_fraccionamiento
         {
           var data = JSON.parse(jdata);
           console.log(data);
-          cuentas_asignadas = data;
-
-          contador =  Object.keys(data).length;
-          if ( numero_cuentas !== 0)
-          {
-            new view_claves_fraccionamiento().get_numeros_consecutivos( Object.keys(data).length );
-          }
-          else
-            new view_claves_fraccionamiento().set_data_form_detalles(data);
-
+          new view_claves_fraccionamiento().set_data_form_detalles(data);
         }
         else
         {
@@ -781,6 +826,8 @@ class view_claves_fraccionamiento
       }
     });
   }
+
+
 
   insertar_cuenta_predial_detalles(data)
   {
