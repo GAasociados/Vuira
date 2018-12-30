@@ -31,7 +31,7 @@ if(isset($_GET['service_name']))
             break;
         case 'getinfodocumentos':
               print_r(json_encode($objD->getDataInformacionDocumentos($_POST["id"], $_POST['cuenta_predial']), JSON_UNESCAPED_SLASHES));
-              break;    
+              break;
 
 
 		default:
@@ -75,22 +75,26 @@ class detFracc
                   $data["Calle"] = $value;
                   break;
               case 2:
-                  $data["Numero_Ext"] = $value;
+                  $data["Manzana"] = $value;
                   break;
-              case 3:
+							case 3:
+											$data["Lote"] = $value;
+									break;
+							case 4:
+		                  $data["Numero_Ext"] = $value;
+		              break;
+              case 5:
                   $data["Numero_Int"] = $value;
                   break;
-              case 4:
+              case 6:
                   $data["Colonia"] = $value;
                   break;
           }
 
-          if($j==4)
+          if($j==6)
           {
             $data["Id_Fraccionamientos"] = $id;
             echo "<hr>";
-            //echo $data["Cuenta_Predial"];
-            //var_dump($data);
             $x = $this->detInsert($data);
             $j=0;
             $data=[];
@@ -114,7 +118,7 @@ class detFracc
         fraccDet.Numero_Ext,
         fraccDet.Numero_Int,
         fraccDet.Colonia,
-        fraccDet.Id_Clave  
+        fraccDet.Id_Clave
         FROM claves_catastrales_fraccionamientos_detalles AS fraccDet
         INNER JOIN claves_catastrales_fraccionamientos_asignacion AS fraccAsign
         ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
