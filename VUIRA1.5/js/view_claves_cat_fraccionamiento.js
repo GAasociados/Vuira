@@ -56,6 +56,17 @@ function event_submit_ventanilla()
     });
 }
 
+function event_modal_pago(event)
+{
+  $("#modalPago").modal("show");
+}
+
+function generar_talon_pago(event)
+{
+  window.open("../../PDFGen/pdfGenTalonPago.php","_blank");
+  $("#modalPago").modal("hide");
+}
+
 function event_imiprimirTalon()
 {
     $('#talonModal').modal('show');
@@ -201,6 +212,38 @@ function event_generar_clave(buttonName)
   }
 }
 
+function uploadFile()
+{
+          if($("#autocat").val() != "")
+          {
+            var file_data = $('#autocat').prop('files')[0];
+            var form_data = new FormData();
+
+            form_data.append('file', file_data);
+
+            $.ajax({
+              url: 'https://vuira.irapuato.gob.mx//DocPrint/uploadFile.php', // point to server-side PHP script
+              dataType: 'text', // what to expect back from the PHP script, if anything
+              cache: false,
+              contentType: false,
+              processData: false,
+              data: form_data,
+              type: 'post',
+              success: function(data){
+              // get server responce here
+              alert(data);
+              // clear file field
+              var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
+              $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+            }
+          });
+        }
+        else
+        {
+            alert("Please select file!");
+        }
+  }
+
 class view_claves_fraccionamiento
 {
   //se define una propiedad estatico para que las demas instancia compartan su valor
@@ -307,12 +350,12 @@ class view_claves_fraccionamiento
     });
   }
 
-  get_data_details(id)
+  get_data_details(id,uid)
   {
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det.php?service_name=byiddet",
-      data:{id:id},
+      data:{id:id,uid:uid},
       async:true,
       success: function (jdata)
       {
@@ -373,6 +416,7 @@ class view_claves_fraccionamiento
     $("#numero_oficio").val( data[0]["ID_Numero_Oficio"] );
     $("#estado_escitura").val( data[0]["Es_Estado_Escritura"] );
     $("#ciudad_escritura").val( data[0]["Es_Ciudad_Escritura"] );
+    $("#Croquis_URL").val( data[0]["Croquis_URL"] );
   }
 
   set_to_grid(data)
@@ -494,32 +538,46 @@ class view_claves_fraccionamiento
 
   	var innerTableContent = "<td colspan='7' ><div class='container-fluid'>";
     innerTableContent += "<div style='display: none;'>"+tmpHidden+"</div>";
-    innerTableContent += "<div class='form-row'>"
+    innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='claveCat' class='control-label'>Clave Catastral *</label> <input type='text'id='claveCat' class='form-control'> </div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='propietario' class='control-label'>Nombre del propietario *</label> <input type='text' id='propietario' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='caracter'class='control-label'>En Su Caracter * </label><input type='text' id='caracter' class='form-control'></div>";
-    innerTableContent += "</div>"
-    innerTableContent += "<div class='form-row'>"
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='superficie' class='control-label'> Superficie del terreno * <input type='text' id='superficie' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='escritura' class='control-label'> Número de Escritura * <input type='text' id='escritura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='notario_publico' class='control-label'> Nombre del notario público * <input type='text' id='notario_publico' class='form-control'></div>";
-    innerTableContent += "</div>"
-    innerTableContent += "<div class='form-row'>"
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='numero_notario_publico'class='control-label'> Número de notario público * <input type='text' id='numero_notario_publico' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='fecha_escritura' class='control-label'> Fecha de Escrituras * <input type='date' id='fecha_escritura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='numero_oficio' class='control-label'> Número de Oficio * <input type='text' id='numero_oficio' class='form-control'></div>";
-    innerTableContent += "</div>"
+    innerTableContent += "</div>";
     innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='estado_escritura' class='control-label'>Entidad Federativa *</label> <input type='text' id='estado_escitura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='ciudad_escritura' class='control-label'>Ciudad de Escritura *</label> <input type='text' id='ciudad_escritura' class='form-control'></div>";
-    innerTableContent += "</div>"
+    innerTableContent += "</div>";
   	innerTableContent += "</td>";
   	innerTableContent += "<td>";
+<<<<<<< HEAD
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-success' value='Documento Orden de Pago' onclick='event_modal_pago(this)'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
+    innerTableContent += "</div>";
+    //innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' onchange='event_get_croquis(event)'></div></div>";
+=======
      innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
-    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' onchange='event_get_croquis(event)'></div></div>";
+    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange=''>"
+    innerTableContent += "<input type='button' onclick='uploadFile()' value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
     innerTableContent += "</div>"
+>>>>>>> 74a160ac159a623100634ffc6c9a1ef9a66f534b
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();
@@ -566,7 +624,7 @@ class view_claves_fraccionamiento
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    //document.getElementById('formVentanilla').submit();
+    window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
   }
 
   init_fraccionamientoFolios(numero_cuentas)
@@ -766,6 +824,7 @@ class view_claves_fraccionamiento
   	data['Tipo_Sup']="m2";
   	data['Es_Ciudad_Escritura']=$("#ciudad_escritura").val();
   	data['Es_Estado_Escritura']=$("#estado_escitura").val();
+    data['Croquis_URL']=$("#Croquis_URL").val();
   	return data;
   }
 

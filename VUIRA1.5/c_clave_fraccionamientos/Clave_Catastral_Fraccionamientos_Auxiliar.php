@@ -470,6 +470,7 @@ ini_set("display_errors",1);
 														<!-- page-content-wrapper -->
 												</div>
 												<!-- FIN sb-site -->
+											<?php include_once("modal_pago.php"); ?>
 											</body>
 										</html>
 
