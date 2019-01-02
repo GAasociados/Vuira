@@ -63,12 +63,12 @@ class auxiliarFracc
 
 	public function getAsignacion($id)
 	{
-		return $this->con->executeQuerry("SELECT * FROM claves_catastrales_fraccionamiento WHERE status >= 3 AND validacion  = 0 AND auxiliar = '" . $id . "'");
+		return $this->con->executeQuerry("SELECT * FROM Claves_Catastrales_Fraccionamiento WHERE status >= 3 AND validacion  = 0 AND auxiliar = '" . $id . "'");
 	}
 
 	public function getByIdAdmin($id)
 	{
-		return $this->con->executeQuerry("SELECT * FROM claves_catastrales_fraccionamiento WHERE ID = '" . $id . "'")[0];
+		return $this->con->executeQuerry("SELECT * FROM Claves_Catastrales_Fraccionamiento WHERE ID = '" . $id . "'")[0];
 	}
 
 	public function getAllAuxiliares()
@@ -143,10 +143,10 @@ class auxiliarFracc
 				detalles.Manzana,
 				detalles.Lote,
 				detalles.Calle
-				FROM Claves_Catastrales_Fraccionamientos_Asignacion as asi 
-				INNER JOIN usuarios as u on u.ID = asi.Id_Auxiliar 
-				INNER JOIN claves_catastrales_fraccionamientos_detalles as detalles on asi.Id_Fraccionamiento = detalles.Id_Fraccionamientos and 
-				asi.Cuenta_Predial = detalles.Cuenta_Predial 
+				FROM Claves_Catastrales_Fraccionamientos_Asignacion as asi
+				INNER JOIN usuarios as u on u.ID = asi.Id_Auxiliar
+				INNER JOIN Claves_Catastrales_Fraccionamientos_Detalles as detalles on asi.Id_Fraccionamiento = detalles.Id_Fraccionamientos and
+				asi.Cuenta_Predial = detalles.Cuenta_Predial
 				WHERE asi.Id_Fraccionamiento = {$idFraccionamiento}";
 		return $this->con->executeQuerry($sql);
 	}
@@ -162,7 +162,7 @@ class auxiliarFracc
 
 	public function delete_asignado($id_fraccionamiento, $cuenta, $id_auxiliar)
 	{
-		$sql = "DELETE FROM claves_catastrales_fraccionamientos_asignacion WHERE Id_Fraccionamiento = {$id_fraccionamiento} AND Cuenta_Predial = '{$cuenta}' AND Id_Auxiliar = {$id_auxiliar}";
+		$sql = "DELETE FROM Claves_Catastrales_Fraccionamientos_Asignacion WHERE Id_Fraccionamiento = {$id_fraccionamiento} AND Cuenta_Predial = '{$cuenta}' AND Id_Auxiliar = {$id_auxiliar}";
 		return $this->con->sqlOperations($sql);
 	}
 

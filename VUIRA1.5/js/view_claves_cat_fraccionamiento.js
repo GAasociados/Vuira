@@ -307,12 +307,12 @@ class view_claves_fraccionamiento
     });
   }
 
-  get_data_details(id)
+  get_data_details(id,uid)
   {
     $.ajax({
       type:"post",
       url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det.php?service_name=byiddet",
-      data:{id:id},
+      data:{id:id,uid:uid},
       async:true,
       success: function (jdata)
       {
@@ -566,7 +566,7 @@ class view_claves_fraccionamiento
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     }
-    //document.getElementById('formVentanilla').submit();
+    window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
   }
 
   init_fraccionamientoFolios(numero_cuentas)
