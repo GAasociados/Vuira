@@ -201,6 +201,38 @@ function event_generar_clave(buttonName)
   }
 }
 
+function uploadFile()
+{
+          if($("#autocat").val() != "")
+          {
+            var file_data = $('#autocat').prop('files')[0];
+            var form_data = new FormData();
+
+            form_data.append('file', file_data);
+
+            $.ajax({
+              url: 'https://vuira.irapuato.gob.mx//DocPrint/uploadFile.php', // point to server-side PHP script
+              dataType: 'text', // what to expect back from the PHP script, if anything
+              cache: false,
+              contentType: false,
+              processData: false,
+              data: form_data,
+              type: 'post',
+              success: function(data){
+              // get server responce here
+              alert(data);
+              // clear file field
+              var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
+              $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+            }
+          });
+        }
+        else
+        {
+            alert("Please select file!");
+        }
+  }
+
 class view_claves_fraccionamiento
 {
   //se define una propiedad estatico para que las demas instancia compartan su valor
@@ -373,6 +405,7 @@ class view_claves_fraccionamiento
     $("#numero_oficio").val( data[0]["ID_Numero_Oficio"] );
     $("#estado_escitura").val( data[0]["Es_Estado_Escritura"] );
     $("#ciudad_escritura").val( data[0]["Es_Ciudad_Escritura"] );
+    $("#Croquis_URL").val( data[0]["Croquis_URL"] );
   }
 
   set_to_grid(data)
@@ -518,7 +551,8 @@ class view_claves_fraccionamiento
      innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
-    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' onchange='event_get_croquis(event)'></div></div>";
+    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange=''>"
+    innerTableContent += "<input type='button' onclick='uploadFile()' value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
     innerTableContent += "</div>"
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
@@ -766,6 +800,7 @@ class view_claves_fraccionamiento
   	data['Tipo_Sup']="m2";
   	data['Es_Ciudad_Escritura']=$("#ciudad_escritura").val();
   	data['Es_Estado_Escritura']=$("#estado_escitura").val();
+    data['Croquis_URL']=$("#Croquis_URL").val();
   	return data;
   }
 
