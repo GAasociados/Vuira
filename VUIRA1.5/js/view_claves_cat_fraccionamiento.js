@@ -559,25 +559,12 @@ class view_claves_fraccionamiento
     innerTableContent += "</div>";
   	innerTableContent += "</td>";
   	innerTableContent += "<td>";
-<<<<<<< HEAD
-    innerTableContent += "<div class='form-row'>";
-    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
-    innerTableContent += "</div>";
-    innerTableContent += "<div class='form-row'>";
-    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-success' value='Documento Orden de Pago' onclick='event_modal_pago(this)'></div>";
-    innerTableContent += "</div>";
-    innerTableContent += "<div class='form-row'>";
-    innerTableContent += "<div class='form-group col-md-12 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
-    innerTableContent += "</div>";
-    //innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' onchange='event_get_croquis(event)'></div></div>";
-=======
      innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
   	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
     innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange=''>"
     innerTableContent += "<input type='button' onclick='uploadFile()' value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
     innerTableContent += "</div>"
->>>>>>> 74a160ac159a623100634ffc6c9a1ef9a66f534b
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();

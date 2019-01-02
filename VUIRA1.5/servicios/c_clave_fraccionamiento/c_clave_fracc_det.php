@@ -109,22 +109,25 @@ class detFracc
 
     public function detSel($id,$uid)
     {
-        return $this->con->executeQuerry("
-        SELECT
-        fraccDet.Cuenta_Predial,
-        fraccDet.Calle,
-        fraccDet.Manzana,
-        fraccDet.Lote,
-        fraccDet.Numero_Ext,
-        fraccDet.Numero_Int,
-        fraccDet.Colonia,
-        fraccDet.Id_Clave
-        FROM claves_catastrales_fraccionamientos_detalles AS fraccDet
-        INNER JOIN claves_catastrales_fraccionamientos_asignacion AS fraccAsign
-        ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
-        WHERE fraccAsign.Id_Fraccionamiento = '$id'
-        AND fraccAsign.Id_Auxiliar = '$uid'
-        GROUP BY fraccDet.Cuenta_Predial");
+			$sql="
+			SELECT
+			fraccDet.Cuenta_Predial,
+			fraccDet.Calle,
+			fraccDet.Manzana,
+			fraccDet.Lote,
+			fraccDet.Numero_Ext,
+			fraccDet.Numero_Int,
+			fraccDet.Colonia,
+			fraccDet.Id_Clave
+			FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet
+			INNER JOIN Claves_Catastrales_Fraccionamientos_Asignacion AS fraccAsign
+			ON fraccDet.Id_Fraccionamientos = fraccAsign.Id_Fraccionamiento
+			and fraccDet.Cuenta_Predial = fraccAsign.Cuenta_Predial
+			WHERE fraccAsign.Id_Fraccionamiento = '$id'
+			AND fraccAsign.Id_Auxiliar = '$uid'
+			GROUP BY fraccDet.Cuenta_Predial";
+		//	echo $sql;
+        return $this->con->executeQuerry($sql);
     }
 
     public function detDel($id)

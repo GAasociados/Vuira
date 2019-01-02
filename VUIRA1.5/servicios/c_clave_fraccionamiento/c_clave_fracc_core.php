@@ -22,20 +22,22 @@ if(isset($_GET['service_name']))
 		case 'updatecore': //EL DICCIONARIO DE DATOS PASA POR POST AL IGUAL QUE EL ID
             print_r(json_encode($obj->coreUpdate($_POST["data"], $_FILES, $_POST['id']), JSON_UNESCAPED_SLASHES));
     break;
+		case 'updateStatus':
+            print_r(json_encode($obj->changeStatus($_POST["status"], $_POST['id']), JSON_UNESCAPED_SLASHES));
+    break;
 		case 'getAll':
 						print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
 		break;
 
-        case 'getFoFi':
-                        print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
-        break;
-        case 'noClaves':
-                        print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
-        break;
-         case 'subirCroquis':
-                        print_r(json_encode($obj->subirCroquis($_POST), JSON_UNESCAPED_SLASHES));
-        break;
-
+    case 'getFoFi':
+          print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
+    break;
+    case 'noClaves':
+          print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
+    break;
+    case 'subirCroquis':
+          print_r(json_encode($obj->subirCroquis($_POST), JSON_UNESCAPED_SLASHES));
+    break;
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
 		break;
@@ -75,31 +77,31 @@ class coreFracc
 
 		public function getAllFraccionamientos()
     {
-				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc INNER JOIN   claves_catastrales_fraccionamientos_detalles AS fraccDet
+				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos AS fracc INNER JOIN   Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet
                     ON fracc.Id = fraccDet.Id_Fraccionamientos GROUP BY fracc.Id";
         return $this->con->executeQuerry($sql);
     }
 
-        public function getFolioFinalFracc($id)
+    public function getFolioFinalFracc($id)
     {
-                $sql = "SELECT fraccDet.Folio FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
+                $sql = "SELECT fraccDet.Folio FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
         return $this->con->executeQuerry($sql);
     }
 
-        public function getNoClaves($id)
+    public function getNoClaves($id)
     {
-                $sql = "SELECT COUNT(*) AS Claves FROM claves_catastrales_fraccionamientos_detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id}";
+                $sql = "SELECT COUNT(*) AS Claves FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id}";
         return $this->con->executeQuerry($sql);
     }
 
-        public function subirCroquis($data)
+    public function subirCroquis($data)
     {
         echo("EL POST TRAE".var_dump($data));
-        // if ( !file_exists($files["croquis"]["tmp_name"]) || !is_uploaded_file($files["croquis"]["tmp_name"]) ) 
+        // if ( !file_exists($files["croquis"]["tmp_name"]) || !is_uploaded_file($files["croquis"]["tmp_name"]) )
         // {
         //         echo var_dump($files);
         // }
-        
+
         //$this->subirArchivo($files["croquis"], "croquis");
     }
 
@@ -119,11 +121,18 @@ EOD;
 
 		public function getAllFraccionamientosSinAsignar()
     {
-				$sql = "SELECT * FROM claves_catastrales_fraccionamientos AS fracc
-                        INNER JOIN claves_catastrales_fraccionamientos_detalles AS fraccDet
+				$sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos AS fracc
+                        INNER JOIN Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet
                         ON fracc.Id = fraccDet.Id_Fraccionamientos WHERE Status = 'Sin Asignar' GROUP BY fracc.Id;";
         return $this->con->executeQuerry($sql);
     }
+
+		public function changeStatus($status,$idFracc)
+		{
+			$sql="UPDATE Claves_Catastrales_Fraccionamientos SET Status='$status' WHERE Id = '$idFracc'";
+			echo $sql;
+			return $this->con->sqlOperations($sql);
+		}
 
     public function coreUpdate($data, $files, $id)
     {
