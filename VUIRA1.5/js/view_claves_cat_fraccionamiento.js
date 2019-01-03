@@ -56,14 +56,21 @@ function event_submit_ventanilla()
     });
 }
 
-function event_modal_pago(event)
+function event_mostrar_modal_pago(event)
 {
   $("#modalPago").modal("show");
+  $("#numeroClaves").val(1);
+}
+
+function event_mostrar_modal_pago_cuentas()
+{
+  $("#modalPago").modal("show");
+  $("#numeroClaves").val(cuentas_asignadas.length);
 }
 
 function generar_talon_pago(event)
 {
-  window.open("../../PDFGen/pdfGenTalonPago.php","_blank");
+  window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val(),"_blank");
   $("#modalPago").modal("hide");
 }
 
@@ -251,6 +258,7 @@ class view_claves_fraccionamiento
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
       this.basePath = "https://"+window.location.hostname+"/";
+      //this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -526,6 +534,7 @@ class view_claves_fraccionamiento
   	rowSelectedContent = tblRow.html();
     var hidden= tblRow.find(":hidden");
     var tmpHidden = "";
+    var cuentaPredial = tblRow.name;
 
     tmpHidden+= "<input type='hidden' id='Cuenta_Predial' value='"+hidden[0].value+"' />";
     tmpHidden+= "<input type='hidden' id='Calle' value='"+hidden[1].value+"' />";
@@ -558,13 +567,19 @@ class view_claves_fraccionamiento
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='ciudad_escritura' class='control-label'>Ciudad de Escritura *</label> <input type='text' id='ciudad_escritura' class='form-control'></div>";
     innerTableContent += "</div>";
   	innerTableContent += "</td>";
-  	innerTableContent += "<td>";
-     innerTableContent += "<div class='form-row'>";
-  	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
-  	innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
+    innerTableContent += "<td>";
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='"+hidden[0].value+"' class='btn btn-success' value='Orden de Pago' onclick='event_mostrar_modal_pago(this)'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+    innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
+    innerTableContent += "</div>";
     innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange=''>"
-    innerTableContent += "<input type='button' onclick='uploadFile()' value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
-    innerTableContent += "</div>"
+    innerTableContent += "<input type='button' onclick='uploadFile()'  value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
+    innerTableContent += "</div>";
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
     this.set_template_to_record();

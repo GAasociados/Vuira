@@ -386,6 +386,11 @@ ini_set("display_errors",1);
 													  <strong>PLANTILLA</strong>
 													</div> -->
 										        	<?php include_once ('cmp_inmueble_generar.php')?>
+													<div class="row">
+														<div class="col-md-12" align="right">
+															<input type="button" class="btn btn-success" value="Orden de Pago de Cuentas" onclick="event_mostrar_modal_pago_cuentas()">
+														</div>
+													</div>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
 

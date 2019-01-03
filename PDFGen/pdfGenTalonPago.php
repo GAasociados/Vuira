@@ -10,15 +10,25 @@ require_once('tcpdf_include.php');
 
 $fecha_inicial = "";
 $fecha_final = "";
-$nombre="";
+$propietario="";
 $correo = "";
 $folios = "";
 $folios_html = "";
 $clave = "";
 
-if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inicial']) && isset($_GET['fecha_final']) && isset($_GET['folios']) && isset($_GET['clave']) ) 
+if ( isset($_GET['Propietario']) )
 {
-	$nombre = $_GET['nombre'];
+	$propietario = $_GET['Propietario'];
+}
+else
+{
+	$propietario = "FERNANDO VARGAS BRAVO";
+}
+
+
+if ( isset($_GET['Propietario']) && isset($_GET['correo']) && isset($_GET['fecha_inicial']) && isset($_GET['fecha_final']) && isset($_GET['folios']) && isset($_GET['clave']) ) 
+{
+	$propietario = $_GET['Propietario'];
 	$correo = $_GET['correo'];
 	$fecha_inicial = $_GET['fecha_inicial'];
 	$fecha_final = $_GET['fecha_final'];
@@ -173,7 +183,7 @@ $html = '
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;">LOGO</td>
-			<td align="center" style="border: 1px solid black;" colspan="2">PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
+			<td align="center" style="border: 1px solid black;" colspan="2"><strong>'.$propietario.'</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
 			DE $$$$ (CON LETRA)</td>
 			<td align="center" style="border: 1px solid black;" >LOGO</td>
 		</tr>
