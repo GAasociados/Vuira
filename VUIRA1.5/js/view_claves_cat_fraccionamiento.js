@@ -70,7 +70,7 @@ function event_mostrar_modal_pago_cuentas()
 
 function generar_talon_pago(event)
 {
-  window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val(),"_blank");
+  window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length,"_blank");
   $("#modalPago").modal("hide");
 }
 

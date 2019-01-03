@@ -7,18 +7,46 @@ require_once('tcpdf_include.php');
 //$Tipo_Tramite="Solicitud IMUVII";
 //$Tipo_Tramite="Constancia Ejidal";
 
+$arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
-$fecha_inicial = "";
-$fecha_final = "";
+$arrayDias = array('Domingo', 'Lunes', 'Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado');
+
+$ajusteTarifario = "";
+$cantidadClaves = 0;
+$costoTramite = 7.56;
+$tarifa = 50.81;
+$totalClaves = 0;
+$costoClaveCertificada = 85.13;
+$totalClaveCertificada = 0;
+$total = 0;
 $propietario="";
 $correo = "";
 $folios = "";
 $folios_html = "";
 $clave = "";
 
-if ( isset($_GET['Propietario']) )
+if ( isset($_GET['Propietario']) && isset($_GET['cantidadClaves']) )
 {
 	$propietario = $_GET['Propietario'];
+	$cantidadClaves = $_GET['cantidadClaves'];
+	$totalClaves = ($cantidadClaves * $tarifa) + $costoTramite;
+	$costoClaveCertificada = 85.13;
+	$totalClaveCertificada = $cantidadClaves * $costoClaveCertificada;
+	$total = floatval($totalClaves + $totalClaveCertificada);
+	$decimales = explode(".",$total);
+	if ( $decimales[1] < 50)
+	{
+		$ajusteTarifario = "-0.5";
+		$total = round($total,0,PHP_ROUND_HALF_DOWN);
+		$total = number_format($total,2);
+	}
+	elseif ( $decimales[1] >= 50)
+	{
+		$ajusteTarifario = "+0.5";
+		$total = round($total,0,PHP_ROUND_HALF_UP);
+		$total = number_format($total,2);
+	}
 }
 else
 {
@@ -135,17 +163,17 @@ $pdf->AddPage();
 //$telefono = $_GET['telefono'];
 //$tipo_tramite = $_GET['tipo_tramite'];
 $html = '
-<table cellspacing="5" cellpadding="5" style="font-size:13px;">
+<table cellspacing="5" cellpadding="5" style="font-size:11px;">
     <tr>
-			<td align="center" colspan="3"><strong>Clave Catastral Fraccionamientos</strong></td>
+			<td align="center" colspan="4"><strong>Clave Catastral Fraccionamientos</strong></td>
 			<td align="center">Orden de Pago</td>
     </tr>
     <tr>
-			<td align="center" colspan="3" style="border: 1px solid black;">TIPO DE AUTORIZACION</td>
+			<td align="center" colspan="4" style="border: 1px solid black;">TIPO DE AUTORIZACION</td>
 			<td align="center" style="border: 1px solid black;">No. DE AUTORIZACION</td>
     </tr>
     <tr>
-			<td align="justify" colspan="3" rowspan="5" >EN RELACIÓN A LA SOLICITUD PRESENTADA ANTE LA DIRECCIÓN DE CATASTRO, ADSCRITA A LA TESORERÍA MUNICIPAL, 
+			<td align="justify" colspan="4" rowspan="5" >EN RELACIÓN A LA SOLICITUD PRESENTADA ANTE LA DIRECCIÓN DE CATASTRO, ADSCRITA A LA TESORERÍA MUNICIPAL, 
 			CON LA FINALIDAD DE OBTENER LA CLAVE CATASTRAL CERTIFICADA; PREVIO ANÁLISIS PRACTICADO PARA TAL EFECTO SE TIENE LO SIGUIENTE: DEBERÁ
 			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LA PRESENTE CLAVE CATASTRAL CERTIFICADA POR LA CANTIDAD DE $<?php echo number_format(round(floatval($costo[0]->costo_base + $costo[0]->costo_tram + $costo[1]->costo_base + $costo[1]->costo_tram), 0, PHP_ROUND_HALF_DOWN), 2); ?>
 			(<span id="letras"></span>), DE CONFORMIDAD CON LO DISPUESTO EN EL ARTÍCULO 27 FRACCIÓN VIII DE LA LEY DE INGRESOS PARA 
@@ -166,7 +194,7 @@ $html = '
 			<td align="center">####</td>
 		</tr>
 		<tr>
-			<td align="center" colspan="3" style="border: 1px solid black;">Descripción</td>
+			<td align="center" colspan="4" style="border: 1px solid black;">Descripción</td>
 			<td align="center" style="border: 1px solid black;">Monto de Autorizacion</td>
 		</tr>
 		<tr>
@@ -177,21 +205,50 @@ $html = '
 			<td align="right"><strong>TOTAL</strong></td>
 		</tr>
 		<tr>
+			<td align="justify">03110004 Clave Catastral Individual</td>
+			<td align="right">'.$cantidadClaves.'</td>
+			<td align="right">$'.$tarifa.'</td>
+			<td align="right">$'.$costoTramite.'</td>
+			<td align="right">$'.$totalClaves.'</td>
+		</tr>
+		<tr>
+			<td align="justify">0310004 Certificación de Clave Catastral</td>
+			<td align="right">'.$cantidadClaves.'</td>
+			<td align="right"></td>
+			<td align="right">$'.$costoClaveCertificada.'</td>
+			<td align="right">$'.$totalClaveCertificada.'</td>
+		</tr>
+		<tr>
+			<td align="left">Ajuste Tarifario</td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right">'.$ajusteTarifario.'</td>
+		</tr>
+		<tr>
+			<td align="left"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"><strong>$'.$total.'</strong></td>
+		</tr>
+		<tr>
 			<td align="center" style="border: 1px solid black;">Informacion</td>
-			<td align="center" style="border: 1px solid black;" colspan="2">PROPIETARIO/SOLICITANTE/RAZON SOCIAL</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PROPIETARIO/SOLICITANTE/RAZON SOCIAL</td>
 			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;">LOGO</td>
-			<td align="center" style="border: 1px solid black;" colspan="2"><strong>'.$propietario.'</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
+			<td align="center" style="border: 1px solid black;" colspan="3"><strong>'.$propietario.'</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
 			DE $$$$ (CON LETRA)</td>
 			<td align="center" style="border: 1px solid black;" >LOGO</td>
 		</tr>
 		<tr>
-			<td align="center" colspan="4">Si requiere factura tiene 48 horas para su solicitud al correo electronico facturacion@irapuato.gob.mx</td>
+			<td align="center" colspan="5">Si requiere factura tiene 48 horas para su solicitud al correo electronico facturacion@irapuato.gob.mx</td>
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EXCLUSIVO DEL BANCO</td>
+			<td align="center"></td>
 			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EN BANCA ELECTRONICA</td>
 		</tr>
 </table>';
