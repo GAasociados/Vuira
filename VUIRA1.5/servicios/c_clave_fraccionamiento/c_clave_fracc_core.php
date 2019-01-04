@@ -24,10 +24,17 @@ if(isset($_GET['service_name']))
     break;
 		case 'updateStatus':
             print_r(json_encode($obj->changeStatus($_POST["status"], $_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+    case 'updatePago':
+        print_r(json_encode($obj->updatePago($_POST['id']), JSON_UNESCAPED_SLASHES));
     break;
 		case 'getAll':
 						print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
-		break;
+        break;
+    
+        case 'getAllWithZero':
+            print_r(json_encode($obj->getAllFraccionamientosWithZero(), JSON_UNESCAPED_SLASHES));
+        break;
 
     case 'getFoFi':
           print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
@@ -82,6 +89,13 @@ class coreFracc
         return $this->con->executeQuerry($sql);
     }
 
+    public function getAllFraccionamientosWithZero()
+    {
+        $sql = "SELECT * FROM Claves_Catastrales_Fraccionamientos AS fracc INNER JOIN   Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet
+                ON fracc.Id = fraccDet.Id_Fraccionamientos WHERE fracc.Pago = 0 GROUP BY fracc.Id";
+        return $this->con->executeQuerry($sql);
+    }
+
     public function getFolioFinalFracc($id)
     {
                 $sql = "SELECT fraccDet.Folio FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id} ORDER BY fraccDet.Folio DESC LIMIT 1";
@@ -132,7 +146,12 @@ EOD;
 			$sql="UPDATE Claves_Catastrales_Fraccionamientos SET Status='$status' WHERE Id = '$idFracc'";
 			echo $sql;
 			return $this->con->sqlOperations($sql);
-		}
+        }
+    public function updatePago($idFracc)
+    {
+        $sql="UPDATE Claves_Catastrales_Fraccionamientos SET Pago = '1' WHERE Id = '$idFracc'";
+		return $this->con->sqlOperations($sql);
+    }    
 
     public function coreUpdate($data, $files, $id)
     {
