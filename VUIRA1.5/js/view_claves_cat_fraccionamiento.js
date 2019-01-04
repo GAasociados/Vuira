@@ -70,8 +70,20 @@ function event_mostrar_modal_pago_cuentas()
 
 function generar_talon_pago(event)
 {
-  window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length,"_blank");
-  $("#modalPago").modal("hide");
+  //window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length+"&data="+cuentas_asignadas,"_blank");
+  //$("#modalPago").modal("hide");
+  console.log($("#id").val());
+  var jsonData = JSON.stringify(cuentas_asignadas);
+  $.ajax({
+    type:"post",
+    url:"../../PDFGen/pdfGenTalonPago.php",
+    data:{idFracc:$("#id").val(),data:jsonData,nombre:$("#Propietario").val(),cantidadClaves:cuentas_asignadas.length,},
+    async:true,
+    success: function (jdata)
+    {
+      window.open("../../PDFGen/TalonPago.pdf", "_blank");
+    }
+  });
 }
 
 function event_imiprimirTalon()

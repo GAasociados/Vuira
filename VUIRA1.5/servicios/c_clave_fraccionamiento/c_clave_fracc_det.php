@@ -117,7 +117,8 @@ class detFracc
 			fraccDet.Lote,
 			fraccDet.Numero_Ext,
 			fraccDet.Numero_Int,
-			fraccDet.Colonia,
+            fraccDet.Colonia,
+            fraccDet.Folio,
 			fraccDet.Id_Clave
 			FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet
 			INNER JOIN Claves_Catastrales_Fraccionamientos_Asignacion AS fraccAsign
