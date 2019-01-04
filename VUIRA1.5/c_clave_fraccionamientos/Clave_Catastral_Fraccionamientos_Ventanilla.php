@@ -111,9 +111,7 @@ ini_set("display_errors",1);
             <div class="panel-body">
               <input class="btn btn-success float" type="submit" value="Guardar"form="formVentanilla" onclick=""/>
                 <!-- <i class="glyph-icon icon-save"></i> -->
-              <button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc"   style="position: fixed;bottom: 70px;right: 20px;">
-                Cancelar
-              </button>
+              <input type="button" class="btn btn-danger float" value="Cancelar" id="btnCancelarFracc"   style="position: fixed;bottom: 70px;right: 20px;" onclick="event_cancelar_tramite()">
               <form action="C_C_Fraccionamientos_CE.php" id="formVentanilla" method="post" enctype="multipart/form-data" >
                 <input type="hidden" name="id" id="id" value="<?php
                 if(isset($_GET["Id"]))

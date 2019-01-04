@@ -307,9 +307,7 @@ ini_set("display_errors",1);
 										Guardar
 										<!-- <i class="glyph-icon icon-save"></i> -->
 									</button>
-									<button class="btn btn-danger float" title="Cncelar Cuenta" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;">
-										Cancelar
-									</button>
+									<input type="button" class="btn btn-danger float" value="Cancelar" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;" onclick="event_cancelar_tramite()">
 									<form id="form">
 										<input type="hidden" name="id" id="id" value="<?php
 										if(isset($_GET["Id"]))

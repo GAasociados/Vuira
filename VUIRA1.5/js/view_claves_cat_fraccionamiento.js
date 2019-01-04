@@ -8,6 +8,12 @@ var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
 
+
+function event_cancelar_tramite()
+{
+  new view_claves_fraccionamiento().redirigir_inicio_tramite();
+}
+
 function event_load_ventanilla()
 {
   var objVista=new view_claves_fraccionamiento();
@@ -101,11 +107,6 @@ function event_imprimirTalon_click()
   });
 }
 
-
-function realizarSubmit()
-{
-  document.getElementById('formVentanilla').submit();
-}
 
 function event_add_cuenta_predial()
 {
@@ -1058,5 +1059,9 @@ class view_claves_fraccionamiento
         }
       }
     });
+  }
+  redirigir_inicio_tramite()
+  {
+    window.location.href="https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamiento";
   }
 }
