@@ -13,8 +13,8 @@ class view_fracc_validar_pago
     constructor()
     {
         //this.basePath = "https://vuira.irapuato.gob.mx/";
-        this.basePath = "https://"+window.location.hostname+"/";
-        //this.basePath = "http://localhost/Vuira/";
+        //this.basePath = "https://"+window.location.hostname+"/";
+        this.basePath = "http://localhost/Vuira/";
     }
 
     get_all_fraccioamientos_con_cero()
