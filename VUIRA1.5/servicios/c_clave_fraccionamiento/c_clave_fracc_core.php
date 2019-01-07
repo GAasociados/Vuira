@@ -15,42 +15,60 @@ if(isset($_GET['service_name']))
 	{
 		case 'insertcore': //EL DICCIONARIO DE DATOS PASA POR MÉTODO POST PARA MÁS COMODIDAD, ENTRE COMENTARIOS ESTÁ LA VARIABLE DATA
             print_r(json_encode($obj->coreInsert($_POST["data"], $_FILES), JSON_UNESCAPED_SLASHES));
-		break;
-    case 'byidcore':
+        break;
+        
+        case 'byidcore':
             print_r(json_encode($obj->coreSel((isset($_GET["id"]) ? $_GET["id"] : (isset($_POST["id"]) ? $_POST["id"] : -1))), JSON_UNESCAPED_SLASHES));
-    break;
+        break;
+
 		case 'updatecore': //EL DICCIONARIO DE DATOS PASA POR POST AL IGUAL QUE EL ID
             print_r(json_encode($obj->coreUpdate($_POST["data"], $_FILES, $_POST['id']), JSON_UNESCAPED_SLASHES));
-    break;
+        break;
+
 		case 'updateStatus':
             print_r(json_encode($obj->changeStatus($_POST["status"], $_POST['id']), JSON_UNESCAPED_SLASHES));
         break;
-    case 'updatePago':
-        print_r(json_encode($obj->updatePago($_POST['id']), JSON_UNESCAPED_SLASHES));
-    break;
+
+        case 'updatePago':
+            print_r(json_encode($obj->updatePago($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+
+        case 'set_cadFile_url':
+            print_r(json_encode($obj->set_cadFile_url($_POST['id'], $_POST['url']), JSON_UNESCAPED_SLASHES));
+        break;
+
+        case 'set_wordFile_url':
+            print_r(json_encode($obj->set_wordFile_url($_POST['id'], $_POST['url']), JSON_UNESCAPED_SLASHES));
+        break;
+
 		case 'getAll':
-						print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
+			print_r(json_encode($obj->getAllFraccionamientos(), JSON_UNESCAPED_SLASHES));
         break;
     
         case 'getAllWithZero':
             print_r(json_encode($obj->getAllFraccionamientosWithZero(), JSON_UNESCAPED_SLASHES));
         break;
 
-    case 'getFoFi':
-          print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
-    break;
-    case 'noClaves':
+        case 'getFoFi':
+            print_r(json_encode($obj->getFolioFinalFracc($_POST['id']), JSON_UNESCAPED_SLASHES));
+        break;
+
+        case 'noClaves':
           print_r(json_encode($obj->getNoClaves($_POST['id']), JSON_UNESCAPED_SLASHES));
-    break;
-    case 'subirCroquis':
+        break;
+
+        case 'subirCroquis':
           print_r(json_encode($obj->subirCroquis($_POST), JSON_UNESCAPED_SLASHES));
-    break;
+        break;
+
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
-		break;
+        break;
+        
 		case 'getByAuxiliar':
 						print_r(json_encode($obj->getAllFraccionamientosByAuxiliar((isset($_GET["auxiliar"]) ? $_GET["auxiliar"] : (isset($_POST["auxiliar"]) ? $_POST["auxiliar"] : -1))), JSON_UNESCAPED_SLASHES));
-		break;
+        break;
+        
 		default:
 			echo "El servicio no existe. / Service doesn't exist.";
 		break;
@@ -151,7 +169,19 @@ EOD;
     {
         $sql="UPDATE Claves_Catastrales_Fraccionamientos SET Pago = '1' WHERE Id = '$idFracc'";
 		return $this->con->sqlOperations($sql);
-    }    
+    }
+    
+    public function set_cadFile_url($idFracc,$url)
+    {
+        $sql="UPDATE Claves_Catastrales_Fraccionamientos SET Doc_Cad = '$url' WHERE Id = '$idFracc'";
+		return $this->con->sqlOperations($sql);
+    }
+
+    public function set_wordFile_url($idFracc,$url)
+    {
+        $sql="UPDATE Claves_Catastrales_Fraccionamientos SET Doc_Word = '$url' WHERE Id = '$idFracc'";
+		return $this->con->sqlOperations($sql);
+    }
 
     public function coreUpdate($data, $files, $id)
     {

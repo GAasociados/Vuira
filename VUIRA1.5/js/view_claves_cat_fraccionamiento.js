@@ -76,8 +76,6 @@ function event_mostrar_modal_pago_cuentas()
 
 function generar_talon_pago(event)
 {
-  //window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length+"&data="+cuentas_asignadas,"_blank");
-  //$("#modalPago").modal("hide");
   console.log($("#id").val());
   var jsonData = JSON.stringify(cuentas_asignadas);
   $.ajax({
@@ -255,6 +253,7 @@ function uploadFile()
               // clear file field
               var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
               $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+              
             }
           });
         }
@@ -270,10 +269,11 @@ function uploadFile()
     {
       var file_data = $('#archivoAutoCad').prop('files')[0];
       var form_data = new FormData();
+      //https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php
 
       form_data.append('file', file_data);
       $.ajax({
-        url: 'https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php', // point to server-side PHP script
+        url: '../../DocPrint/uploadCadFile.php', // point to server-side PHP script
         dataType: 'text', // what to expect back from the PHP script, if anything
         cache: false,
         contentType: false,
@@ -284,8 +284,42 @@ function uploadFile()
         // get server responce here
         alert(data);
         // clear file field
-        var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
-        $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+        var filename = $('#archivoAutoCad').val().replace(/C:\\fakepath\\/i, '')
+        $("#Cad_URL").val("assets/tramites/clavescatastralesfraccionamiento/cadFiles/"+filename);
+        new view_claves_fraccionamiento().set_cadFile_url($("#id").val(), $("#Cad_URL").val());
+        }
+      });
+    }
+    else
+    {
+      alert("Please select file!");
+    }
+  }
+
+  function uploadWordFile()
+  {
+    if($("#archivoWord").val() != "")
+    {
+      var file_data = $('#archivoWord').prop('files')[0];
+      var form_data = new FormData();
+      //https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php
+
+      form_data.append('file', file_data);
+      $.ajax({
+        url: '../../DocPrint/uploadWordFile.php', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(data){
+        // get server responce here
+        alert(data);
+        // clear file field
+        var filename = $('#archivoWord').val().replace(/C:\\fakepath\\/i, '')
+        $("#CartaWord_URL").val("assets/tramites/clavescatastralesfraccionamiento/wordFiles/"+filename);
+        new view_claves_fraccionamiento().set_wordFile_url($("#id").val(), $("#CartaWord_URL").val());
         }
       });
     }
@@ -651,6 +685,48 @@ class view_claves_fraccionamiento
 		$("#estado_escitura").val($("#p_estado_escritura").val());
 	 if($("#ciudad_escritura").val()=="")
 		$("#ciudad_escritura").val($("#p_ciudad_escritura").val());
+  }
+
+  set_cadFile_url(id,url)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=set_cadFile_url",
+      data:{id:id,url,url},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
+
+  set_wordFile_url(id,url)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=set_wordFile_url",
+      data:{id:id,url,url},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
   }
 
 

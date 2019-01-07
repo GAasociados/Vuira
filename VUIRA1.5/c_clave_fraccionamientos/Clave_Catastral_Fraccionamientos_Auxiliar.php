@@ -395,14 +395,14 @@ ini_set("display_errors",1);
 																<input type="file" name="archivoAutocad" id="archivoAutoCad">
 																<input type='hidden' id='Cad_URL' name='Cad_URL' value='assets/tramites/clavescatastralesindividual/cad/2861.PNG'>
 															</div>
-															<input type="button" class="btn btn-info" value="Subir AutoCad" onclick="uploadFile()'">
+															<input type="button" class="btn btn-info" value="Subir AutoCad" onclick="uploadCadFile()">
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<input type="file" name="archivoWord" id="archivoWord">
 																<input type='hidden' id='CartaWord_URL' name='CartaWord_URL' value='assets/tramites/clavescatastralesindividual/cartaWord/2861.PNG'>
 															</div>
-															<input type="button" class="btn btn-info" value="Subir Clave Catastral" onclick="uploadFile()'0">
+															<input type="button" class="btn btn-info" value="Subir Clave Catastral" onclick="uploadWordFile()">
 														</div>
 													</div>
 										        </div>
