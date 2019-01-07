@@ -264,6 +264,37 @@ function uploadFile()
         }
   }
 
+  function uploadCadFile()
+  {
+    if($("#archivoAutoCad").val() != "")
+    {
+      var file_data = $('#archivoAutoCad').prop('files')[0];
+      var form_data = new FormData();
+
+      form_data.append('file', file_data);
+      $.ajax({
+        url: 'https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(data){
+        // get server responce here
+        alert(data);
+        // clear file field
+        var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
+        $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+        }
+      });
+    }
+    else
+    {
+      alert("Please select file!");
+    }
+  }
+
 class view_claves_fraccionamiento
 {
   //se define una propiedad estatico para que las demas instancia compartan su valor

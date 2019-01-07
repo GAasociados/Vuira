@@ -386,6 +386,27 @@ ini_set("display_errors",1);
 										        	<?php include_once ('cmp_inmueble_generar.php')?>
 										        </div><!-- DIV content-box-wrapper de CUENTAS SUSPENDIDAS-->
 										      </div> <!-- DIV PANEL-CUENTA-SUSPENDIDA 1-->
+											  
+											  <div id="documentosCadWord" class="content-box border-top border-blue">
+										        <div class="content-box-wrapper">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="file" name="archivoAutocad" id="archivoAutoCad">
+																<input type='hidden' id='Cad_URL' name='Cad_URL' value='assets/tramites/clavescatastralesindividual/cad/2861.PNG'>
+															</div>
+															<input type="button" class="btn btn-info" value="Subir AutoCad" onclick="uploadFile()'">
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="file" name="archivoWord" id="archivoWord">
+																<input type='hidden' id='CartaWord_URL' name='CartaWord_URL' value='assets/tramites/clavescatastralesindividual/cartaWord/2861.PNG'>
+															</div>
+															<input type="button" class="btn btn-info" value="Subir Clave Catastral" onclick="uploadFile()'0">
+														</div>
+													</div>
+										        </div>
+										    </div>
 
 										      <div id="panel-datos-cuenta-suspendida2" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
