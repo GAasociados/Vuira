@@ -29,14 +29,6 @@ function event_load_ventanilla()
     console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
   }
 
-  //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
-  $(".custom-file-input").change(function(event){
-    var padre = $(this).parent()
-    var archivos = $(this).get(0).files;
-    var label = padre.children( ".custom-file-label" );
-    label.text( archivos[0]["name"] );
-  });
-
   //valida el boton guardar
   event_submit_ventanilla();
   //evento para generar el talon
@@ -60,12 +52,6 @@ function event_submit_ventanilla()
         mensajeError('Debe Agregar Al Menos Una Cuenta Predial');
       }
     });
-}
-
-function event_mostrar_modal_pago(event)
-{
-  $("#modalPago").modal("show");
-  $("#numeroClaves").val(1);
 }
 
 function event_mostrar_modal_pago_cuentas()
@@ -117,17 +103,6 @@ function event_add_cuenta_predial()
   {
     alert("Debes ingresar una cuenta predial");
   }
-}
-
-function event_get_croquis(event)
-{
-  var form = $("#form");
-  var data = new FormData(form);
-  data.append('croquis',event.target.files[0]);
-  for (var p of data) {
-  console.log(p);
-  }
-  new view_claves_fraccionamiento().save_croquis(data);
 }
 
 function event_pulsar_enter(event)
@@ -646,9 +621,6 @@ class view_claves_fraccionamiento
     innerTableContent += "</div>";
   	innerTableContent += "</td>";
     innerTableContent += "<td>";
-    innerTableContent += "<div class='form-row'>";
-    innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='"+hidden[0].value+"' class='btn btn-success' value='Orden de Pago' onclick='event_mostrar_modal_pago(this)'></div>";
-    innerTableContent += "</div>";
     innerTableContent += "<div class='form-row'>";
     innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
     innerTableContent += "</div>";
