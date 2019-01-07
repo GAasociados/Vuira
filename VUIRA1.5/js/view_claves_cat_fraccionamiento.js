@@ -981,8 +981,6 @@ class view_claves_fraccionamiento
     });
   }
 
-
-
   insertar_cuenta_predial_detalles(data)
   {
     var id_fraccionamientos = $("#id").val();
@@ -1064,29 +1062,6 @@ class view_claves_fraccionamiento
         else
         {
           alert (jdata);
-        }
-      }
-    });
-  }
-
-  save_croquis(data)
-  {
-    $.ajax({
-      type:"post",
-      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=subirCroquis",
-      data:{data:data},
-      async:true,
-      success: function (jdata)
-      {
-        console.log(jdata);
-        if(jdata != "Error")
-        {
-          var data = JSON.parse(jdata);
-          console.log(data);
-        }
-        else
-        {
-            alert (jdata);
         }
       }
     });
