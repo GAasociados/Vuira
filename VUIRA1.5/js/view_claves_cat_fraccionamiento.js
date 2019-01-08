@@ -8,6 +8,30 @@ var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
 
+//cuando es persona moral se muestran estos documentos
+function event_mostrar_extra_docs(event)
+{
+  var extra_row = $("#extra_docs_row");
+  console.log(extra_row.length);
+  if( extra_row.length != 0)
+  {
+    $("#extra_docs_row").remove();
+  }
+
+  if ( event.value == "si")
+  {
+    var innerField = "";
+    innerField += "<div id='extra_docs_row' class='row'>";
+    innerField += "<div class='col-md-6'>";
+    innerField += "<div class='form-group'>";
+    innerField += "<label>Identificación de Solicitante: INE, Pasaporte o Cédula Profesional</label>";
+    innerField += "<input accept='.jpg, .jpeg, .png ,.pdf, .rar, .zip' type='file' name='Doc_Ine_Soli' multiple=''>";
+    innerField += "</div>";
+    innerField += "</div>";
+    innerField += "</div>";
+    $("#content-wrapper-fecha-recep").append(innerField);
+  }
+}
 
 function event_cancelar_tramite()
 {
@@ -20,7 +44,6 @@ function event_load_ventanilla()
   var id = $("#id").val();
   if ( id !== "")
   {
-
     objVista.load_data_fraccionamientos( $("#id").val() );
     objVista.load_data_fraccionamientos_detalles( $("#id").val() );
   }
@@ -28,7 +51,7 @@ function event_load_ventanilla()
   {
     console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
   }
-
+  $("#check-unidad_supS").click();
   //valida el boton guardar
   event_submit_ventanilla();
   //evento para generar el talon

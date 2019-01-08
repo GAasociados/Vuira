@@ -126,18 +126,19 @@ ini_set("display_errors",1);
                 }
                 ?>"/>
               <div id="panel-fecha_recep" class="content-box border-top border-blue">
-                <div class="content-box-wrapper">
+                <div id="content-wrapper-fecha-recep" class="content-box-wrapper" >
                   <h3 class="title-hero">I. Documentos del Inmueble</h3>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="" >Presentar Plano Físico de Traza Autorizada por la Dirección General de Desarrollo Territorial</label>
-                        <label>(Se lleva a oficinas)</label>
+                        <label for="">¿Es Propietario?</label><br>
+                        <label class="radio-inline"><input type="radio"  id="check-unidad_supS"  class="sup_inmueble_swi"  name="es_propietario" value="si" onclick="event_mostrar_extra_docs(this)" checked>Si</label>
+                        <label class="radio-inline"><input type="radio"  id="check-unidad_supN" class="sup_inmueble_swi"  name="es_propietario" value="no" onclick="event_mostrar_extra_docs(this)">No</label>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi"  value="moral" checked>Personal Moral</label>
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"   value="fisica">Persona Física</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi"  name="tipo_persona" value="moral" onclick="" checked>Personal Moral</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="tipo_persona" value="fisica" onclick="">Persona Física</label>
                     </div>
                   </div>
                   <div class="row">
@@ -171,18 +172,17 @@ ini_set("display_errors",1);
                   <div class="row">
                     <div class="col-md-6">
                      <div class="form-group">
-                      <label for="">Poder Notarial para Representación de Persona Moral</label>
-                      <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Acta" multiple="">
+                      <label for="" >Presentar Plano Físico de Traza Autorizada por la Dirección General de Desarrollo Territorial</label>
+                      <label>(Se lleva a oficinas)</label>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="">Escritura Pública de Propiedad que Contenga la Hoja Registral y Ampare la Superficie Registrada (En Caso de No Contener la Hoja Registral Anexar Copia de Libertad de Gravamen)</label>
-                      <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Escritura_Publica" multiple="">
+                      <label for="">Poder Notarial para Representación de Persona Moral</label>
+                      <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Acta" multiple="">
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
             <!-- SECCION II -->
