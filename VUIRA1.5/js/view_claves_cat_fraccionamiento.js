@@ -306,7 +306,6 @@ function uploadFile()
 
 class view_claves_fraccionamiento
 {
-  //se define una propiedad estatico para que las demas instancia compartan su valor
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
@@ -553,8 +552,6 @@ class view_claves_fraccionamiento
           $("#"+field).val(data[field]);
       }
     }
-    //se agregó por que al parecer es el unico campo que no establece su valor
-
   }
 
   set_data_grid_aux(data)
