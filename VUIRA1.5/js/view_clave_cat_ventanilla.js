@@ -154,8 +154,8 @@ function addDaysTalon()
   var today = new Date();
   var weekDay = today.getDay();
   if(weekDay >0 && weekDay <=3)
-    return addDays(today,2);
+    return addDays(today,3);
   else {
-    return addDays(today,4);
+    return addDays(today,5);
   }
 }
