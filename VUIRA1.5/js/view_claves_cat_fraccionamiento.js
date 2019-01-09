@@ -86,17 +86,24 @@ function event_mostrar_modal_pago_cuentas()
 function generar_talon_pago(event)
 {
   console.log($("#id").val());
-  var jsonData = JSON.stringify(cuentas_asignadas);
-  $.ajax({
+  var folios = [];
+  for (var i = 0; i < cuentas_asignadas.length; i++)
+  {
+    console.log(cuentas_asignadas[i]["Folio"]);
+    folios.push(cuentas_asignadas[i]["Folio"]);
+  }
+  var jsonData = JSON.stringify(folios);
+  window.open("../../PDFGen/pdfGenTalonPagoGet.php?idFracc="+$("#id").val()+"&data="+jsonData+"&nombre="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length, "_blank");
+  /* .ajax({
     type:"post",
     url:"../../PDFGen/pdfGenTalonPago.php",
     data:{idFracc:$("#id").val(),data:jsonData,nombre:$("#Propietario").val(),cantidadClaves:cuentas_asignadas.length,},
     async:true,
     success: function (jdata)
     {
-      window.open("../../PDFGen/TalonPago.pdf", "_blank");
+      window.open("../../PDFGen/talonPago.pdf", "_blank");
     }
-  });
+  }); */
 }
 
 function event_imiprimirTalon()
