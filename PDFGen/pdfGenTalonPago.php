@@ -453,6 +453,9 @@ $html = '
 </table>';
 $pdf->writeHTML($html,true,false,false,false,'L');
 
-header('Content-type: application/pdf');
-$pdf->Output('talonPago.pdf', 'I');
+$pdf->Output(__DIR__.'/talonPago.pdf', 'F');
+$pdf->Output(__DIR__.'/talonPago.pdf', 'I');
+
+return true;
+
  ?>

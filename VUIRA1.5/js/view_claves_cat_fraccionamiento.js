@@ -18,7 +18,7 @@ function event_mostrar_extra_docs(event)
     $("#extra_docs_row").remove();
   }
 
-  if ( event.value == "no")
+  if ( event.value == "si")
   {
     var innerField = "";
     innerField += "<div id='extra_docs_row' class='row'>";
@@ -94,7 +94,7 @@ function generar_talon_pago(event)
     async:true,
     success: function (jdata)
     {
-      window.open("../../PDFGen/talonPago.pdf", "_blank");
+      window.open("../../PDFGen/TalonPago.pdf", "_blank");
     }
   });
 }
