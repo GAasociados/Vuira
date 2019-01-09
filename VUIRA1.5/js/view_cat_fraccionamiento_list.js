@@ -319,7 +319,6 @@ class view_claves_cat_fraccionamiento_list
   				{
   					console.log(data);
   					console.log("Save completed");
-  					alert (data);
   				}
   			});
   		}
