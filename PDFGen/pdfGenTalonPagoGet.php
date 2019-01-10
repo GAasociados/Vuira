@@ -426,11 +426,11 @@ $html = <<<EOD
 			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
 		</tr>
 		<tr>
-            <td style="border: 1px solid black;font-size:15px;"><img src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chld=L|1"></td>
+            <td style="border: 1px solid black;font-size:15px;"><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chld=L|1"></td>
                                                                                                                      
 			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong><br>PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
 			DE $$total ($numeroConLetra)</td>
-			<td align="center" style="border: 1px solid black;" ><img src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=../assets/nombramiento-catastro.PDF/&chld=L|1"></td>
+			<td align="center" style="border: 1px solid black;" ><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=../assets/nombramiento-catastro.PDF/&chld=L|1"></td>
             <td></td>
         </tr>
 		<tr>
