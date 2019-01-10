@@ -3,16 +3,6 @@ error_reporting(E_ALL);
 ini_set("display_errors",1);
 
 require_once('tcpdf_include.php');
-/* $chartUlr = "http://chart.googleapis.com/chart?cht=p3&chs=250x100&chd=t:60,40&chl=Hello|World";
-$ch = curl_init();
-$timeout = 0;
-curl_setopt($ch, CURLOPT_URL, $chartUlr);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-$image = curl_exec($ch);
-curl_close($ch); */
-
 
 //FUNCION DIABOLICA PARA CONVERTIR NUMEROS A LETRAS
 function num_to_letras($numero, $moneda = 'PESO', $subfijo = 'M.N.')
@@ -198,37 +188,6 @@ $dataFraccionamientos;
 $folios = "";
 $idFracc = 0;
 
-/* if ( isset($_GET['Propietario']) && isset($_GET['cantidadClaves']) && isset($_POST['data']))
-{
-	$propietario = $_GET['Propietario'];
-	$cantidadClaves = $_GET['cantidadClaves'];
-	$dataFraccionamientos = $_POST['data'];
-	$data = json_decode($dataFraccionamientos);
-	error_log($data);
-	$totalClaves = ($cantidadClaves * $tarifa) + $costoTramite;
-	$costoClaveCertificada = 85.13;
-	$totalClaveCertificada = $cantidadClaves * $costoClaveCertificada;
-	$fechaAutorizacion = date('d')." de ".$arrayMeses[date('m') - 1]." de ".date('Y');
-	$total = floatval($totalClaves + $totalClaveCertificada);
-	$decimales = explode(".",$total);
-	$numeroConLetra = num_to_letras($total);
-	if ( $decimales[1] < 50)
-	{
-		$ajusteTarifario = "-0.5";
-		$total = round($total,0,PHP_ROUND_HALF_DOWN);
-		$total = number_format($total,2);
-	}
-	elseif ( $decimales[1] >= 50)
-	{
-		$ajusteTarifario = "+0.5";
-		$total = round($total,0,PHP_ROUND_HALF_UP);
-		$total = number_format($total,2);
-	}
-} */
-
-/* $data = $_POST['data'];
-$data1 = json_decode($data);
-error_log($data1[0]->Folio); */
 if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClaves"]) && isset($_GET["idFracc"]))
 {
 	//listo para usarse como un array
@@ -258,16 +217,22 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
     for ($i = 0; $i < count($dataFraccionamientos); $i++)
     {
         if($i>0)
-			$folios .=",";
+			$folios .=", ";
 		$folios .= $dataFraccionamientos[$i];
     } 
 }
-$pdfUrl= "../assets/nombramiento-catastro.pdf";
+
+$fechaPrueba = "2010-11-24";
+$elementos = explode("-",$fechaPrueba);
+for($i = 0; $i < count($elementos);$i++)
+{
+	error_log($elementos[$i]);
+}
+$nombreMes = (int)$elementos[1];
+$fechaNuevoFormato = $elementos[2]." de ".$arrayMeses[$nombreMes -1]." de ".$elementos[0];
 $propietarioUrl = str_replace(" ", "%20", $propietario);
 $urlIzquierda = "http://chart.googleapis.com/chart?cht=qr&amp;chs=100x100&amp;chl=ID:".$idFracc.",Solicitante:".$propietario.",Costo:".$total."&amp;chld=H|0";
-error_log($urlIzquierda);
-error_log($propietarioUrl);
-//src="http://chart.googleapis.com/chart?cht=qr&amp;chs=150x150&amp;chl=ID:2,Solicitante:2, Costo:2;&amp;chld=H|0">
+error_log($fechaNuevoFormato);
 
 class CCPDF extends TCPDF {
 	public $InF="";
@@ -426,7 +391,7 @@ $html = <<<EOD
 			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
 		</tr>
 		<tr>
-            <td style="border: 1px solid black;font-size:15px;"><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chld=L|1"></td>
+            <td style="border: 1px solid black;font-size:15px;"><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chof=png"></td>
                                                                                                                      
 			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong><br>PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
 			DE $$total ($numeroConLetra)</td>
