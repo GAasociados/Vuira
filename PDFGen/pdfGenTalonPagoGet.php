@@ -3,11 +3,15 @@ error_reporting(E_ALL);
 ini_set("display_errors",1);
 
 require_once('tcpdf_include.php');
-
-function crearHtml()
-{
-	
-}
+/* $chartUlr = "http://chart.googleapis.com/chart?cht=p3&chs=250x100&chd=t:60,40&chl=Hello|World";
+$ch = curl_init();
+$timeout = 0;
+curl_setopt($ch, CURLOPT_URL, $chartUlr);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+$image = curl_exec($ch);
+curl_close($ch); */
 
 
 //FUNCION DIABOLICA PARA CONVERTIR NUMEROS A LETRAS
@@ -225,7 +229,6 @@ $idFracc = 0;
 /* $data = $_POST['data'];
 $data1 = json_decode($data);
 error_log($data1[0]->Folio); */
-$imagentr = "<img src='http://chart.googleapis.com/chart?chs=150x150&amp;cht=qr&amp;chl=Hello|World'>";
 if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClaves"]) && isset($_GET["idFracc"]))
 {
 	//listo para usarse como un array
@@ -259,6 +262,10 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
 		$folios .= $dataFraccionamientos[$i];
     } 
 }
+
+$urlIzquierda = "http://chart.googleapis.com/chart?cht=qr&amp;chs=100x100&amp;chl=ID:".$idFracc.",Solicitante:".$propietario.",Costo:".$total."&amp;chld=H|0";
+error_log($urlIzquierda);
+//src="http://chart.googleapis.com/chart?cht=qr&amp;chs=150x150&amp;chl=ID:2,Solicitante:2, Costo:2;&amp;chld=H|0">
 
 class CCPDF extends TCPDF {
 	public $InF="";
@@ -342,12 +349,10 @@ $pdf->SetFont('helvetica', '', 15, '', true);
 // Add a page
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
-$pdf->Image('https://chart.googleapis.com/chart?chs=150x150&amp;cht=qr&amp;chl=Hello|World', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
 //aqui agregar el contenido
 //$telefono = $_GET['telefono'];
 //$tipo_tramite = $_GET['tipo_tramite'];
-
-$html = '
+/* $html = '
 <table cellspacing="5" cellpadding="5" style="font-size:11px;">
     <tr>
 			<td align="center" colspan="4"><strong>Clave Catastral Fraccionamientos</strong></td>
@@ -422,7 +427,7 @@ $html = '
 			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
 		</tr>
 		<tr>
-			<td style="border: 1px solid black;" rowspan="2"><img src="http://chart.googleapis.com/chart?chs=150x150&amp;cht=qr&amp;chl=Hello|World" alt="50" width="50"></td>
+			<td style="border: 1px solid black;"></td>
 			<td align="center" style="border: 1px solid black;" colspan="3"><strong>'.$propietario.'</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
 			DE $'.$total.' ('.$numeroConLetra.')</td>
 			<td align="center" style="border: 1px solid black;" >LOGO</td>
@@ -451,7 +456,113 @@ $html = '
             <td align="center" colspan="1">REFERENCIA BANCARIA: 00171110083</td>
             <td align="right" colspan="2"><img src="../assets/images/codigocertificacioncosto.gif" alt="" width="80"></td>
 		</tr>
-</table>';
+</table>'; */
+//<img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Hello|World">
+$html = <<<EOD
+<table cellspacing="5" cellpadding="5" style="font-size:11px;">
+    <tr>
+			<td align="center" colspan="4"><strong>Clave Catastral Fraccionamientos</strong></td>
+			<td align="center">Orden de Pago</td>
+    </tr>
+    <tr>
+			<td align="center" colspan="4" style="border: 1px solid black;">TIPO DE AUTORIZACION</td>
+			<td align="center" style="border: 1px solid black;">No. DE AUTORIZACION</td>
+    </tr>
+    <tr>
+			<td align="justify" colspan="4" rowspan="5" >EN RELACIÓN A LA SOLICITUD PRESENTADA ANTE LA DIRECCIÓN DE CATASTRO, ADSCRITA A LA TESORERÍA MUNICIPAL, 
+			CON LA FINALIDAD DE OBTENER LA CLAVE CATASTRAL CERTIFICADA; PREVIO ANÁLISIS PRACTICADO PARA TAL EFECTO SE TIENE LO SIGUIENTE: DEBERÁ
+			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LAS PRESENTES CLAVES CATASTRALES CERTIFICADAS POR LA CANTIDAD DE $'.$total.'
+			($numeroConLetra), DE CONFORMIDAD CON LO DISPUESTO EN EL ARTÍCULO 27 FRACCIÓN VIII Y 32 FRACCIÓN IV DE LA LEY DE INGRESOS PARA 
+			EL MUNICIPIO DE IRAPUATO GUANAJUATO QUE ENTRÓ EN VIGOR A PARTIR DEL 1° DE ENERO DEL AÑO 2019.</td>
+			<td align="center">$idFracc</td>
+    </tr>
+    <tr>
+			<td align="center" style="border: 1px solid black;">NUMEROS DE SEGUIMIENTO</td>
+		</tr>
+		<tr>
+			<td align="center">$folios</td>
+		</tr>
+		<tr>
+			<td align="center" style="border: 1px solid black;">FECHA DE AUTORIZACION</td>
+		</tr>
+		<tr>
+			<td align="center">$fechaAutorizacion</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="4" style="border: 1px solid black;">Descripción</td>
+			<td align="center" style="border: 1px solid black;">Monto de Autorizacion</td>
+		</tr>
+		<tr>
+			<td align="left"><strong>CONCEPTO</strong></td>
+			<td align="right"><strong>CANTIDAD</strong></td>
+			<td align="right"><strong>TARIFA</strong></td>
+			<td align="right"><strong>COSTO</strong></td>
+			<td align="right"><strong>TOTAL</strong></td>
+		</tr>
+		<tr>
+			<td align="justify">03110004 Clave Catastral Individual</td>
+			<td align="right">$cantidadClaves</td>
+			<td align="right">$$tarifa</td>
+			<td align="right">$$costoTramite</td>
+			<td align="right">$$totalClaves</td>
+		</tr>
+		<tr>
+			<td align="justify">0310004 Certificación de Clave Catastral</td>
+			<td align="right">$cantidadClaves</td>
+			<td align="right"></td>
+			<td align="right">$$costoClaveCertificada</td>
+			<td align="right">$$totalClaveCertificada</td>
+		</tr>
+		<tr>
+			<td align="left">Ajuste Tarifario</td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right">$ajusteTarifario</td>
+		</tr>
+		<tr>
+			<td align="left"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"></td>
+			<td align="right"><strong>$$total</strong></td>
+		</tr>
+		<tr>
+			<td align="center" style="border: 1px solid black;">Informacion</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PROPIETARIO/SOLICITANTE/RAZON SOCIAL</td>
+			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
+		</tr>
+		<tr>
+            <td style="border: 1px solid black;"  colspan="3" rowspan="3"><img src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc.Solicitante:$propietario.Costo:$$total"></td>
+                                                                                                                     
+			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
+			DE $$total ($numeroConLetra)</td>
+			<td align="center" style="border: 1px solid black;" >LOGO</td>
+            <td></td>
+        </tr>
+		<tr>
+			<td align="center" colspan="5">Si requiere factura tiene 48 horas para su solicitud al correo electronico facturacion@irapuato.gob.mx</td>
+		</tr>
+		<tr>
+			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EXCLUSIVO DEL BANCO</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PARA USO EN BANCA ELECTRONICA</td>
+		</tr>
+		<tr>
+			<td align="justify" colspan="2">REF1: $propietario</td>
+            <td align="center" colspan="1">Pago en banca electronica</td>
+            <td align="right" colspan="2"><img src="../assets/images/codigoclavecosto.gif" alt="" width="80"></td>
+		</tr>
+		<tr>
+			<td align="justify" colspan="2">REF2: Claves Catastral Fraccionamiento</td>
+			<td align="center" colspan="1">CLAVE:030222900012857979</td>
+		</tr>
+		<tr>
+			<td align="justify" colspan="2">REF3: 00117111002332</td>
+            <td align="center" colspan="1">REFERENCIA BANCARIA: 00171110083</td>
+            <td align="right" colspan="2"><img src="../assets/images/codigocertificacioncosto.gif" alt="" width="80"></td>
+		</tr>
+</table>
+EOD;
 $pdf->writeHTML($html,true,false,false,false,'');
 $pdf->Output("talonPago.pdf", "I");
  ?>
