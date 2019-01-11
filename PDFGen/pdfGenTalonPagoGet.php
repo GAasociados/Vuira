@@ -4,12 +4,6 @@ ini_set("display_errors",1);
 
 require_once('tcpdf_include.php');
 
-function crearHtml()
-{
-	
-}
-
-
 //FUNCION DIABOLICA PARA CONVERTIR NUMEROS A LETRAS
 function num_to_letras($numero, $moneda = 'PESO', $subfijo = 'M.N.')
 {
@@ -194,45 +188,13 @@ $dataFraccionamientos;
 $folios = "";
 $idFracc = 0;
 
-/* if ( isset($_GET['Propietario']) && isset($_GET['cantidadClaves']) && isset($_POST['data']))
-{
-	$propietario = $_GET['Propietario'];
-	$cantidadClaves = $_GET['cantidadClaves'];
-	$dataFraccionamientos = $_POST['data'];
-	$data = json_decode($dataFraccionamientos);
-	error_log($data);
-	$totalClaves = ($cantidadClaves * $tarifa) + $costoTramite;
-	$costoClaveCertificada = 85.13;
-	$totalClaveCertificada = $cantidadClaves * $costoClaveCertificada;
-	$fechaAutorizacion = date('d')." de ".$arrayMeses[date('m') - 1]." de ".date('Y');
-	$total = floatval($totalClaves + $totalClaveCertificada);
-	$decimales = explode(".",$total);
-	$numeroConLetra = num_to_letras($total);
-	if ( $decimales[1] < 50)
-	{
-		$ajusteTarifario = "-0.5";
-		$total = round($total,0,PHP_ROUND_HALF_DOWN);
-		$total = number_format($total,2);
-	}
-	elseif ( $decimales[1] >= 50)
-	{
-		$ajusteTarifario = "+0.5";
-		$total = round($total,0,PHP_ROUND_HALF_UP);
-		$total = number_format($total,2);
-	}
-} */
-
-/* $data = $_POST['data'];
-$data1 = json_decode($data);
-error_log($data1[0]->Folio); */
-
-if( isset($_POST['data']) && isset($_POST['nombre']) && isset($_POST['cantidadClaves']) && isset($_POST['idFracc']))
+if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClaves"]) && isset($_GET["idFracc"]))
 {
 	//listo para usarse como un array
-    $dataFraccionamientos = json_decode($_POST['data']);
-    $propietario = $_POST['nombre'];
-    $cantidadClaves = $_POST['cantidadClaves'];
-    $idFracc = $_POST['idFracc'];
+    $dataFraccionamientos = json_decode($_GET["data"],true);
+    $propietario = $_GET['nombre'];
+    $cantidadClaves = $_GET['cantidadClaves'];
+    $idFracc = $_GET['idFracc'];
     $totalClaves = ($cantidadClaves * $tarifa) + $costoTramite;
 	$costoClaveCertificada = 85.13;
 	$totalClaveCertificada = $cantidadClaves * $costoClaveCertificada;
@@ -255,10 +217,22 @@ if( isset($_POST['data']) && isset($_POST['nombre']) && isset($_POST['cantidadCl
     for ($i = 0; $i < count($dataFraccionamientos); $i++)
     {
         if($i>0)
-			$folios .=",";
-		$folios .= $dataFraccionamientos[$i]->Folio;
-    }
+			$folios .=", ";
+		$folios .= $dataFraccionamientos[$i];
+    } 
 }
+
+$fechaPrueba = "2010-11-24";
+$elementos = explode("-",$fechaPrueba);
+for($i = 0; $i < count($elementos);$i++)
+{
+	error_log($elementos[$i]);
+}
+$nombreMes = (int)$elementos[1];
+$fechaNuevoFormato = $elementos[2]." de ".$arrayMeses[$nombreMes -1]." de ".$elementos[0];
+$propietarioUrl = str_replace(" ", "%20", $propietario);
+$urlIzquierda = "http://chart.googleapis.com/chart?cht=qr&amp;chs=100x100&amp;chl=ID:".$idFracc.",Solicitante:".$propietario.",Costo:".$total."&amp;chld=H|0";
+error_log($fechaNuevoFormato);
 
 class CCPDF extends TCPDF {
 	public $InF="";
@@ -280,8 +254,8 @@ EOD;
 }
 	
 // create new PDF document
-if(isset($_POST['PageFormat']))
-	if($_POST['PageFormat']=="Oficio")
+if(isset($_GET['PageFormat']))
+	if($_GET['PageFormat']=="Oficio")
 		$pdf = new CCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT_OFF, true, 'UTF-8', false);
 	else
 		$pdf = new CCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -295,9 +269,9 @@ else
 header("Content-type: application/pdf");
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Gobierno Municipal de Irapuato');
-$pdf->SetTitle('clave Catastral');
-$pdf->SetSubject('clave catastral');
-$pdf->SetKeywords('clave Catastral, Irapuato');
+$pdf->SetTitle('Orden Pago');
+$pdf->SetSubject('Orden Pago');
+$pdf->SetKeywords('Orden Pago, Irapuato');
 
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
@@ -342,13 +316,8 @@ $pdf->SetFont('helvetica', '', 15, '', true);
 // Add a page
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
-
-//aqui agregar el contenido
-//$telefono = $_GET['telefono'];
-//$tipo_tramite = $_GET['tipo_tramite'];
-
-$html = '
-<table cellspacing="5" cellpadding="5" style="font-size:11px;">
+$html = <<<EOD
+<table cellspacing="5" cellpadding="5" style="font-size:8;">
     <tr>
 			<td align="center" colspan="4"><strong>Clave Catastral Fraccionamientos</strong></td>
 			<td align="center">Orden de Pago</td>
@@ -360,23 +329,22 @@ $html = '
     <tr>
 			<td align="justify" colspan="4" rowspan="5" >EN RELACIÓN A LA SOLICITUD PRESENTADA ANTE LA DIRECCIÓN DE CATASTRO, ADSCRITA A LA TESORERÍA MUNICIPAL, 
 			CON LA FINALIDAD DE OBTENER LA CLAVE CATASTRAL CERTIFICADA; PREVIO ANÁLISIS PRACTICADO PARA TAL EFECTO SE TIENE LO SIGUIENTE: DEBERÁ
-			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LA PRESENTE CLAVE CATASTRAL CERTIFICADA POR LA CANTIDAD DE $'.$total.'
-			('.$numeroConLetra.'), DE CONFORMIDAD CON LO DISPUESTO EN EL ARTÍCULO 27 FRACCIÓN VIII DE LA LEY DE INGRESOS PARA 
-			EL MUNICIPIO DE IRAPUATO GUANAJUATO PUBLICADA EN EL PERIÓDICO OFICIAL DEL GOBIERNO DEL ESTADO DE GUANAJUATO, QUE ENTRÓ EN VIGOR A PARTIR DEL 1° DE ENERO DEL AÑO 2018
-			PARA EL EJERCICIO FISCAL AÑO 2018.</td>
-			<td align="center">'.$idFracc.'</td>
+			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LAS PRESENTES CLAVES CATASTRALES CERTIFICADAS POR LA CANTIDAD DE $'.$total.'
+			($numeroConLetra), DE CONFORMIDAD CON LO DISPUESTO EN EL ARTÍCULO 27 FRACCIÓN VIII Y 32 FRACCIÓN IV DE LA LEY DE INGRESOS PARA 
+			EL MUNICIPIO DE IRAPUATO GUANAJUATO QUE ENTRÓ EN VIGOR A PARTIR DEL 1° DE ENERO DEL AÑO 2019.</td>
+			<td align="center">$idFracc</td>
     </tr>
     <tr>
 			<td align="center" style="border: 1px solid black;">NUMEROS DE SEGUIMIENTO</td>
 		</tr>
 		<tr>
-			<td align="center">'.$folios.'</td>
+			<td align="center">$folios</td>
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;">FECHA DE AUTORIZACION</td>
 		</tr>
 		<tr>
-			<td align="center">'.$fechaAutorizacion.'</td>
+			<td align="center">$fechaAutorizacion</td>
 		</tr>
 		<tr>
 			<td align="center" colspan="4" style="border: 1px solid black;">Descripción</td>
@@ -391,67 +359,68 @@ $html = '
 		</tr>
 		<tr>
 			<td align="justify">03110004 Clave Catastral Individual</td>
-			<td align="right">'.$cantidadClaves.'</td>
-			<td align="right">$'.$tarifa.'</td>
-			<td align="right">$'.$costoTramite.'</td>
-			<td align="right">$'.$totalClaves.'</td>
+			<td align="right">$cantidadClaves</td>
+			<td align="right">$$tarifa</td>
+			<td align="right">$$costoTramite</td>
+			<td align="right">$$totalClaves</td>
 		</tr>
 		<tr>
 			<td align="justify">0310004 Certificación de Clave Catastral</td>
-			<td align="right">'.$cantidadClaves.'</td>
+			<td align="right">$cantidadClaves</td>
 			<td align="right"></td>
-			<td align="right">$'.$costoClaveCertificada.'</td>
-			<td align="right">$'.$totalClaveCertificada.'</td>
+			<td align="right">$$costoClaveCertificada</td>
+			<td align="right">$$totalClaveCertificada</td>
 		</tr>
 		<tr>
 			<td align="left">Ajuste Tarifario</td>
 			<td align="right"></td>
 			<td align="right"></td>
 			<td align="right"></td>
-			<td align="right">'.$ajusteTarifario.'</td>
+			<td align="right">$ajusteTarifario</td>
 		</tr>
 		<tr>
 			<td align="left"></td>
 			<td align="right"></td>
 			<td align="right"></td>
 			<td align="right"></td>
-			<td align="right"><strong>$'.$total.'</strong></td>
+			<td align="right"><strong>$$total</strong></td>
 		</tr>
 		<tr>
-			<td align="center" style="border: 1px solid black;">Informacion</td>
+			<td align="center" style="border: 1px solid black;">INFORMACION</td>
 			<td align="center" style="border: 1px solid black;" colspan="3">PROPIETARIO/SOLICITANTE/RAZON SOCIAL</td>
 			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
 		</tr>
 		<tr>
-			<td align="center" style="border: 1px solid black;">LOGO</td>
-			<td align="center" style="border: 1px solid black;" colspan="3"><strong>'.$propietario.'</strong> PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
-			DE $'.$total.' ('.$numeroConLetra.')</td>
-			<td align="center" style="border: 1px solid black;" >LOGO</td>
-		</tr>
+            <td style="border: 1px solid black;font-size:15px;"><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chof=png"></td>
+                                                                                                                     
+			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong><br>PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
+			DE $$total ($numeroConLetra)</td>
+			<td align="center" style="border: 1px solid black;" ><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=../assets/nombramiento-catastro.PDF/&chld=L|1"></td>
+            <td></td>
+        </tr>
 		<tr>
 			<td align="center" colspan="5">Si requiere factura tiene 48 horas para su solicitud al correo electronico facturacion@irapuato.gob.mx</td>
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EXCLUSIVO DEL BANCO</td>
-			<td align="center"></td>
-			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EN BANCA ELECTRONICA</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PARA USO EN BANCA ELECTRONICA</td>
 		</tr>
 		<tr>
-			<td align="justify" colspan="2">REF1: '.$propietario.'</td>
-			<td align="center"></td>
-			<td align="center"  colspan="2"></td>
+			<td align="justify" colspan="2">REF1: $propietario</td>
+            <td align="center" colspan="1">Pago en banca electronica</td>
+            <td align="right" colspan="2"><img src="../assets/images/codigoclavecosto.gif" alt="" width="80"></td>
 		</tr>
 		<tr>
 			<td align="justify" colspan="2">REF2: Claves Catastral Fraccionamiento</td>
-			<td align="center"></td>
-			<td align="center"  colspan="2"></td>
+			<td align="center" colspan="1">CLAVE:030222900012857979</td>
 		</tr>
 		<tr>
 			<td align="justify" colspan="2">REF3: 00117111002332</td>
-			<td align="center"></td>
-			<td align="center" colspan="2"></td>
+            <td align="center" colspan="1">REFERENCIA BANCARIA: 00171110083</td>
+            <td align="right" colspan="2"><img src="../assets/images/codigocertificacioncosto.gif" alt="" width="80"></td>
 		</tr>
-</table>';
+</table>
+EOD;
 $pdf->writeHTML($html,true,false,false,false,'');
-$pdf->Output("../".__DIR__."../talonPago.pdf", "F");
+$pdf->Output("talonPago.pdf", "I");
  ?>

@@ -8,13 +8,42 @@ var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
 
+//cuando es persona moral se muestran estos documentos
+function event_mostrar_extra_docs(event)
+{
+  var extra_row = $("#extra_docs_row");
+  console.log(extra_row.length);
+  if( extra_row.length != 0)
+  {
+    $("#extra_docs_row").remove();
+  }
+
+  if ( event.value == "si")
+  {
+    var innerField = "";
+    innerField += "<div id='extra_docs_row' class='row'>";
+    innerField += "<div class='col-md-6'>";
+    innerField += "<div class='form-group'>";
+    innerField += "<label>Identificación de Solicitante: INE, Pasaporte o Cédula Profesional</label>";
+    innerField += "<input accept='.jpg, .jpeg, .png ,.pdf, .rar, .zip' type='file' name='Doc_Ine_Soli' multiple=''>";
+    innerField += "</div>";
+    innerField += "</div>";
+    innerField += "</div>";
+    $("#content-wrapper-fecha-recep").append(innerField);
+  }
+}
+
+function event_cancelar_tramite()
+{
+  new view_claves_fraccionamiento().redirigir_inicio_tramite();
+}
+
 function event_load_ventanilla()
 {
   var objVista=new view_claves_fraccionamiento();
   var id = $("#id").val();
   if ( id !== "")
   {
-
     objVista.load_data_fraccionamientos( $("#id").val() );
     objVista.load_data_fraccionamientos_detalles( $("#id").val() );
   }
@@ -22,15 +51,7 @@ function event_load_ventanilla()
   {
     console.log("SE INICIA UN NUEVO FRACCIONAMIENTO");
   }
-
-  //sirve para tomar el nombre del archivo cargado y coloca su nombre en el label
-  $(".custom-file-input").change(function(event){
-    var padre = $(this).parent()
-    var archivos = $(this).get(0).files;
-    var label = padre.children( ".custom-file-label" );
-    label.text( archivos[0]["name"] );
-  });
-
+  $("#check-unidad_supS").click();
   //valida el boton guardar
   event_submit_ventanilla();
   //evento para generar el talon
@@ -56,12 +77,6 @@ function event_submit_ventanilla()
     });
 }
 
-function event_mostrar_modal_pago(event)
-{
-  $("#modalPago").modal("show");
-  $("#numeroClaves").val(1);
-}
-
 function event_mostrar_modal_pago_cuentas()
 {
   $("#modalPago").modal("show");
@@ -70,20 +85,25 @@ function event_mostrar_modal_pago_cuentas()
 
 function generar_talon_pago(event)
 {
-  //window.open("../../PDFGen/pdfGenTalonPago.php?Propietario="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length+"&data="+cuentas_asignadas,"_blank");
-  //$("#modalPago").modal("hide");
   console.log($("#id").val());
-  var jsonData = JSON.stringify(cuentas_asignadas);
-  $.ajax({
+  var folios = [];
+  for (var i = 0; i < cuentas_asignadas.length; i++)
+  {
+    console.log(cuentas_asignadas[i]["Folio"]);
+    folios.push(cuentas_asignadas[i]["Folio"]);
+  }
+  var jsonData = JSON.stringify(folios);
+  window.open("../../PDFGen/pdfGenTalonPagoGet.php?idFracc="+$("#id").val()+"&data="+jsonData+"&nombre="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length, "_blank");
+  /* .ajax({
     type:"post",
     url:"../../PDFGen/pdfGenTalonPago.php",
     data:{idFracc:$("#id").val(),data:jsonData,nombre:$("#Propietario").val(),cantidadClaves:cuentas_asignadas.length,},
     async:true,
     success: function (jdata)
     {
-      window.open("../../PDFGen/TalonPago.pdf", "_blank");
+      window.open("../../PDFGen/talonPago.pdf", "_blank");
     }
-  });
+  }); */
 }
 
 function event_imiprimirTalon()
@@ -102,11 +122,6 @@ function event_imprimirTalon_click()
 }
 
 
-function realizarSubmit()
-{
-  document.getElementById('formVentanilla').submit();
-}
-
 function event_add_cuenta_predial()
 {
   if ( $("#txtCuentaPredial").val() != "" )
@@ -118,17 +133,6 @@ function event_add_cuenta_predial()
   {
     alert("Debes ingresar una cuenta predial");
   }
-}
-
-function event_get_croquis(event)
-{
-  var form = $("#form");
-  var data = new FormData(form);
-  data.append('croquis',event.target.files[0]);
-  for (var p of data) {
-  console.log(p);
-  }
-  new view_claves_fraccionamiento().save_croquis(data);
 }
 
 function event_pulsar_enter(event)
@@ -254,6 +258,7 @@ function uploadFile()
               // clear file field
               var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
               $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
+              
             }
           });
         }
@@ -263,9 +268,74 @@ function uploadFile()
         }
   }
 
+  function uploadCadFile()
+  {
+    if($("#archivoAutoCad").val() != "")
+    {
+      var file_data = $('#archivoAutoCad').prop('files')[0];
+      var form_data = new FormData();
+      //https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php
+
+      form_data.append('file', file_data);
+      $.ajax({
+        url: '../../DocPrint/uploadCadFile.php', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(data){
+        // get server responce here
+        alert(data);
+        // clear file field
+        var filename = $('#archivoAutoCad').val().replace(/C:\\fakepath\\/i, '')
+        $("#Cad_URL").val("assets/tramites/clavescatastralesfraccionamiento/cadFiles/"+filename);
+        new view_claves_fraccionamiento().set_cadFile_url($("#id").val(), $("#Cad_URL").val());
+        }
+      });
+    }
+    else
+    {
+      alert("Please select file!");
+    }
+  }
+
+  function uploadWordFile()
+  {
+    if($("#archivoWord").val() != "")
+    {
+      var file_data = $('#archivoWord').prop('files')[0];
+      var form_data = new FormData();
+      //https://vuira.irapuato.gob.mx//DocPrint/uploadCadFile.php
+
+      form_data.append('file', file_data);
+      $.ajax({
+        url: '../../DocPrint/uploadWordFile.php', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(data){
+        // get server responce here
+        alert(data);
+        // clear file field
+        var filename = $('#archivoWord').val().replace(/C:\\fakepath\\/i, '')
+        $("#CartaWord_URL").val("assets/tramites/clavescatastralesfraccionamiento/wordFiles/"+filename);
+        new view_claves_fraccionamiento().set_wordFile_url($("#id").val(), $("#CartaWord_URL").val());
+        }
+      });
+    }
+    else
+    {
+      alert("Please select file!");
+    }
+  }
+
 class view_claves_fraccionamiento
 {
-  //se define una propiedad estatico para que las demas instancia compartan su valor
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
@@ -512,8 +582,6 @@ class view_claves_fraccionamiento
           $("#"+field).val(data[field]);
       }
     }
-    //se agregó por que al parecer es el unico campo que no establece su valor
-
   }
 
   set_data_grid_aux(data)
@@ -581,9 +649,6 @@ class view_claves_fraccionamiento
   	innerTableContent += "</td>";
     innerTableContent += "<td>";
     innerTableContent += "<div class='form-row'>";
-    innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='"+hidden[0].value+"' class='btn btn-success' value='Orden de Pago' onclick='event_mostrar_modal_pago(this)'></div>";
-    innerTableContent += "</div>";
-    innerTableContent += "<div class='form-row'>";
     innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-info' value='Generar Clave' onclick='event_generar_clave(this)'></div>";
     innerTableContent += "</div>";
     innerTableContent += "<div class='form-row'>";
@@ -619,6 +684,48 @@ class view_claves_fraccionamiento
 		$("#estado_escitura").val($("#p_estado_escritura").val());
 	 if($("#ciudad_escritura").val()=="")
 		$("#ciudad_escritura").val($("#p_ciudad_escritura").val());
+  }
+
+  set_cadFile_url(id,url)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=set_cadFile_url",
+      data:{id:id,url,url},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
+
+  set_wordFile_url(id,url)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=set_wordFile_url",
+      data:{id:id,url,url},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
   }
 
 
@@ -901,8 +1008,6 @@ class view_claves_fraccionamiento
     });
   }
 
-
-
   insertar_cuenta_predial_detalles(data)
   {
     var id_fraccionamientos = $("#id").val();
@@ -989,29 +1094,6 @@ class view_claves_fraccionamiento
     });
   }
 
-  save_croquis(data)
-  {
-    $.ajax({
-      type:"post",
-      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=subirCroquis",
-      data:{data:data},
-      async:true,
-      success: function (jdata)
-      {
-        console.log(jdata);
-        if(jdata != "Error")
-        {
-          var data = JSON.parse(jdata);
-          console.log(data);
-        }
-        else
-        {
-            alert (jdata);
-        }
-      }
-    });
-  }
-
   update_manzana(cuenta_predial,valor)
   {
     var id = $("#id").val();
@@ -1058,5 +1140,9 @@ class view_claves_fraccionamiento
         }
       }
     });
+  }
+  redirigir_inicio_tramite()
+  {
+    window.location.href="https://vuira.irapuato.gob.mx/infotramites/info_atencion_de_claves_catastrales_fraccionamiento";
   }
 }
