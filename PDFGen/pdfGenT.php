@@ -163,6 +163,11 @@ EOD;
 	isset($_POST["Manzana_Titulo"])? $Manzana_Titulo=$_POST["Manzana_Titulo"]:$Manzana_Titulo="";
 	isset($_POST["Porcion"])? $Porcion=$_POST["Porcion"]:$Porcion="";
 	//var_dump($_POST);
+
+	//Codigo para cambiar la fecha de SQL al formato dd de m de yyyy
+	$elementos = explode("-",$fecha_ini);
+	$nombreMes = (int)$elementos[1];
+	$fechaNuevoFormato = $elementos[2]." de ".$arrayMeses[$nombreMes -1]." de ".$elementos[0];
 		
 	$e_areas="";
 	$c_dirigido_a="";
@@ -582,7 +587,7 @@ PRESENTE:
 <div style="text-align:right">$c_atencion_a</div>
 </div>
 <div style="text-align:justify;">
-<div>En atención a su solicitud recibida el día $FechaR del año en curso, respecto $tipTramPrefix "$tipotramitedp" del inmueble ubicado en la calle $calleui con número $c_oficial $nooficialui$NoInterior $c_porcion del Fracc./Colonia/Ejido/Comunidad/Barrio $coloniaui de esta ciudad de Irapuato, Guanajuato$c_primerParrafo_2</div>
+<div>En atención a su solicitud recibida el día $fechaNuevoFormato, respecto $tipTramPrefix "$tipotramitedp" del inmueble ubicado en la calle $calleui con número $c_oficial $nooficialui$NoInterior $c_porcion del Fracc./Colonia/Ejido/Comunidad/Barrio $coloniaui de esta ciudad de Irapuato, Guanajuato$c_primerParrafo_2</div>
  $c_clausula
  $c_obs
 <div>Para efectos de la inscripción al padrón catastral, integración a la cartografía del Municipio, localización geográfica e identificación del predio de forma única, se le ha asignado a este inmueble la clave catastral número: </div>
