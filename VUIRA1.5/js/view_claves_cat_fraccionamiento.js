@@ -290,7 +290,7 @@ function uploadFile()
         alert(data);
         // clear file field
         var filename = $('#archivoAutoCad').val().replace(/C:\\fakepath\\/i, '')
-        $("#Cad_URL").val("assets/tramites/clavescatastralesfraccionamiento/cadFiles/"+filename);
+        $("#Cad_URL").val("assets/tramites/clavescatastralesfraccionamiento/"+filename);
         new view_claves_fraccionamiento().set_cadFile_url($("#id").val(), $("#Cad_URL").val());
         }
       });
@@ -323,7 +323,7 @@ function uploadFile()
         alert(data);
         // clear file field
         var filename = $('#archivoWord').val().replace(/C:\\fakepath\\/i, '')
-        $("#CartaWord_URL").val("assets/tramites/clavescatastralesfraccionamiento/wordFiles/"+filename);
+        $("#CartaWord_URL").val("assets/tramites/clavescatastralesfraccionamiento/"+filename);
         new view_claves_fraccionamiento().set_wordFile_url($("#id").val(), $("#CartaWord_URL").val());
         }
       });
@@ -339,8 +339,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "https://"+window.location.hostname+"/";
-      this.basePath = "http://localhost/Vuira/";
+      this.basePath = "https://"+window.location.hostname+"/";
+      //this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
