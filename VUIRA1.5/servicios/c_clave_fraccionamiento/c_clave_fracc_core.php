@@ -21,6 +21,12 @@ if(isset($_GET['service_name']))
             print_r(json_encode($obj->coreSel((isset($_GET["id"]) ? $_GET["id"] : (isset($_POST["id"]) ? $_POST["id"] : -1))), JSON_UNESCAPED_SLASHES));
         break;
 
+
+        //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA OBTENER SOLO UN REGISTRO
+        case 'getMotivoIndividual': 
+            print_r(json_encode($obj->getMotivoIndividual($_POST["id"]), JSON_UNESCAPED_SLASHES));
+        break;
+
         //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA ACTUALIZAR EL CAMPO MOTIVO_NEGACION
         case 'updateMotivoNegacion':
             print_r(json_encode($obj->updateMotivoNegacion($_POST["id"], $_POST['motivo']), JSON_UNESCAPED_SLASHES));
@@ -154,6 +160,12 @@ EOD;
 			echo $sql;
 			return $this->con->sqlOperations($sql);
         }
+
+    public function getMotivoIndividual($id)
+    {
+        $sql="SELECT motivo_negacion FROM claves_catastrales_individual WHERE Id = '$id'";
+        return $this->con->executeQuerry($sql);
+    }    
 
     public function updateMotivoNegacion($id, $motivo)
     {
