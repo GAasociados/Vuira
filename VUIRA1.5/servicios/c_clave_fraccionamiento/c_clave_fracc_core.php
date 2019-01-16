@@ -21,6 +21,11 @@ if(isset($_GET['service_name']))
             print_r(json_encode($obj->coreSel((isset($_GET["id"]) ? $_GET["id"] : (isset($_POST["id"]) ? $_POST["id"] : -1))), JSON_UNESCAPED_SLASHES));
         break;
 
+        //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA ACTUALIZAR EL CAMPO MOTIVO_NEGACION
+        case 'updateMotivoNegacion':
+            print_r(json_encode($obj->updateMotivoNegacion($_POST["id"], $_POST['motivo']), JSON_UNESCAPED_SLASHES));
+        break;
+
 		case 'updatecore': //EL DICCIONARIO DE DATOS PASA POR POST AL IGUAL QUE EL ID
             print_r(json_encode($obj->coreUpdate($_POST["data"], $_FILES, $_POST['id']), JSON_UNESCAPED_SLASHES));
         break;
@@ -149,6 +154,13 @@ EOD;
 			echo $sql;
 			return $this->con->sqlOperations($sql);
         }
+
+    public function updateMotivoNegacion($id, $motivo)
+    {
+        $sql="UPDATE claves_catastrales_individual SET motivo_negacion = '$motivo' WHERE Id = '$id'";
+        return $this->con->sqlOperations($sql);
+    }    
+
     public function updatePago($idFracc)
     {
         $sql="UPDATE Claves_Catastrales_Fraccionamientos SET Pago = '1' WHERE Id = '$idFracc'";
