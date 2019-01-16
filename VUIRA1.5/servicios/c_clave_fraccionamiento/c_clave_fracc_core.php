@@ -27,9 +27,9 @@ if(isset($_GET['service_name']))
             print_r(json_encode($obj->getMotivoIndividual($_POST["id"]), JSON_UNESCAPED_SLASHES));
         break;
 
-        //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA ACTUALIZAR EL CAMPO MOTIVO_NEGACION
+        //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA ACTUALIZAR EL CAMPO MOTIVO_NEGACION Y EL CAMPO NOFICIO
         case 'updateMotivoNegacion':
-            print_r(json_encode($obj->updateMotivoNegacion($_POST["id"], $_POST['motivo']), JSON_UNESCAPED_SLASHES));
+            print_r(json_encode($obj->updateMotivoNegacion($_POST["id"], $_POST['motivo'], $_POST['noOficio']), JSON_UNESCAPED_SLASHES));
         break;
 
 		case 'updatecore': //EL DICCIONARIO DE DATOS PASA POR POST AL IGUAL QUE EL ID
@@ -161,15 +161,16 @@ EOD;
 			return $this->con->sqlOperations($sql);
         }
 
+    //OBTIENE LOS CAMPOS MOTIVO_NEGACION Y NOOFICIO. SOLO SE UTILIZA ESTE WS EN INDIVIDUAL      
     public function getMotivoIndividual($id)
     {
-        $sql="SELECT motivo_negacion FROM claves_catastrales_individual WHERE Id = '$id'";
+        $sql="SELECT nooficio,motivo_negacion FROM claves_catastrales_individual WHERE Id = '$id'";
         return $this->con->executeQuerry($sql);
     }    
-
-    public function updateMotivoNegacion($id, $motivo)
+    //ACTUALIZA EL CAMPO MOTIVO_NEGACION Y NOOFICIO. SOLO SE UTILIZA ESTE WS EN INDIVIDUAL      
+    public function updateMotivoNegacion($id, $motivo, $noOficio)
     {
-        $sql="UPDATE claves_catastrales_individual SET motivo_negacion = '$motivo' WHERE Id = '$id'";
+        $sql="UPDATE claves_catastrales_individual SET motivo_negacion = '$motivo', nooficio = '$noOficio' WHERE Id = '$id'";
         return $this->con->sqlOperations($sql);
     }    
 
