@@ -182,12 +182,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <input <?php echo $modificar; ?> required="" type="text" class="form-control" name="nooficialui" id="nooficialui" placeholder="Núm. Oficial" value="<?php echo $nooficialui; ?>" />
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="varchar">Número de Lote *<?php echo form_error('nodeloteui') ?></label>
-                                            <input <?php echo $modificar; ?> required="" type="text" class="form-control" name="nodeloteui" id="nodeloteui" placeholder="Núm. de Lote" value="<?php echo $nodeloteui; ?>" />
+                                            <label for="varchar">Número de Lote<?php echo form_error('nodeloteui') ?></label>
+                                            <input <?php echo $modificar; ?> type="text" class="form-control" name="nodeloteui" id="nodeloteui" placeholder="Núm. de Lote" value="<?php echo $nodeloteui; ?>" />
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="varchar">Manzana *<?php echo form_error('manzanaui') ?></label>
-                                            <input <?php echo $modificar; ?> required="" type="text" class="form-control" name="manzanaui" id="manzanaui" placeholder="Manzana" value="<?php echo $manzanaui; ?>" />
+                                            <label for="varchar">Manzana<?php echo form_error('manzanaui') ?></label>
+                                            <input <?php echo $modificar; ?> type="text" class="form-control" name="manzanaui" id="manzanaui" placeholder="Manzana" value="<?php echo $manzanaui; ?>" />
                                         </div>
 
                                         <div class="form-group col-md-5">
@@ -234,16 +234,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <label for="double">Superficie Construida m2 *<?php echo form_error('superficieconstruidaui') ?></label>
                                             <input <?php echo $modificar; ?> type="number" min="0" step=".01" class="form-control" name="superficieconstruidaui" id="superficieconstruidaui" placeholder="Superficie Construida" value="<?php echo $superficieconstruidaui; ?>" />
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="varchar">Superficie a Construir m2. *<?php echo form_error('superficieconstruirui') ?></label>
-                                            <input <?php echo $modificar; ?> type="number" min="0" step=".01" required class="form-control" name="superficieconstruirui" id="superficieconstruirui" placeholder="Superficie a Construir" value="<?php echo $superficieconstruirui; ?>" />
-                                        </div>
-
-                                        <div class="form-group col-md-3">
-                                            <label for="double">Bardeo mts. *<?php echo form_error('bardeoui') ?></label>
-                                            <input <?php echo $modificar; ?> type="number" min="0" step=".01" class="form-control" name="bardeoui" id="bardeoui" placeholder="Bardeo mts" value="<?php echo $bardeoui; ?>" />
-                                        </div>
-
 
                                         <div class="form-group col-md-3">
                                             <label for="int">Número de Niveles *<?php echo form_error('nonivelesui') ?></label>
@@ -384,7 +374,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="form-group col-md-4">
                                             <label for="int">Nombre Perito Especializado  <?php echo form_error('nombreperitoresponsabledp') ?></label>
 
-                                            <select <?php echo $modificar; ?>  class="form-control select2" name="nombreperitoresponsabledp" tabindex="-1"  id="nombreperitoresponsabledp" required="">
+                                            <select <?php echo $modificar; ?>  class="form-control select2" name="nombreperitoresponsabledp" tabindex="-1"  id="nombreperitoresponsabledp">
                                                 <?php
                                                 if (!empty($nombreperitoresponsabledp)) {
 
