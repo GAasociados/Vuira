@@ -323,9 +323,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
                                                     <div class="form-group col-md-4">
-                                                        <label for="varchar">Documento Permiso Uso de Suelo *<?php echo form_error('doctopermisousosuelo') ?></label>
+                                                        <label for="varchar">Documento Permiso Uso de Suelo<?php echo form_error('doctopermisousosuelo') ?></label>
                                                         <?php if ($this->session->userdata('tipo') == 3 || $this->session->userdata('tipo') == 4): ?>
-                                                            <input <?php echo $doctopermisousosuelo != "" ? "" : "required"; ?> type="file" multiple name="doctopermisousosuelo[]" id="doctopermisousosuelo" placeholder="doctopermisousosuelo"/>
+                                                            <input <?php echo $doctopermisousosuelo != "" ? "" : ""; ?> type="file" multiple name="doctopermisousosuelo[]" id="doctopermisousosuelo" placeholder="doctopermisousosuelo"/>
                                                         <?php endif; ?>
                                                         <?php if (!empty($doctopermisousosuelo)): ?><br>
                                                             <a href="<?php echo base_url() . "assets/tramites/permisosanunciosadosados/" . $doctopermisousosuelo; ?>"><?php echo $doctopermisousosuelo ?></a>
