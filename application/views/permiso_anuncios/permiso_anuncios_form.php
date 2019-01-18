@@ -289,8 +289,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="row" id="paso4">
                                             <div class="form-group">
                                                 <div class="form-group col-md-6">
-                                                    <label for="double">Dimensiones de las carteleras</label>
-                                                    <textarea  <?php echo $modificar; ?> rows="5"  class="form-control" name="dimenciones" id="dimenciones" placeholder="Dimensiones" value="" ><?php echo $dimenciones; ?></textarea>
+                                                    <label for="double">Dimensiones de las carteleras maximas (12.90 x 7.20)</label>
+                                                    <textarea  <?php echo $modificar; ?> rows="5"  class="form-control" name="dimenciones" id="dimenciones" placeholder="Dimensiones maximas (2.90 x 7.20)" value="" ><?php echo $dimenciones; ?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="double">Total m<sup>2</sup> del anuncio*</label>
@@ -423,7 +423,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <div class="form-group col-md-4">
                                                     <label for="varchar">Documento Permiso Uso de Suelo *<?php echo form_error('doctopermisousosuelo') ?></label>
                                                     <?php if ($this->session->userdata("tipo") == 4 || $this->session->userdata("tipo") == 3): ?>
-                                                        <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip ,.doc,.docx, .xlsx"   <?php echo $doctopermisousosuelo != "" ? "" : "required"; ?>  type="file" multiple name="doctopermisousosuelo[]" id="doctopermisousosuelo"/>
+                                                        <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip ,.doc,.docx, .xlsx"   <?php echo $doctopermisousosuelo != "" ? "" : ""; ?>  type="file" multiple name="doctopermisousosuelo[]" id="doctopermisousosuelo"/>
                                                     <?php endif; ?>
                                                     <?php if (!empty($doctopermisousosuelo)): ?><br>
                                                         <a href="<?php echo base_url() . "assets/tramites/permisosanunciosautosoportados/" . $doctopermisousosuelo; ?>"><?php echo $doctopermisousosuelo;?></a>
@@ -1087,6 +1087,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php } ?>
         <script type="text/javascript">
             $(document).ready(function(){
+                //FUNCION PARA LIMITAR LA ALTURA DEL ANUNCIO
+                $("#poliza").on("input", function() {
+                    var altura = Number($(this).val());
+                    if ( altura > 18)
+                    {
+                        alert("La altura no debe exceder los 18 metros");
+                        $(this).val(0);
+                    }
+                });
+                //FUNCION PARA LIMITAR LA CANTIDAD DE CARTELERAS
+                $("#carteleras").on("input", function() {
+                    var no_carteleras = Number($(this).val());
+                    if ( no_carteleras > 2)
+                    {
+                        alert("El número de carteleras no debe ser mayor a 2");
+                        $(this).val(0);
+                    }
+                })
             setTimeout(function(){
             $('#address').val($("#calleui").val() + " " + $('#nooficialui').val() + " Irapuato,Guanajuato");
             initMap();
