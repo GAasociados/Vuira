@@ -182,14 +182,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <input   <?php echo $modificar; ?> required placeholder="Cuenta Predial" type="text" class="form-control" name="cuenta_predial" id="cuenta_predial"  value="<?php echo $cuenta_predial; ?>" />
                                                     </div>
 
-                                                    <div class="form-group col-md-3">
+                                                    <!-- <div class="form-group col-md-3">
                                                     <label for="varchar">RFC<?php echo form_error('rfcdg') ?></label>
                                                     <input <?php echo $modificar; ?> required type="text" class="form-control" name="rfcdg" id="rfcdg" placeholder="RFC" value="<?php echo $rfcdg; ?>" />
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="varchar">REC<?php echo form_error('recdg') ?></label>
                                                     <input <?php echo $modificar; ?> required type="text" class="form-control" name="recdg" id="recdg" placeholder="REC" value="<?php echo $recdg; ?>" />
-                                                </div>
+                                                </div> -->
                                                 
                                        </div>
                                 </div>
