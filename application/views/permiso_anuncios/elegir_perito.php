@@ -121,13 +121,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="form-group">
                                                         <label class="control-label col-md-1">Número de Perito.
                                                         </label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <input type="text" class="form-control" name="noregistroperitodp"  placeholder="Núm. de Registro del Perito" id="numperito" readonly value="" />
                                                         </div>
-                                                        <label class="control-label col-md-2">Teléfono    
+                                                        <label class="control-label col-md-1">Teléfono    
                                                         </label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <input type="" placeholder="Teléfono" class="form-control" name="telefonoperitodp" id="telefonoofocina" readonly value="" />
+                                                        </div>
+                                                        <label class="control-label col-md-1">Correo    
+                                                        </label>
+                                                        <div class="col-md-3">
+                                                            <input type="" placeholder="Correo" class="form-control" name="correoperitodp" id="correoperitodp" readonly value="" />
                                                         </div>
                                                     </div>
                                                     <div class="form-actions">
@@ -226,10 +231,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             var registros = eval(respuesta);
                             $("#numperito").val(registros[0]["numregistro"]);
                             $("#telefonoofocina").val(registros[0]["teloficina"]);
+                            $("#correoperitodp").val(registros[0]["correo"]);
                         } else {
                             //$("#codigop").val("");
                             $("#numperito").val("");
                             $("#telefonoofocina").val("");
+                            $("#correoperitodp").val("");
                         }
                     }
                 });
