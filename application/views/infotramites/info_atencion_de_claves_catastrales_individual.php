@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           comentamos  las  políticas  internas  y  buenas  prácticas conforme  a  la  Ley  emitida  por  el
                           Instituto de Acceso a la Información Pública del Estado de Guanajuato sobre la protección de información confidencial y reservada. <br>
                           El   presente   aviso   de   confidencialidad   puede   sufrir   modificaciones,   cambios   o
-                          actualizaciones   derivadas   de   nuevos   requerimientos   legales;   de   nuestras   propias necesidades  por  mejorar
+                          actualizaciones   derivadas   de   nusZUQbHevos   requerimientos   legales;   de   nuestras   propias necesidades  por  mejorar
                           los  procedimientos  y  nuestras  prácticas  de  privacidad,  o  por otras causas.
                           De  igual  forma,  le  informamos  que  la  información  confidencial  que  este  sujeto  obligado
                           capta  por  transferencia  de  otros  sujetos obligados,  o  bien,  por  el  uso  de mecanismos en medios remotos o locales de
@@ -261,6 +261,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 </a>
                                             </div>
                                         </div>
+                                       
+                                        
                                         <?php endif; ?>
                                     </div>
                                     
@@ -315,11 +317,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <div class="btn-group">
                                                     <a class="btn btn-azure" href="<?php echo base_url('claves_catastrales_individual/tramites') ?>">
                                                         <i class="icon-note"></i> Trámites por Asignar
-
                                                     </a>
-
                                                 </div>
-                                            </div> 
+                                            </div>
+                                           
+                                              
 
                                             <div class=" form-group col-md-12">
                                                 <div class="btn-group">
@@ -334,10 +336,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class=" form-group col-md-12">
                                             <div class="btn-group">
                                                 <a class="btn btn-azure" href="<?php echo base_url('claves_catastrales_individual/asigna') ?>"  >
-                                                    <i class="icon-book-open"></i> Ver Mis Trámites Asignados 
+                                                    <i class="icon-book-open"></i> Ver Mis Trámites Asignados  
 
                                                 </a>
 
+                                            </div>
+                                        </div>
+                                        <div class=" form-group col-md-12">
+                                            <div class="btn-group">
+                                                <a  href="<?php echo base_url('claves_catastrales_individual/reportes'); ?>" class="btn btn-info btn-circle" >
+                                                    <i class="glyph-icon icon-pencil"></i> Ver reportes <span id="notificacion" class="badge badge-danger" style=" background-color:red; color: black;"></span>
+                                                </a>
                                             </div>
                                         </div>
                                     <?php endif; ?>

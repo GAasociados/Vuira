@@ -8,11 +8,155 @@
 
         <title> Tramites y Servicios </title>
         <meta name="description" content="">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="shortcut icon" href="https://webservice.irapuato.gob.mx/Estilos/img/irapuato.png">
         <link rel="shortcut icon" href="https://webservice.irapuato.gob.mx/Estilos/img/irapuato.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!--#region CSS  -->
         <?php $this->load->view('base/admin'); ?>
+        <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/animate.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/backgrounds.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/boilerplate.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/border-radius.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/grid.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/page-transitions.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/spacing.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/typography.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/utils.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/colors.css">
+
+            <!-- ELEMENTS -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/badges.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/buttons.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/content-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/dashboard-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/forms.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/images.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/info-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/invoice.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/loading-indicators.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/menus.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/panel-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/response-messages.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/responsive-tables.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/ribbon.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/social-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/tables.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/tile-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/elements/timeline.css">
+
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/icons/fontawesome/fontawesome.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/icons/linecons/linecons.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/icons/spinnericon/spinnericon.css">
+            <!-- WIDGETS -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/accordion-ui/accordion.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/calendar/calendar.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/carousel/carousel.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/charts/justgage/justgage.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/charts/morris/morris.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/charts/piegage/piegage.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/charts/xcharts/xcharts.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/chosen/chosen.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/colorpicker/colorpicker.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/datatable/datatable.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/datepicker/datepicker.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/datepicker-ui/datepicker.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/daterangepicker/daterangepicker.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/dialog/dialog.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/dropdown/dropdown.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/dropzone/dropzone.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/file-input/fileinput.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/input-switch/inputswitch.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/input-switch/inputswitch-alt.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/ionrangeslider/ionrangeslider.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/jcrop/jcrop.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/jgrowl-notifications/jgrowl.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/loading-bar/loadingbar.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/maps/vector-maps/vectormaps.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/markdown/markdown.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/modal/modal.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/multi-select/multiselect.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/multi-upload/fileupload.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/nestable/nestable.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/noty-notifications/noty.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/popover/popover.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/pretty-photo/prettyphoto.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/progressbar/progressbar.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/range-slider/rangeslider.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/slider-ui/slider.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/summernote-wysiwyg/summernote-wysiwyg.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/tabs-ui/tabs.css">
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/widgets/theme-switcher/themeswitcher.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/timepicker/timepicker.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/tocify/tocify.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/tooltip/tooltip.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/touchspin/touchspin.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/uniform/uniform.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/wizard/wizard.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/xeditable/xeditable.css">
+
+            <!-- FRONTEND WIDGETS -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/layerslider/layerslider.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/owlcarousel/owlcarousel.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/widgets/fullpage/fullpage.css">
+
+            <!-- SNIPPETS -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/chat.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/files-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/login-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/notification-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/progress-box.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/todo.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/user-profile.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/snippets/mobile-navigation.css">
+
+            <!-- Frontend theme -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/themes/frontend/layout.css">
+            <!-- 
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/themes/admin/layout.css"> 
+            -->
+            
+            <link rel="stylesheet" type="text/css"
+                  href="https://vuira.irapuato.gob.mx/assets/assets/themes/frontend/color-schemes/default.css">
+
+            <!-- Components theme -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/themes/components/default.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/themes/components/border-radius.css">
+
+            <!-- Frontend responsive -->
+
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/responsive-elements.css">
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/helpers/frontend-responsive.css">
+
+            <!-- alertify-->
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/lib/alertify/css/alertify.min.css">
+
+            <!-- global-->
+            <link rel="stylesheet" type="text/css" href="https://vuira.irapuato.gob.mx/assets/assets/stuffs/css/global.css">
+
+            <style>
+                .swal2-popup {
+                    font-size: 1.6rem !important;
+                }
+            </style>
         <style>
               .btnAyuda{ 
         border-radius: 50px 0px 0px 50px; 
@@ -289,21 +433,36 @@
 <script type="text/javascript">var base_url = "";</script>
 
 <!-- SELECT CHOSEN-->
-<link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/chosen/chosen.css">
-<script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/chosen/chosen.js"></script>
-<script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/chosen/chosen-demo.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/chosen/chosen.css">
+        <script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/chosen/chosen.js"></script>
+        <script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/chosen/chosen-demo.js"></script>
 
-<!-- INPUT SWITCH -->
-<link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/input-switch/inputswitch.css">
-<link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/input-switch/inputswitch-alt.css">
-<link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/theme-switcher/themeswitcher.css">
-<script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/input-switch/inputswitch.js"></script>
+        <!-- INPUT SWITCH -->
+        <link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/input-switch/inputswitch.css">
+        <link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/input-switch/inputswitch-alt.css">
+        <link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/theme-switcher/themeswitcher.css">
+        <script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/input-switch/inputswitch.js"></script>
 
+        <!--DATES-->
+        <script src="<?php echo base_url(); ?>assets/global/scripts/app.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/moment.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+            type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/pages/scripts/components-date-time-pickers.min.js"
+            type="text/javascript"></script>
 
+            <!-- DATEPICKER -->
+        <link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/datepicker/datepicker.css">
+        <script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets/widgets/datepicker/datepicker.js"></script>
 
-<!-- DATEPICKER -->
-<link rel="stylesheet" type="text/css" href="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/datepicker/datepicker.css">
-<script type="text/javascript" src="https://webservice.irapuato.gob.mx/Estilos/assets_admin/widgets/datepicker/datepicker.js"></script>
 
 <script>
     $(function ()
