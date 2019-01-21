@@ -349,6 +349,7 @@ class Permiso_anuncios extends CI_Controller {
                 'noregistroperitodp' => $row->noregistroperitodp,
                 'telefonoperitodp' => $row->telefonoperitodp,
                 'nombreperitoresponsabledp' => $row->nombreperitoresponsabledp,
+                'correoresponsabledp' => $row->correoresponsabledp,
                 'noregistroresponsabledp' => $row->noregistroresponsabledp,
                 'telefonoresponsabledp' => $row->telefonoresponsabledp,
                 'fechaentrega' => $row->fechaentrega,
@@ -379,6 +380,7 @@ class Permiso_anuncios extends CI_Controller {
 //        $datos = $this->Ccbd_model->get_all_data($CLAVE);C}
 //        die(print_r($datos['CUENTA_PREDIAL_ID'],true));
         $id_perito = $this->input->post('perito_id');
+        $correoresponsabledp = $this->input->post('correoperitodp');
         $datos = $this->datospredial($this->input->post('clave'));
         if (isset($datos['CALLE_ID'])) {
             $datos['CALLE_ID'] = trim($datos['CALLE_ID'], '0');
@@ -417,7 +419,7 @@ class Permiso_anuncios extends CI_Controller {
             'superficieconstruidaui' => set_value('superficieconstruidaui'),
             'nonivelesui' => set_value('nonivelesui'),
             'nombreperitoresponsabledp' => $id_perito,
-            'correoresponsabledp' => set_value('correoresponsabledp'),
+            'correoresponsabledp' => $correoresponsabledp,
             'noregistroresponsabledp' => set_value('noregistroresponsabledp'),
             'telefonoresponsabledp' => set_value('telefonoresponsabledp'),
             'fechaentrega' => set_value('fechaentrega'),
