@@ -318,9 +318,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     </div>
 
 
-
-
-
+                                                    <div class="form-group col-md-4">
+                                                        <label for="varchar">Documento RFC<?php echo form_error('doctorfc') ?></label>
+                                                        <?php if ($this->session->userdata('tipo') == 3 || $this->session->userdata('tipo') == 4): ?>
+                                                            <input <?php echo $doctorfc != "" ? "" : ""; ?> type="file" multiple name="doctorfc[]" id="doctorfc" placeholder="Documento RFC"/>
+                                                        <?php endif; ?>
+                                                        <?php if (!empty($doctorfc)): ?><br>
+                                                            <a href="<?php echo base_url() . "assets/tramites/permisosanunciosadosados/" . $doctorfc; ?>"><?php echo $doctorfc ?></a>
+                                                        <?php endif; ?>
+                                                    </div>
 
                                                     <div class="form-group col-md-4">
                                                         <label for="varchar">Documento Permiso Uso de Suelo<?php echo form_error('doctopermisousosuelo') ?></label>
