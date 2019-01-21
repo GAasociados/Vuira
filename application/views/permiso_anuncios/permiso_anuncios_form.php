@@ -131,14 +131,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <label for="varchar">Número *<?php echo form_error('numerodg') ?></label>
                                                     <input <?php echo $modificar; ?> required type="text" class="form-control" name="numerodg" id="numerodg" placeholder="Número" value="<?php echo $numerodg; ?>" />
                                                 </div>
-												<div class="form-group col-md-3">
+												<!-- <div class="form-group col-md-3">
                                                     <label for="varchar">RFC<?php echo form_error('rfcdg') ?></label>
                                                     <input <?php echo $modificar; ?> required type="text" class="form-control" name="rfcdg" id="rfcdg" placeholder="RFC" value="<?php echo $rfcdg; ?>" />
-                                                </div>
-                                                <div class="form-group col-md-3">
+                                                </div> -->
+                                                <!-- <div class="form-group col-md-3">
                                                     <label for="varchar">REC<?php echo form_error('recdg') ?></label>
                                                     <input <?php echo $modificar; ?> required type="text" class="form-control" name="recdg" id="recdg" placeholder="REC" value="<?php echo $recdg; ?>" />
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group col-md-3">
                                                     <label for="varchar">Clave Catastral *</label>
                                                     <input   <?php echo $modificar; ?> required placeholder="Clave Catastral" type="text" class="form-control" name="clavecat" id="clavecat"  value="<?php if (strpos($clavecat, '-') !== false) {  } else echo $clavecat; ?>" />
@@ -422,7 +422,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <?php else: ?>
                                                         <h3>Solo adjuntar archivos escaneados en original (PDF, Imagen ó Archivo .Zip o .Rar) Escaneados Completos</h3>
                                                     <?php endif; ?></h3>
-                                        </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="varchar">Documento RFC *<?php echo form_error('doctorfc') ?></label>
+                                                    <?php if ($this->session->userdata("tipo") == 4 || $this->session->userdata("tipo") == 3): ?>
+                                                        <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip ,.doc,.docx, .xlsx"   <?php echo $doctorfc != "" ? "" : ""; ?>  type="file" multiple name="doctorfc[]" id="doctorfc"/>
+                                                    <?php endif; ?>
+
+                                                    <?php if (!empty($doctorfc)): ?><br>
+                                                        <a href="<?php echo base_url() . "assets/tramites/permisosanunciosautosoportados/" . $doctorfc; ?>"><?php echo $doctorfc;?></a>
+                                                    <?php endif; ?>
+                                                </div>
+
 
                                                 <div class="form-group col-md-4">
                                                     <label for="varchar">Documento Permiso Uso de Suelo *<?php echo form_error('doctopermisousosuelo') ?></label>
@@ -473,8 +485,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <?php if ($this->session->userdata("tipo") == 4 || $this->session->userdata("tipo") == 3): ?>
                                                         <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip ,.doc,.docx, .xlsx"   <?php echo $doctopolizafianza != "" ? "" : "required"; ?> type="file" multiple name="doctopolizafianza[]" id="doctopolizafianza"/>
                                                     <?php endif; ?>
-
-
                                                     <?php if (!empty($doctopolizafianza)): ?><br>
                                                         <a href="<?php echo base_url() . "assets/tramites/permisosanunciosautosoportados/" . $doctopolizafianza; ?>"><?php echo $doctopolizafianza;?></a>
                                                     <?php endif; ?>
