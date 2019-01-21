@@ -364,7 +364,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <h3 class="title-hero">V. Datos del Perito</h3>
                                         </div>
 
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-3">
                                                     <label for="int">Nombre Perito Especializado * <?php echo form_error('nombreperitoresponsabledp') ?></label>
 
                                                     <select <?php echo $modificar; ?>  required=""class="form-control select2" name="nombreperitoresponsabledp" tabindex="-1"  id="nombreperitoresponsabledp" value="<?php echo $nombreperitoresponsabledp; ?>">
@@ -392,14 +392,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     </select>
                                                 </div>
 
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-3">
                                                     <label for="varchar">Número de Registro <?php echo form_error('noregistroresponsabledp') ?></label>
                                                     <input readonly type="text" class="form-control" name="noregistroresponsabledp" id="noregistroresponsabledp" placeholder="Núm. de Registro" value="<?php echo $noregistroresponsabledp; ?>" />
                                                 </div>
 
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-3">
                                                     <label for="varchar">Teléfono Perito <?php echo form_error('telefonoresponsabledp') ?></label>
                                                     <input readonly type="text" class="form-control" name="telefonoresponsabledp" id="telefonoresponsabledp" placeholder="Teléfono Perito" value="<?php echo $telefonoresponsabledp; ?>" />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="varchar">Correo eléctronico <?php echo form_error('correoresponsabledp') ?></label>
+                                                    <input readonly type="text" class="form-control" name="correoresponsabledp" id="correoresponsabledp" placeholder="Correo Perito" value="<?php echo $correoresponsabledp; ?>" />
                                                 </div>
                                   
                                  </div>

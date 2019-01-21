@@ -342,13 +342,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                             </div>
                                         </div>
-                                        <div class=" form-group col-md-12">
+                                        <!-- <div class=" form-group col-md-12">
                                             <div class="btn-group">
                                                 <a  href="<?php echo base_url('claves_catastrales_individual/reportes'); ?>" class="btn btn-info btn-circle" >
                                                     <i class="glyph-icon icon-pencil"></i> Ver reportes <span id="notificacion" class="badge badge-danger" style=" background-color:red; color: black;"></span>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     <?php endif; ?>
                                 </div>
    </div><!-- Botones Flotantes -->
