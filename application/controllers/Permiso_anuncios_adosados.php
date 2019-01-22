@@ -283,6 +283,8 @@ class Permiso_anuncios_adosados extends CI_Controller {
             'nocontrol' => set_value('nocontrol'),
             'doctopermisousosuelo' => set_value('doctopermisousosuelo'),
             'doctofotografico' => set_value('doctofotografico'),
+            'doctorfc' => set_value('doctorfc'),
+            'doctorec' => set_value('doctorec'),
             'doctopago' => set_value('doctopago'),
             'doctofinal' => set_value('doctofinal'),
             'usuarioID' => set_value('usuarioID'),
@@ -331,6 +333,8 @@ class Permiso_anuncios_adosados extends CI_Controller {
             'nocontrol' => set_value('nocontrol'),
             'doctopermisousosuelo' => set_value('doctopermisousosuelo'),
             'doctofotografico' => set_value('doctofotografico'),
+            'doctorfc' => set_value('doctorfc'),
+            'doctorec' => set_value('doctorec'),
             'doctopago' => set_value('doctopago'),
             'doctofinal' => set_value('doctofinal'),
             'usuarioID' => set_value('usuarioID'),
@@ -432,6 +436,40 @@ class Permiso_anuncios_adosados extends CI_Controller {
             //echo "Entra al IF";
         } else {
             $data['doctopermisousosuelo'] = "";
+        }
+        if (!empty($_FILES['doctorfc']['tmp_name'][0])) {
+            $numfiles = count($_FILES['doctorfc']['tmp_name']);
+            //Documentos Bitacora
+            for ($i = 0; $i < $numfiles; $i++) {
+                $path = $variablefile['doctorfc']['tmp_name'][$i];
+                $this->zip->read_file($path, $variablefile['doctorfc']['name'][$i]);
+            }
+            //Write the zip file to a folder on your server. Name it "my_backup.zip"
+            if ($this->zip->archive('./assets/tramites/permisosanunciosadosados/file-' . $maxnumbd . '-doctorfc.zip')) {
+                $data['doctorfc'] = "file-" . $maxnumbd . "-doctorfc.zip";
+                //echo "Guarda";
+            }
+            $this->zip->clear_data();
+            //echo "Entra al IF";
+        } else {
+            $data['doctorfc'] = "";
+        }
+        if (!empty($_FILES['doctorec']['tmp_name'][0])) {
+            $numfiles = count($_FILES['doctorfc']['tmp_name']);
+            //Documentos Bitacora
+            for ($i = 0; $i < $numfiles; $i++) {
+                $path = $variablefile['doctorec']['tmp_name'][$i];
+                $this->zip->read_file($path, $variablefile['doctorec']['name'][$i]);
+            }
+            //Write the zip file to a folder on your server. Name it "my_backup.zip"
+            if ($this->zip->archive('./assets/tramites/permisosanunciosadosados/file-' . $maxnumbd . '-doctorec.zip')) {
+                $data['doctorec'] = "file-" . $maxnumbd . "-doctorec.zip";
+                //echo "Guarda";
+            }
+            $this->zip->clear_data();
+            //echo "Entra al IF";
+        } else {
+            $data['doctorec'] = "";
         }
         if (!empty($_FILES['bitacora']['tmp_name'][0])) {
             $numfiles = count($_FILES['bitacora']['tmp_name']);
