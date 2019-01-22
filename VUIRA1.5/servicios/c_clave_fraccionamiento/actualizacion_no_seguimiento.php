@@ -6,7 +6,7 @@ $mensaje = "Error";
 if (isset($_POST['no'])) {
 	$archivo = fopen("../../../assets/no_seguimiento.txt", "r");
 	$linea = fgets($archivo);
-	$valor = intval($linea);
+	$valor = 1 + intval($linea);
 	$contador = $valor + $_POST['no'];
 	fclose($archivo);
 
