@@ -549,7 +549,8 @@ class Permiso_anuncios_adosados extends CI_Controller {
                 'nocontrol' => set_value('nocontrol', $row->nocontrol),
                 'doctopermisousosuelo' => set_value('doctopermisousosuelo', $row->doctopermisousosuelo),
                 'doctofotografico' => set_value('doctofotografico', $row->doctofotografico),
-                'doctorfc' => set_value('doctorfc', $row->doctopago),
+                'doctorec' => set_value('doctorec', $row->doctorec),
+                'doctorfc' => set_value('doctorfc', $row->doctorfc),
                 'doctofinal' => set_value('doctofinal', $row->doctofinal),
                 'usuarioID' => set_value('usuarioID', $row->usuarioID),
                 'status' => set_value('status', $row->status),
@@ -742,6 +743,22 @@ class Permiso_anuncios_adosados extends CI_Controller {
                 //Write the zip file to a folder on your server. Name it "my_backup.zip"
                 if ($this->zip->archive('./assets/tramites/permisosanunciosadosados/file-' . $maxnumbd . '-doctorfc.zip')) {
                     $data['doctorfc'] = "file-" . $maxnumbd . "-doctorfc.zip";
+                    //echo "Guarda";
+                }
+                $this->zip->clear_data();
+                //echo "Entra al IF";
+            }
+
+            if (!empty($_FILES['doctorec']['tmp_name'][0])) {
+                $numfiles = count($_FILES['doctorec']['tmp_name']);
+                //Documentos Bitacora
+                for ($i = 0; $i < $numfiles; $i++) {
+                    $path = $variablefile['doctorec']['tmp_name'][$i];
+                    $this->zip->read_file($path, $variablefile['doctorec']['name'][$i]);
+                }
+                //Write the zip file to a folder on your server. Name it "my_backup.zip"
+                if ($this->zip->archive('./assets/tramites/permisosanunciosadosados/file-' . $maxnumbd . '-doctorec.zip')) {
+                    $data['doctorec'] = "file-" . $maxnumbd . "-doctorec.zip";
                     //echo "Guarda";
                 }
                 $this->zip->clear_data();
