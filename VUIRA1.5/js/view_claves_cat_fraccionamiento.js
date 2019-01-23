@@ -258,7 +258,7 @@ function uploadFile()
               // clear file field
               var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
               $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
-              
+
             }
           });
         }
@@ -746,18 +746,57 @@ class view_claves_fraccionamiento
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
     } */
     new view_claves_fraccionamiento().set_folio_fracc_detalles(0);
-   
+
   }
 
   init_fraccionamientoFolios(numero_cuentas)
   {
+
     if ( numero_cuentas !== 0)
     {
-      this.get_numeros_consecutivos(numero_cuentas);
+      var folios= this.get_numeros_folio(this.get_Detalles_Fraccionamiento($("#id").val()));
+      if(folios[0]==0)
+        this.get_numeros_consecutivos(numero_cuentas);
+      else {
+          numeros_asignados = folios;
+          this.setup_generate_talon();
+      }
     }
     else
       mensajeError('El numero de cuentas no puede ser 0');
   }
+
+  get_Detalles_Fraccionamiento(id_frac)
+  {
+    var datosDetalleFraccionamiento=[];
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det.php?service_name=getDetallesFraccionamiento",
+      data:{id:id_frac},
+      async:false,
+      success: function (jdata)
+      {
+        if(jdata != "Error")
+        {
+          var datosDetalleFraccionamiento = JSON.parse(jdata);
+        }
+      }
+    });
+    return datosDetalleFraccionamiento;
+  }
+
+  get_numeros_folio(datosDetallesFracc)
+  {
+    var folios = [];
+    for(var i=0; i < datosDetallesFracc.lenght ; i++ )
+    {
+      folios.append(datosDetallesFracc[i].Folio);
+    }
+    return folios;
+  }
+
+
+
 
   get_numeros_consecutivos(numero)
   {
@@ -786,7 +825,7 @@ class view_claves_fraccionamiento
 
   set_folio_fracc_detalles(indice)
   {
-    if ( indice < numeros_asignados.length ) 
+    if ( indice < numeros_asignados.length )
     {
       console.log("CUENTA: "+cuentas_asignadas[indice]+", Folio: "+numeros_asignados[indice]);
       $.ajax({
