@@ -741,11 +741,12 @@ class view_claves_fraccionamiento
     var folios = JSON.stringify(numeros_asignados);
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
       +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
-    for (var i = 0; i < numeros_asignados.length; i++)
+   /*  for (var i = 0; i < numeros_asignados.length; i++)
     {
       new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
-    }
-    window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
+    } */
+    new view_claves_fraccionamiento().set_folio_fracc_detalles(0);
+   
   }
 
   init_fraccionamientoFolios(numero_cuentas)
@@ -785,25 +786,25 @@ class view_claves_fraccionamiento
 
   set_folio_fracc_detalles(indice)
   {
-    $.ajax({
-      type:"post",
-      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php",
-      data:{id:$("#id").val(),cuenta_predial:cuentas_asignadas[indice]["Cuenta_Predial"],folio:numeros_asignados[indice]},
-      async:true,
-      success: function (jdata)
-      {
-        console.log(jdata);
-        if(jdata != "Error")
+    if ( indice < numeros_asignados.length ) 
+    {
+      console.log("CUENTA: "+cuentas_asignadas[indice]+", Folio: "+numeros_asignados[indice]);
+      $.ajax({
+        type:"post",
+        url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_insert_folio.php",
+        data:{id:$("#id").val(),cuenta_predial:cuentas_asignadas[indice]["Cuenta_Predial"],folio:numeros_asignados[indice]},
+        async:true,
+        success: function (jdata)
         {
-
           console.log(jdata);
+          new view_claves_fraccionamiento().set_folio_fracc_detalles(indice+1);
         }
-        else
-        {
-            alert (jdata);
-        }
-      }
-    });
+      });
+    }
+    else
+    {
+      window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
+    }
   }
 
   setup_generate_clave()
