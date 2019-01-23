@@ -32,6 +32,9 @@ if(isset($_GET['service_name']))
         case 'getinfodocumentos':
               print_r(json_encode($objD->getDataInformacionDocumentos($_POST["id"], $_POST['cuenta_predial']), JSON_UNESCAPED_SLASHES));
               break;
+			  case 'getDetallesFraccionamiento':
+		          print_r(json_encode($objD->getDataDetallesFraccionamiento($_POST["id"]), JSON_UNESCAPED_SLASHES));
+		          break;
 
 
 		default:
@@ -170,6 +173,12 @@ class detFracc
     public function getDataInformacionDocumentos($id, $cuenta_predial)
     {
       $query = "SELECT * FROM Cat_Informacion_Documentos WHERE Id_Bd = $id and Numero_Predial = '$cuenta_predial'";
+      return $this->con->executeQuerry($query);
+    }
+
+		public function getDataDetallesFraccionamiento($idFraccionamiento)
+    {
+      $query = "SELECT * FROM natural7_vuira.Claves_Catastrales_Fraccionamientos_Detalles WHERE Id_Fraccionamientos = $idFraccionamiento";
       return $this->con->executeQuerry($query);
     }
 }
