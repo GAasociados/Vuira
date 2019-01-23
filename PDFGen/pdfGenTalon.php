@@ -30,20 +30,28 @@ if ( isset($_GET['nombre']) && isset($_GET['correo']) && isset($_GET['fecha_inic
 	}
 }
 
-function DateParser($dia,$mes,$año){
 
-	
-}
-
-
+//BORRAR LOS SIGUIENTE
+/* $nombre = "RECUPERADORA JURIDICA INMOBILIARIA S DE RL DE CV"; 
+$fecha_inicial = "21-01-19";
+$fecha_final = "2019-01-24 13:00:00";
+$correo = "no@hotmail.com";
+$telefono = "4626900017";
+$folios = [125,126,127,128,129.130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155];
+	for ($i = 0; $i < count($folios); $i++)
+	{
+		if($i>0)
+			$folios_html .=",";
+		$folios_html .= $folios[$i];
+	}  */
 
 class CCPDF extends TCPDF {
 	public $InF="";
     //Page header
     public function Header() {
         // Logo
-        $image_file = K_PATH_IMAGES.'LOGOIRA.png';
-        $this->Image($image_file, 15, 10, 185, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        //$image_file = K_PATH_IMAGES.'LOGOIRA.png';
+        //$this->Image($image_file, 15, 10, 185, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
     }
 
     // Page footer
@@ -78,9 +86,9 @@ else
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Gobierno Municipal de Irapuato');
-$pdf->SetTitle('clave Catastral');
-$pdf->SetSubject('clave catastral');
-$pdf->SetKeywords('clave Catastral, Irapuato');
+$pdf->SetTitle('Clave Catastral Fraccionamientos');
+$pdf->SetSubject('clave catastral Fraccionamientos');
+$pdf->SetKeywords('Clave Catastral, Irapuato');
 
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
@@ -132,50 +140,54 @@ $pdf->AddPage();
 $html = <<<EOD
 <table>
 <tr align="center">
-  <td>Nombre</td>
+  <td>Clave Catastral Fracionamientos</td>
 </tr>
 <tr align="center">
-  <td>$nombre</td>
-</tr>
-<br>
-<tr align="center">
-  <td>Correo</td>
+  <td></td>
 </tr>
 <tr align="center">
-  <td>$correo</td>
+  <td>Nombre: $nombre</td>
 </tr>
 <br>
 <tr align="center">
-  <td>Asignacion de clave catastral</td>
-</tr>
-<tr align="center">
-  <td>$clave</td>
+  <td>Fecha de solicitud de su trámite: $fecha_inicial</td>
 </tr>
 <br>
 <tr align="center">
-  <td>Folios</td>
+  <td>Fecha y hora de entrega de su trámite: $fecha_final</td>
+</tr>
+<br>
+<tr align="center">
+  <td>Folios:</td>
 </tr>
 <tr align="center">
   <td>$folios_html</td>
 </tr>
 <br>
-<tr align="center">
-  <td>Fecha Inicio</td>
-</tr>
-<tr align="center">
-  <td>$fecha_inicial</td>
-</tr>
-<br>
-<tr align="center">
-  <td>Fecha Final</td>
-</tr>
-<tr align="center">
-  <td>$fecha_final</td>
+<tr>
+	<td align="center"><img src="http://localhost/Vuira/assets/images/logo.png" width="160">
+	</td>
 </tr>
 </table>
 EOD;
 $pdf->writeHTML($html,true,false,false,false,'L');
 
+$pdf->SetY(150);
+$html2 = <<<EOD
+<table>
+<tr>
+<td align="center">
+		<label>
+				Calle Álvaro Obregón N°100 Zona Centro, Irapuato Guanajuato,
+		</label>
+</td>
+</tr>
+<tr>
+<td align="center">Tel: 01(462)6069999 ext. 1564</td>
+</tr>
+</table>
+EOD;
+$pdf->writeHTML($html2,true,false,false,false,'L');
 
 $pdf->Output('example_001.pdf', 'I');
 
