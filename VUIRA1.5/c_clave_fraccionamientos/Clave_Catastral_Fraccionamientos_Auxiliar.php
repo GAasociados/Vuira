@@ -427,7 +427,7 @@ ini_set("display_errors",1);
 
 										              <div class="col-md-7" id="Superficie">
 										                <div class="form-group">
-										                  <label>Telefono</label>
+										                  <label>Teléfono</label>
 										                  <div class="row">
 										                    <div class="col-xs-6 col-md-6">
 										                     <input type="text" class="form-control" id="Telefono" name="Telefono" value="" required>
@@ -435,7 +435,7 @@ ini_set("display_errors",1);
 										                  </div>
 										                </div>
 										                <div class="form-group" >
-										                  <label class="control-label">Tipo de Tramite que solicita</label>
+										                  <label class="control-label">Tipo de Trámite que Solicita</label>
 										                  <select id="tipo_de_tramite" name="tipo_de_tramite" class="chosen-select">
 										                  	 <option value="0">Elegir trámite...</option>
 											                 <option value="1">Asignación de Claves Catastrales</option>

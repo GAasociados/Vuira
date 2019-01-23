@@ -203,13 +203,13 @@ ini_set("display_errors",1);
                         <input type="text" class="form-control" id="Propietario" name="Propietario" ></select>
                       </div>
                       <div class="form-group">
-                        <label class="control-label">Correo Electronico</label>
+                        <label class="control-label">Correo Eléctronico</label>
                         <input type="email" class="form-control" id="Correo_Electronico" name="Correo_Electronico"  ></select>
                       </div>
                     </div>
                     <div class="col-md-7">
                       <div class="form-group">
-                        <label>Telefono</label>
+                        <label>Teléfono</label>
                         <div class="row">
                           <div class="col-xs-6 col-md-6">
                            <input type="text" class="form-control" id="Telefono" name="Telefono" >
@@ -217,7 +217,7 @@ ini_set("display_errors",1);
                        </div>
                      </div>
                      <div class="form-group" >
-                      <label class="control-label">Tipo de Tramite que solicita</label>
+                      <label class="control-label">Tipo de Trámite que solicita</label>
                       <select id="Tipo_Tramite" name="Tipo_Tramite" class="chosen-select">
                         <option value="0">Elegir trámite...</option>
                         <option value="1">Asignación de Claves Catastrales</option>

@@ -127,15 +127,21 @@ foreach ($noficial->result() as $row) {
             <!-- BEGIN PAGE CONTENT BODY -->
             <div class="panel">
                 <div class="panel-body">
-                    <h5 class="note note-success">Para solicitar este trámite le recomendamos tenga su recibo predial a
-                        la mano.</h5>
-                    <form id="formclave" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-
-                        <?php if ($modificar != ""): ?>
+                    <?php if ($this->session->userdata('tipo') == 4): ?>
+                        <h5 class="note note-success">Para solicitar este trámite le recomendamos tenga su recibo predial a
+                            la mano.</h5>
+                            <?php if ($modificar != ""): ?>
                             <h5 class="note note-warning bold">Recuerda dar click en el botón "Guardar" si realizas
-                                algún cambio.<br>En caso de cambios en el documento final vuelva a generar el documento
+                                algún cambio.
                             </h5>
                         <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($this->session->userdata('tipo') == 1555 || $this->session->userdata('tipo') == 12): ?>
+                        <h5 class="note note-warning bold"><br>En caso de cambios en el documento final vuelva a generar el documento</h5>
+                    <?php endif; ?>     
+                    <form id="formclave" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+
+                        
                         <div class="row">
                             <div class="form-group">
                                 <?php if (isset($numerocontrol)): ?>

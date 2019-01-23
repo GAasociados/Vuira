@@ -36,7 +36,7 @@ include("../servicios/c_clave_fraccionamiento/c_clave_fracc_det.php");
   echo "<script type=\"text/javascript\">
                   window.onload=function(){
                      // document.forms['docF'].submit();
-  				           window.location.href='https://vuira.irapuato.gob.mx/VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Fraccionamientos_Ventanilla.php?Id=$insertedId&operation=ImprimirTalon';
+  				           window.location.href='http://localhost/Vuira/VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Fraccionamientos_Ventanilla.php?Id=$insertedId&operation=ImprimirTalon';
                   }
          </script>";
 

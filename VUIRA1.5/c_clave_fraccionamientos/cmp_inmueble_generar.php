@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set("display_errors",1);
 ?>
 <div class="form-group col-md-6">
-	<label class="control-label">En Su Caracter *</label>
+	<label class="control-label">En su Caracter *</label>
 	<input class="form-control" id="p_caracter"/>
 </div>
 <div class="form-group col-md-6">
-	<label class="control-label">Superficie del terreno *</label>
+	<label class="control-label">Superficie del Terreno *</label>
 	<input class="form-control" type="text" id="p_superficie">
 </div>
 <div class="form-group col-md-6">
@@ -15,11 +15,11 @@ ini_set("display_errors",1);
 	<input class="form-control" type="text" id="p_numero_escritura">
 </div>
 <div class="form-group col-md-6">
-	<label class="control-label">Nombre del notario público *</label>
+	<label class="control-label">Nombre del Notario Público *</label>
 	<input class="form-control" type="text" id="p_notario_publico">
 </div>
 <div class="form-group col-md-6">
-	<label class="control-label">Número de notario público *</label>
+	<label class="control-label">Número de Notario Núblico *</label>
 	<input class="form-control" type="text" id="p_numero_notario_publico">
 </div>
 <div class="form-group col-md-6">
