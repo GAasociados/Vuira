@@ -255,11 +255,11 @@ ini_set("display_errors",1);
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleFormControlInput1">Fecha de Inicio</label>
-          <input class="form-control" id="fecha-inicio" type="date">
+          <input class="form-control" id="fecha-inicio" type="date" data-format="yyyy-MM-dd">
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Fecha de Entrega</label>
-          <input class="form-control" id="fecha-entrega" type="date">
+          <input class="form-control" id="fecha-entrega" type="date" data-format="yyyy-MM-dd">
         </div>
       </div>
       <div class="modal-footer">

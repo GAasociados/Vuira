@@ -4,10 +4,13 @@ var id_bd = 0;
 var contador = 0;
 var numero_cuentas = 0;
 //se utiliza en ventanilla y auxiliae
+var detalles_fracc_data = [];
 var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
-var detalles_fracc_data = [];
+//SE UTILIZA EN AUXILIAR
+var data_auxiliar = 0;
+
 
 //cuando es persona moral se muestran estos documentos
 function event_mostrar_extra_docs(event)
@@ -195,6 +198,7 @@ function event_load_auxiliar()
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
+  objVista.get_data_auxiliar($("#uid").val());
 
   $( "#form" ).submit(function( event ) {
     event.preventDefault();
@@ -409,6 +413,40 @@ class view_claves_fraccionamiento
           cuentas_asignadas = data;
           new view_claves_fraccionamiento().set_data_grid_aux(data);
           console.log(data);
+        }
+        else
+        {
+            alert (jdata);
+        }
+      }
+    });
+  }
+
+  get_data_auxiliar(uid)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=getAuxiliar",
+      data:{uid:uid},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          var data = JSON.parse(jdata);
+          console.log(data);
+          data_auxiliar = data;
+          //OBTENER LAS INICIALES DE NOMBRES, APELLIDO PATERNO Y MATERNO
+          var nombre_completo = data[0]["nombres"]+" "+data[0]["apellido_pat"]+" "+data[0]["apellido_mat"];
+          nombre_completo = nombre_completo.split(" ");
+          var iniciales = "";
+          for(var i = 0; i < nombre_completo.length; i++)
+          {
+            var palabra = nombre_completo[i];
+            iniciales += palabra[0];
+          }
+          data[0]["nombres"] = iniciales;
         }
         else
         {
@@ -847,7 +885,11 @@ class view_claves_fraccionamiento
     {
       //alert("fecha inicial: "+$("#fecha-inicio").val()+", fecha final: "+$("#fecha-entrega").val());
       var objVista=new view_claves_fraccionamiento();
-      objVista.update_fechas($("#Id").val(), $("#fecha-inicio").val(), $("#fecha-entrega").val());
+      var fechaIni = $("#fecha-inicio").val();
+      //fechaIni = fechaIni.substring(0,7);
+      var fechaFin = $("#fecha-entrega").val();
+      //fechaFin = fechaFin.substring(0,7);
+      objVista.update_fechas($("#Id").val(), fechaIni, fechaFin);
       window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
     }
   }
@@ -994,6 +1036,7 @@ class view_claves_fraccionamiento
   	data['Es_Ciudad_Escritura']=$("#ciudad_escritura").val();
   	data['Es_Estado_Escritura']=$("#estado_escitura").val();
     data['Croquis_URL']=$("#Croquis_URL").val();
+    data['Iniciales_Func'] = "AAA";
 
   	return data;
   }
