@@ -215,7 +215,7 @@ function event_select_entry(buttonName)
 	var objVista =new view_claves_fraccionamiento();
 	objVista.cancelar_claveGen();
 	rowSelected = buttonName.name;
-	objVista.setup_for_claveGen($("#"+buttonName.name));
+	objVista.setup_for_claveGen($("#"+buttonName.name), buttonName.Id);
   if(id_bd != "0")
     objVista.get_data_inmueble_auxiliar(id_bd, buttonName.name);
 }
@@ -446,7 +446,7 @@ class view_claves_fraccionamiento
             var palabra = nombre_completo[i];
             iniciales += palabra[0];
           }
-          data[0]["nombres"] = iniciales;
+          data_auxiliar[0]["nombres"] = iniciales;
         }
         else
         {
@@ -643,7 +643,7 @@ class view_claves_fraccionamiento
          innerTableContent += "<input type='hidden' id='clave_ind_"+data[i].Cuenta_Predial+"' name='id_clave_ind' value='"+data[i][element]+"' >"
        }
 		 }
-		 innerTableContent += "<td><input type='button' class='btn btn-info' name='"+data[i].Cuenta_Predial+"' value='Seleccionar' onclick='event_select_entry(this)'></td>";
+		 innerTableContent += "<td><input type='button' class='btn btn-info' id='"+data[i].Folio+"' name='"+data[i].Cuenta_Predial+"' value='Seleccionar' onclick='event_select_entry(this)'></td>";
 		 innerTableContent += "</tr>";
 	 }
      $("#tblinmubles").append(innerTableContent);
@@ -1001,6 +1001,8 @@ class view_claves_fraccionamiento
   data['status'] = "3";
   data['fecha_inicial'] = detalles_fracc_data[0]["fecha_inicial"];
   data['fecha_entrega'] = detalles_fracc_data[0]["fecha_final"];
+  data['Numero_Seguimiento'] = $("#Id_clave").val();
+  
 	return data;
   }
 
@@ -1036,8 +1038,8 @@ class view_claves_fraccionamiento
   	data['Es_Ciudad_Escritura']=$("#ciudad_escritura").val();
   	data['Es_Estado_Escritura']=$("#estado_escitura").val();
     data['Croquis_URL']=$("#Croquis_URL").val();
-    data['Iniciales_Func'] = "AAA";
-
+    data['Iniciales_Func'] = data_auxiliar[0]["nombres"];
+    data['Numero_Seguimiento'] = $("#Id_clave").val();
   	return data;
   }
 

@@ -8,8 +8,8 @@ require_once('tcpdf_include.php');
 //$Tipo_Tramite="Solicitud IMUVII";
 //$Tipo_Tramite="Constancia Ejidal";
 
-$arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+$arrayMeses = array('enero', 'rebrero', 'marzo', 'abril', 'mayo', 'junio',
+            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
 
 $arrayDias = array('Domingo', 'Lunes', 'Martes',
             'Miércoles', 'Jueves', 'Viernes', 'Sabado');
@@ -56,8 +56,8 @@ $Constancia="12";/////////
 
 function DateParser($dia,$mes,$año){
 
-	$arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+	$arrayMeses = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
 
 $arrayDias = array('Domingo', 'Lunes', 'Martes',
             'Miércoles', 'Jueves', 'Viernes', 'Sabado');
@@ -85,7 +85,7 @@ class CCPDF extends TCPDF {
 	$html2 = <<<EOD
 	<div style=" text-align:Left;padding:0px 0px 0px 0px;">
 	ARCHIVO<br />
-	CAH/CAJ/$this->InF<br />
+	MAOG/CAJ/$this->InF<br />
 	TESORERIA MUNICIPAL / CATASTRO
 	<hr>
 	Álvaro Obregón no. 100 Zona Centro, CP 36500,<br />
@@ -320,7 +320,7 @@ EOD;
 	
 	if($numero_exp!="")
 	{
-		$numero_exp = substr($numero_exp, 0, strlen($numero_exp)-4)."/".substr($numero_exp,-4);
+		$numero_exp = substr($numero_exp, 0, strlen($numero_exp)-4)."".substr($numero_exp,-4);
 	}
 	if($Tipo_Sup=="m2")
 	{
@@ -608,7 +608,7 @@ ENCARGADO DEL DESPACHO DE LA DIRECCIÓN DE CATASTRO</div>
 </div>
 EOD;
 $pdf->writeHTML($html,true,false,false,false,'C');
-
+$añoParaFolio = date("Y");
 $pdf->AddPage();
 $pdf->SetY(45);
 $html = <<<EOD
@@ -617,7 +617,7 @@ $html = <<<EOD
 <h2 style="text-align:center">CERTIFICACIÓN DE DOCUMENTO</h2>
 <p style="text-align:justify">El Arq. Miguel Ángel Ortíz García, Encargado del Despacho de la Dirección de Catastro del Municipio de Irapuato, Guanajuato, adscrito a la Tesorería Municipal. </p>
 <div ><span style="text-align:center">Certifica: </span><br />
-Que los documentos entregados al solicitante concuerdan fielmente con los que obran en el Expediente <strong>No. $numero_exp</strong>, los cuales se encuentran en el archivo de esta Dirección, mismo que tuve a la vista y con el que fue cotejado.<br /><br />
+Que los documentos entregados al solicitante concuerdan fielmente con los que obran en el Expediente <strong>$numero_exp/$añoParaFolio</strong>, los cuales se encuentran en el archivo de esta Dirección, mismo que tuve a la vista y con el que fue cotejado.<br /><br />
 Se expide la presente certificación por acuerdo con la Tesorera Municipal Ma. Ernestina Hernández Guzmán, otorgado mediante el oficio número TM/001/2014 en la ciudad de Irapuato, Guanajuato, a los 06 días del mes de enero 2014.<br /><br />
 Se expide a solicitud del interesado en la ciudad de Irapuato, Guanajuato, el día $Fecha.</div>
 EOD;
