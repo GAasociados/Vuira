@@ -7,6 +7,7 @@ var numero_cuentas = 0;
 var cuentas_asignadas = [];
 //se utiliza en ventanilla
 var numeros_asignados = 0;
+var detalles_fracc_data = [];
 
 //cuando es persona moral se muestran estos documentos
 function event_mostrar_extra_docs(event)
@@ -245,7 +246,7 @@ function uploadFile()
             form_data.append('file', file_data);
 
             $.ajax({
-              url: 'https://vuira.irapuato.gob.mx//DocPrint/uploadFile.php', // point to server-side PHP script
+              url: '../../DocPrint/uploadFile.php', // point to server-side PHP script
               dataType: 'text', // what to expect back from the PHP script, if anything
               cache: false,
               contentType: false,
@@ -339,8 +340,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      this.basePath = "https://"+window.location.hostname+"/";
-      //this.basePath = "http://localhost/Vuira/";
+      //this.basePath = "https://"+window.location.hostname+"/";
+      this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -430,6 +431,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
+          detalles_fracc_data = data;
           new view_claves_fraccionamiento().set_data_auxiliar(data[0]);
         }
         else
@@ -779,6 +781,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var datosDetalleFraccionamiento = JSON.parse(jdata);
+          detalles_fracc_data = datosDetalleFraccionamiento;
         }
       }
     });
@@ -842,6 +845,9 @@ class view_claves_fraccionamiento
     }
     else
     {
+      //alert("fecha inicial: "+$("#fecha-inicio").val()+", fecha final: "+$("#fecha-entrega").val());
+      var objVista=new view_claves_fraccionamiento();
+      objVista.update_fechas($("#Id").val(), $("#fecha-inicio").val(), $("#fecha-entrega").val());
       window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
     }
   }
@@ -950,7 +956,9 @@ class view_claves_fraccionamiento
 	data['cbocoloniaui'] = "";
 	data['categoriapredioui'] = "";
 	data['nombrepropietariodp'] = $("#propietario").val();
-	data['status'] = "3";
+  data['status'] = "3";
+  data['fecha_inicial'] = detalles_fracc_data[0]["fecha_inicial"];
+  data['fecha_entrega'] = detalles_fracc_data[0]["fecha_final"];
 	return data;
   }
 
@@ -976,7 +984,7 @@ class view_claves_fraccionamiento
   	data['Nombre_Notario'] = $("#notario_publico").val();
   	data['Numero_Notario'] = $("#numero_notario_publico").val();
   	data['Numero_Seguimiento'] = $("#numero_oficio").val();
-  	data['Fecha_Inicio'] = "";
+  	data['Fecha_Inicio'] = detalles_fracc_data[0]["fecha_inicial"];
   	data['Clave_Catastral'] = $("#claveCat").val();
   	data['Manzana'] = "";
   	data['Numero_Lote'] = "";
@@ -986,6 +994,7 @@ class view_claves_fraccionamiento
   	data['Es_Ciudad_Escritura']=$("#ciudad_escritura").val();
   	data['Es_Estado_Escritura']=$("#estado_escitura").val();
     data['Croquis_URL']=$("#Croquis_URL").val();
+
   	return data;
   }
 
@@ -1125,6 +1134,30 @@ class view_claves_fraccionamiento
         {
           console.log(jdata);
           document.getElementById('form').submit();
+        }
+        else
+        {
+          alert (jdata);
+        }
+      }
+    });
+  }
+
+  update_fechas(id,fecha_inicial, fecha_final)
+  {
+    var id = $("#id").val();
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_core.php?service_name=updateFechas",
+      data:{id:id,fechaInicial:fecha_inicial,fechaFinal:fecha_final},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        if(jdata != "Error")
+        {
+          console.log(jdata);
+          mensajeInfo('Se Ha Actualizado las fechas');
         }
         else
         {
