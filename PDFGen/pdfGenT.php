@@ -53,6 +53,7 @@ $Copropietario="Pedro Mendoza";/////////
 $Parcela="1524";///////
 $CORETT_Contrato="Irapuato";////////
 $Constancia="12";/////////
+$tramite_solicitado="";/////////
 
 function DateParser($dia,$mes,$año){
 
@@ -97,6 +98,7 @@ EOD;
 		$this->writeHTML($html2,true,false,false,false,'L');
     }
 }
+	isset($_POST["Tramite_Solicitado"])? $tramite_solicitado=$_POST["Tipo_Tramite"]:$tramite_solicitado="";
 	isset($_POST["Tipo_Tramite"])? $Tipo_Tramite=$_POST["Tipo_Tramite"]:$Tipo_Tramite="";
 	isset($_POST["Fecha_Generacion_Documento"])? $Fecha=$_POST["Fecha_Generacion_Documento"]:$Fecha="";
 	isset($_POST["Numero_Exterior"])? $nooficialui=$_POST["Numero_Exterior"]:$nooficialui="";
@@ -177,6 +179,12 @@ EOD;
 	if ($Porcion != "")
 	{
 		$c_porcion= "P $Porcion";
+	}
+
+
+	if ($tramite_solicitado != "")
+	{
+		$numero_exp = "00".$numero_exp."/".date('Y');
 	}
 	
 	
@@ -276,7 +284,6 @@ EOD;
 		$tipTramPrefix = "a el";
 	}
 		
-		
 	if($Fecha == "")
 		$Fecha = $arrayDias[date('w')] . " " . date('d') . " de " . $arrayMeses[date('m') - 1] . " de " . date('Y'); 
 	
@@ -318,10 +325,10 @@ EOD;
 		$FechaR=DateParser($Fecha_Temporal[2],$Fecha_Temporal[1],"");
 	}
 	
-	if($numero_exp!="")
+	/* if($numero_exp!="")
 	{
 		$numero_exp = substr($numero_exp, 0, strlen($numero_exp)-4)."".substr($numero_exp,-4);
-	}
+	} */
 	if($Tipo_Sup=="m2")
 	{
 		$Tipo_Sup = "M<sup>2</sup>";
@@ -617,7 +624,7 @@ $html = <<<EOD
 <h2 style="text-align:center">CERTIFICACIÓN DE DOCUMENTO</h2>
 <p style="text-align:justify">El Arq. Miguel Ángel Ortíz García, Encargado del Despacho de la Dirección de Catastro del Municipio de Irapuato, Guanajuato, adscrito a la Tesorería Municipal. </p>
 <div ><span style="text-align:center">Certifica: </span><br />
-Que los documentos entregados al solicitante concuerdan fielmente con los que obran en el Expediente <strong>$numero_exp/$añoParaFolio</strong>, los cuales se encuentran en el archivo de esta Dirección, mismo que tuve a la vista y con el que fue cotejado.<br /><br />
+Que los documentos entregados al solicitante concuerdan fielmente con los que obran en el Expediente <strong>$numero_exp</strong>, los cuales se encuentran en el archivo de esta Dirección, mismo que tuve a la vista y con el que fue cotejado.<br /><br />
 Se expide la presente certificación por acuerdo con la Tesorera Municipal Ma. Ernestina Hernández Guzmán, otorgado mediante el oficio número TM/001/2014 en la ciudad de Irapuato, Guanajuato, a los 06 días del mes de enero 2014.<br /><br />
 Se expide a solicitud del interesado en la ciudad de Irapuato, Guanajuato, el día $Fecha.</div>
 EOD;

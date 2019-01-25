@@ -194,7 +194,7 @@ function event_remove_clave(buttonName)
 
 function event_load_auxiliar()
 {
-  $("#tipo_de_tramite").val("2").change();
+  $("#tipo_de_tramite_chosen").val("1").change();
   var objVista=new view_claves_fraccionamiento();
   objVista.get_data_clave($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
@@ -218,6 +218,18 @@ function event_select_entry(buttonName)
 	objVista.setup_for_claveGen($("#"+buttonName.name), buttonName.Id);
   if(id_bd != "0")
     objVista.get_data_inmueble_auxiliar(id_bd, buttonName.name);
+  else
+  {
+    $("#claveCat").val("Primera vez que se llenan los datos");
+    $("#caracter").val( $("#p_caracter").val() );
+    $("#superficie").val( $("#p_superficie").val());
+    $("#escritura").val( $("#p_numero_escritura").val() );
+    $("#notario_publico").val( $("#p_notario_publico").val() );
+    $("#numero_notario_publico").val( $("#p_numero_notario_publico").val() );
+    $("#numero_oficio").val( $("#p_numero_escritura").val());
+    $("#estado_escitura").val( $("#p_estado_escritura").val() );
+    $("#ciudad_escritura").val( $("#p_ciudad_escritura").val() );
+  }
 }
 
 function event_cancelar_selection()
@@ -344,8 +356,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "https://"+window.location.hostname+"/";
-      this.basePath = "http://localhost/Vuira/";
+      this.basePath = "https://"+window.location.hostname+"/";
+      //this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -517,6 +529,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
+          console.log(data);
           new view_claves_fraccionamiento().set_data_seleccion_auxiliar(data);
         }
         else
@@ -823,15 +836,15 @@ class view_claves_fraccionamiento
         }
       }
     });
-    return datosDetalleFraccionamiento;
+    return detalles_fracc_data;
   }
 
   get_numeros_folio(datosDetallesFracc)
   {
     var folios = [];
-    for(var i=0; i < datosDetallesFracc.lenght ; i++ )
+    for(var i=0; i < datosDetallesFracc.length ; i++ )
     {
-      folios.append(datosDetallesFracc[i].Folio);
+      folios.push(datosDetallesFracc[i].Folio);
     }
     return folios;
   }
@@ -999,9 +1012,7 @@ class view_claves_fraccionamiento
 	data['categoriapredioui'] = "";
 	data['nombrepropietariodp'] = $("#propietario").val();
   data['status'] = "3";
-  data['fecha_inicial'] = detalles_fracc_data[0]["fecha_inicial"];
-  data['fecha_entrega'] = detalles_fracc_data[0]["fecha_final"];
-  data['Numero_Seguimiento'] = $("#Id_clave").val();
+
   
 	return data;
   }
@@ -1040,6 +1051,9 @@ class view_claves_fraccionamiento
     data['Croquis_URL']=$("#Croquis_URL").val();
     data['Iniciales_Func'] = data_auxiliar[0]["nombres"];
     data['Numero_Seguimiento'] = $("#Id_clave").val();
+    data['tipotramitedp'] = 1;
+    data['Tramite_Solicitado'] = 100;
+    
   	return data;
   }
 

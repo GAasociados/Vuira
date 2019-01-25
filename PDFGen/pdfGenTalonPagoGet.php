@@ -175,10 +175,10 @@ $arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
 
 $ajusteTarifario = "";
 $cantidadClaves = 0;
-$costoTramite = 7.56;
-$tarifa = 50.81;
+$costoTramite = 7.86;
+$tarifa = 52.84;
 $totalClaves = 0;
-$costoClaveCertificada = 85.13;
+$costoClaveCertificada = 88.54;
 $totalClaveCertificada = 0;
 $total = 0;
 $propietario="";
@@ -195,24 +195,38 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
     $propietario = $_GET['nombre'];
     $cantidadClaves = $_GET['cantidadClaves'];
     $idFracc = $_GET['idFracc'];
+    $costoxTramite = $tarifa + $costoTramite;
+    error_log($costoxTramite);
     $totalClaves = ($cantidadClaves * $tarifa) + $costoTramite;
+    $totalClaves = floatval($cantidadClaves * $costoxTramite);
+    error_log($totalClaves);
 	$costoClaveCertificada = 85.13;
 	$totalClaveCertificada = $cantidadClaves * $costoClaveCertificada;
 	$fechaAutorizacion = date('d')." de ".$arrayMeses[date('m') - 1]." de ".date('Y');
-	$total = floatval($totalClaves + $totalClaveCertificada);
+    $total = floatval($totalClaves + $totalClaveCertificada);
+    error_log($total);
 	$decimales = explode(".",$total);
-	$numeroConLetra = num_to_letras($total);
-	if ( $decimales[1] < 50)
-	{
-		$ajusteTarifario = "-0.5";
-		$total = round($total,0,PHP_ROUND_HALF_DOWN);
-		$total = number_format($total,2);
-	}
-	elseif ( $decimales[1] >= 50)
-	{
-		$ajusteTarifario = "+0.5";
-		$total = round($total,0,PHP_ROUND_HALF_UP);
-		$total = number_format($total,2);
+    $numeroConLetra = num_to_letras($total);
+    error_log(is_float($total));
+    if (count($decimales) > 1)
+    {
+        error_log("Tiene decimales");
+        if ( $decimales[1] < 50)
+        {
+            $ajusteTarifario = "-0.5";
+            $total = round($total,0,PHP_ROUND_HALF_DOWN);
+            $total = number_format($total,2);
+        }
+        elseif ( $decimales[1] >= 50)
+        {
+            $ajusteTarifario = "+0.5";
+            $total = round($total,0,PHP_ROUND_HALF_UP);
+            $total = number_format($total,2);
+        }
+    }
+    else
+    {
+        error_log("No tiene decimales");
     }
     for ($i = 0; $i < count($dataFraccionamientos); $i++)
     {
