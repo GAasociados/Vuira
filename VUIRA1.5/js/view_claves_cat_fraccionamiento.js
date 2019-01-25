@@ -135,7 +135,7 @@ function event_add_cuenta_predial()
   }
   else
   {
-    alert("Debes ingresar una cuenta predial");
+    mensajeError("Debes ingresar al menos una cuenta predial para continuar");
   }
 }
 
@@ -161,7 +161,7 @@ function event_update_manzana(inputName)
     }
     else
     {
-      alert("DEBE INGRESAR INFORMACION");
+      mensajeError("Debes ingresar informacion en el campo");
     }
   }
 }
@@ -178,7 +178,7 @@ function event_update_lote(inputName)
     }
     else
     {
-      alert("DEBE INGRESAR INFORMACION");
+      mensajeError("Debes ingresar informacion en el campo");
     }
   }
 }
@@ -248,7 +248,7 @@ function event_generar_clave(buttonName)
   }
   else
   {
-    alert("Se deben llenar todos los campos");
+    mensajeError("Se deben llenar todos los campos");
   }
 }
 
@@ -271,7 +271,7 @@ function uploadFile()
               type: 'post',
               success: function(data){
               // get server responce here
-              alert(data);
+              mensajeInfo("El archivo se ha cargado con éxito");
               // clear file field
               var filename = $('#autocat').val().replace(/C:\\fakepath\\/i, '')
               $("#Croquis_URL").val("assets/tramites/clavescatastralesindividual/croquis/"+filename);
@@ -281,7 +281,7 @@ function uploadFile()
         }
         else
         {
-            alert("Please select file!");
+            mensajeError("Debes seleccionar un archivo");
         }
   }
 
@@ -304,7 +304,7 @@ function uploadFile()
         type: 'post',
         success: function(data){
         // get server responce here
-        alert(data);
+        mensajeInfo("El archivo se cargado con exito");
         // clear file field
         var filename = $('#archivoAutoCad').val().replace(/C:\\fakepath\\/i, '')
         $("#Cad_URL").val("assets/tramites/clavescatastralesfraccionamiento/"+filename);
@@ -314,7 +314,7 @@ function uploadFile()
     }
     else
     {
-      alert("Please select file!");
+      mensajeError("Debes seleccionar un archivo");
     }
   }
 
@@ -337,7 +337,7 @@ function uploadFile()
         type: 'post',
         success: function(data){
         // get server responce here
-        alert(data);
+        mensajeInfo("El archivo se ha cargado con éxito");
         // clear file field
         var filename = $('#archivoWord').val().replace(/C:\\fakepath\\/i, '')
         $("#CartaWord_URL").val("assets/tramites/clavescatastralesfraccionamiento/"+filename);
@@ -347,7 +347,7 @@ function uploadFile()
     }
     else
     {
-      alert("Please select file!");
+      mensajeError("Debes seleccionar un archivo");
     }
   }
 
@@ -356,8 +356,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      this.basePath = "https://"+window.location.hostname+"/";
-      //this.basePath = "http://localhost/Vuira/";
+      //this.basePath = "https://"+window.location.hostname+"/";
+      this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -896,12 +896,9 @@ class view_claves_fraccionamiento
     }
     else
     {
-      //alert("fecha inicial: "+$("#fecha-inicio").val()+", fecha final: "+$("#fecha-entrega").val());
       var objVista=new view_claves_fraccionamiento();
       var fechaIni = $("#fecha-inicio").val();
-      //fechaIni = fechaIni.substring(0,7);
       var fechaFin = $("#fecha-entrega").val();
-      //fechaFin = fechaFin.substring(0,7);
       objVista.update_fechas($("#Id").val(), fechaIni, fechaFin);
       window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
     }
@@ -921,7 +918,8 @@ class view_claves_fraccionamiento
         console.log(jdata);
         if(jdata != "Error")
         {
-          alert(jdata);
+          //alert(jdata);
+          mensajeInfo("Se ha generado el documento de la cuenta predial actual");
     		  var data ={};
           if(id_bd=="0")
           {
@@ -936,7 +934,8 @@ class view_claves_fraccionamiento
         }
         else
         {
-            alert (jdata);
+            //alert (jdata);
+            mensajeError("Error al generar el pdf de la cuenta. Compruebe datos y croquis");
         }
       }
     });
@@ -1137,7 +1136,6 @@ class view_claves_fraccionamiento
         {
           new view_claves_fraccionamiento().set_nombre_propietario(data);
           new view_claves_fraccionamiento().set_to_grid(data);
-          //alert (jdata);
         }
       }
     });
@@ -1196,7 +1194,7 @@ class view_claves_fraccionamiento
         }
         else
         {
-          alert (jdata);
+          mensajeError("No se han generado todas las claves de este fraccionamiento");
         }
       }
     });
