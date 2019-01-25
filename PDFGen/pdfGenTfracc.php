@@ -182,10 +182,10 @@ EOD;
 	}
 
 
-	/* if ($tramite_solicitado != "")
+	if ($tramite_solicitado != "")
 	{
 		$numero_exp = "00".$numero_exp."/".date('Y');
-	} */
+	}
 	
 	
 	
