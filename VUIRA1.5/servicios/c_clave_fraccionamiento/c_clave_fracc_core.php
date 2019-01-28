@@ -71,6 +71,10 @@ if(isset($_GET['service_name']))
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
         break;
+
+        case 'getAuxiliar':
+            print_r(json_encode($obj->getInfoAux($_POST["uid"]), JSON_UNESCAPED_SLASHES));
+        break;
         
 		case 'getByAuxiliar':
 						print_r(json_encode($obj->getAllFraccionamientosByAuxiliar((isset($_GET["auxiliar"]) ? $_GET["auxiliar"] : (isset($_POST["auxiliar"]) ? $_POST["auxiliar"] : -1))), JSON_UNESCAPED_SLASHES));
@@ -130,6 +134,12 @@ class coreFracc
     public function getNoClaves($id)
     {
                 $sql = "SELECT COUNT(*) AS Claves FROM Claves_Catastrales_Fraccionamientos_Detalles AS fraccDet WHERE fraccDet.Id_Fraccionamientos = {$id}";
+        return $this->con->executeQuerry($sql);
+    }
+
+    public function getInfoAux($uid)
+    {
+        $sql = "SELECT * FROM usuarios WHERE ID = {$uid}";
         return $this->con->executeQuerry($sql);
     }
 

@@ -229,10 +229,17 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
         error_log("No tiene decimales");
     }
     for ($i = 0; $i < count($dataFraccionamientos); $i++)
+    // {
+    //     if($i>0)
+	// 		$folios .="/2019, ";
+	// 	$folios .= $dataFraccionamientos[$i];
+    // } 
+    for ($i = 0; $i < count($dataFraccionamientos); $i++)
     {
-        if($i>0)
-			$folios .=", ";
-		$folios .= $dataFraccionamientos[$i];
+        // if($i>0)
+		// 	$folios .="/2019, ";
+        // $folios .= $dataFraccionamientos[$i];
+        $folios .= "00".$dataFraccionamientos[$i]."/2019, ";
     } 
 }
 

@@ -11,6 +11,30 @@ var numeros_asignados = 0;
 //SE UTILIZA EN AUXILIAR
 var data_auxiliar = 0;
 
+function event_insert_data_inmueble()
+{
+  var caracter = $("#p_caracter").val();
+  var superficie = $("#p_superficie").val();
+  var numero_escritura = $("#p_numero_escritura").val();
+  var notario = $("#p_notario_publico").val();
+  var numero_notario = $("#p_numero_notario_publico").val();
+  var fecha_escritura = $("#p_fecha_escritura").val();
+  var numero_oficio = $("#p_numero_oficio").val();
+  var estado_escritura = $("#p_estado_escritura").val();
+  var ciudad_escritura = $("#p_ciudad_escritura").val();
+  $.ajax({
+    type:"post",
+    url:"../servicios/c_clave_fraccionamiento/c_clave_fracc_info_init_update.php",
+    data:{Id:$("#id").val(), caracter:caracter, superficie_terreno:superficie, numero_escritura:numero_escritura, nombre_notario:notario, 
+    numero_notario:numero_notario, fecha_escritura:fecha_escritura, numero_oficio:numero_oficio, estado_escitura:estado_escritura,
+  ciudad_escritura:ciudad_escritura},
+    async:true,
+    success: function (jdata)
+    {
+      alert("Se ha Actualizado la Plantilla");
+    }
+  }); 
+}
 
 //cuando es persona moral se muestran estos documentos
 function event_mostrar_extra_docs(event)
@@ -98,16 +122,6 @@ function generar_talon_pago(event)
   }
   var jsonData = JSON.stringify(folios);
   window.open("../../PDFGen/pdfGenTalonPagoGet.php?idFracc="+$("#id").val()+"&data="+jsonData+"&nombre="+$("#Propietario").val()+"&cantidadClaves="+cuentas_asignadas.length, "_blank");
-  /* .ajax({
-    type:"post",
-    url:"../../PDFGen/pdfGenTalonPago.php",
-    data:{idFracc:$("#id").val(),data:jsonData,nombre:$("#Propietario").val(),cantidadClaves:cuentas_asignadas.length,},
-    async:true,
-    success: function (jdata)
-    {
-      window.open("../../PDFGen/talonPago.pdf", "_blank");
-    }
-  }); */
 }
 
 function event_imiprimirTalon()
@@ -199,6 +213,8 @@ function event_load_auxiliar()
   objVista.get_data_clave($("#id").val());
   objVista.get_data_asignaciones( $("#id").val(), $("#uid").val());
   objVista.get_data_auxiliar($("#uid").val());
+  objVista.get_data_inmueble_template($("#id").val());
+  objVista.get_Detalles_Fraccionamiento($("#id").val());
 
   $( "#form" ).submit(function( event ) {
     event.preventDefault();
@@ -422,7 +438,7 @@ class view_claves_fraccionamiento
         if(jdata != "Error")
         {
           var data = JSON.parse(jdata);
-          cuentas_asignadas = data;
+          //cuentas_asignadas = data;
           new view_claves_fraccionamiento().set_data_grid_aux(data);
           console.log(data);
         }
@@ -787,17 +803,13 @@ class view_claves_fraccionamiento
     var fecha_ini = $("#fecha-inicio").val();
     var fecha_final = $("#fecha-entrega").val();
     var nombre_propietario = $("#Propietario").val();
-    var telefono = $("#Telefono").val();
     var correo = $("#Correo_Electronico").val();
-    var tipo_tramite = $("#Tipo_Tramite").val();
     var clave = cuentas_asignadas[0]["Cuenta_Predial"];
     var folios = JSON.stringify(numeros_asignados);
+    //aqui funcion para insertar el id en la tabla fracc_info_init
+    new view_claves_fraccionamiento().insertar_idFracc_info_init($("#id").val());
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
       +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
-   /*  for (var i = 0; i < numeros_asignados.length; i++)
-    {
-      new view_claves_fraccionamiento().set_folio_fracc_detalles(i);
-    } */
     new view_claves_fraccionamiento().set_folio_fracc_detalles(0);
 
   }
@@ -833,6 +845,12 @@ class view_claves_fraccionamiento
         {
           var datosDetalleFraccionamiento = JSON.parse(jdata);
           detalles_fracc_data = datosDetalleFraccionamiento;
+
+          if( $("#uid").val() != "")
+          {
+            console.log("NO ESTA VACIO");
+            cuentas_asignadas = datosDetalleFraccionamiento;
+          }
         }
       }
     });
@@ -918,8 +936,8 @@ class view_claves_fraccionamiento
         console.log(jdata);
         if(jdata != "Error")
         {
-          //alert(jdata);
-          mensajeInfo("Se ha generado el documento de la cuenta predial actual");
+          alert(jdata);
+          //mensajeInfo("Se ha generado el documento de la cuenta predial actual");
     		  var data ={};
           if(id_bd=="0")
           {
@@ -929,7 +947,7 @@ class view_claves_fraccionamiento
                                                               $("#Cuenta_Predial").val());
           }
           //var url = "https://vuira.irapuato.gob.mx/DocPrint/DocPrint.php?id="+jdata;
-    		  var url = "../../DocPrint/DocPrint.php?id="+jdata;
+    		  var url = "../../DocPrint/DocPrintFracc.php?id="+jdata;
     		  window.open(url, '_blank');
         }
         else
@@ -1056,6 +1074,39 @@ class view_claves_fraccionamiento
   	return data;
   }
 
+  get_data_inmueble_template(id)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_det.php?service_name=getInfoFraccInit",
+      data:{id:id},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
+        var data = JSON.parse(jdata);
+        console.log("EL TAMAÑO DEL OBJETO ES: "+data.length);
+        if ( data.length != 0)
+        {
+          new view_claves_fraccionamiento().set_data_inmueble_template(data);
+        }
+      }
+    });
+  }
+
+  set_data_inmueble_template(data)
+  {
+    $("#p_caracter").val( data[0]["caracter"] );
+    $("#p_superficie").val( data[0]["superficie_terreno"] );
+    $("#p_numero_escritura").val( data[0]["numero_escritura"] );
+    $("#p_notario_publico").val( data[0]["nombre_notario"] );
+    $("#p_numero_notario_publico").val( data[0]["numero_notario"] );
+    $("#p_fecha_escritura").val( data[0]["fecha_escrituras"] );
+    $("#p_numero_oficio").val( data[0]["numero_oficio"] );
+    $("#p_estado_escritura").val( data[0]["entidad_federativa"] );
+    $("#p_ciudad_escritura").val( data[0]["ciudad_escrituras"] );
+  }
+
   cancelar_claveGen()
   {
 	  if(rowSelected!= "")
@@ -1088,6 +1139,32 @@ class view_claves_fraccionamiento
         }
       }
     });
+  }
+
+  insert_data_inmueble()
+  {
+    var caracter = $("#p_caracter").val();
+    var superficie = $("#p_superficie").val();
+    var numero_escritura = $("#p_numero_escritura").val();
+    var notario = $("#p_notario_publico").val();
+    var numero_notario = $("#p_numero_notario_publico").val();
+    var fecha_escritura = $("#p_fecha_escritura").val();
+    var numero_oficio = $("#p_numero_oficio").val();
+    var estado_escritura = $("#p_estado_escritura").val();
+    var ciudad_escritura = $("#p_ciudad_escritura").val();
+
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_info_init_insert.php",
+      data:{id:$().val(), caracter:caracter, superficie_terreno:superficie, numero_escritura:numero_escritura, nombre_notario:notario, 
+      numero_notario:numero_notario, fecha_escritura:fecha_escritura, numero_oficio:numero_oficio, estado_escitura:estado_escritura,
+    ciudad_escritura:ciudad_escritura},
+      async:true,
+      success: function (jdata)
+      {
+        var data = JSON.parse(jdata);
+      }
+    }); 
   }
 
   load_data_fraccionamientos_detalles(id)
@@ -1137,6 +1214,20 @@ class view_claves_fraccionamiento
           new view_claves_fraccionamiento().set_nombre_propietario(data);
           new view_claves_fraccionamiento().set_to_grid(data);
         }
+      }
+    });
+  }
+
+  insertar_idFracc_info_init(id)
+  {
+    $.ajax({
+      type:"post",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_init_insert.php",
+      data:{id:id},
+      async:true,
+      success: function (jdata)
+      {
+        console.log(jdata);
       }
     });
   }

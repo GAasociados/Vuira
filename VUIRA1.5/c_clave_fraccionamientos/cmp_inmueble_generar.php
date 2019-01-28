@@ -36,7 +36,11 @@ ini_set("display_errors",1);
 </div>
 <div class="form-group col-md-6">
 	<label class="control-label">Ciudad de Escritura *</label>
-	<input class="form-control" type="text" id="p_ciudad_escritura"">
+	<input class="form-control" type="text" id="p_ciudad_escritura">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Haga click en el botón de abajo para guardar los datos</label>
+	<input class="btn btn-info" value="Guadar Datos de la Plantilla" type="button" onclick="event_insert_data_inmueble()" id="buttonSaveTemplate">
 </div>
 <div class="row">
     <div class="col-md-12">

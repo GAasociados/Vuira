@@ -32,10 +32,12 @@ if(isset($_GET['service_name']))
         case 'getinfodocumentos':
               print_r(json_encode($objD->getDataInformacionDocumentos($_POST["id"], $_POST['cuenta_predial']), JSON_UNESCAPED_SLASHES));
               break;
-			  case 'getDetallesFraccionamiento':
-		          print_r(json_encode($objD->getDataDetallesFraccionamiento($_POST["id"]), JSON_UNESCAPED_SLASHES));
-		          break;
-
+        case 'getDetallesFraccionamiento':
+            print_r(json_encode($objD->getDataDetallesFraccionamiento($_POST["id"]), JSON_UNESCAPED_SLASHES));
+        break;
+        case 'getInfoFraccInit':
+            print_r(json_encode($objD->getInfoFraccInit($_POST["id"]), JSON_UNESCAPED_SLASHES));
+		break;
 
 		default:
 			echo "El servicio no existe. / Service doesn't exist.";
@@ -180,6 +182,12 @@ class detFracc
     {
       $query = "SELECT * FROM natural7_vuira.Claves_Catastrales_Fraccionamientos_Detalles WHERE Id_Fraccionamientos = $idFraccionamiento";
       return $this->con->executeQuerry($query);
+    }
+
+    public function getInfoFraccInit($id)
+    {
+        $query = "SELECT * FROM natural7_vuira.Claves_Catastrales_fracc_info_init WHERE Id_Fraccionamientos = $id";
+        return $this->con->executeQuerry($query);
     }
 }
 
