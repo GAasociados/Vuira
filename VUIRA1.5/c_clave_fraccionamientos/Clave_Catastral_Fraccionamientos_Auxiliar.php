@@ -363,11 +363,6 @@ ini_set("display_errors",1);
 
 										              </div><!-- FIN SUPERFICE-->
 										            </div>
-													<!-- <div class="row">
-														<div class="col-md-12" align="right">
-															<input type="button" class="btn btn-success" value="">
-														</div>
-													</div> -->
 													<div class="row">
 														<div class="col-md-12" align="right">
 															<input type="button" class="btn btn-success" value="Documento del pago total de cuentas" onclick="event_mostrar_modal_pago_cuentas()">
