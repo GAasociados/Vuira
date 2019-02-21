@@ -184,6 +184,14 @@ ini_set("display_errors",1);
                   </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Escritura Pública de Propiedad que contenga la Hoja Registral y ampare la Superficie Registrada (en caso de no contener la hoja registral anexar copia de Libertad de Gravamen)</label>
+                        <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Escritura_Publica" multiple="">
+                      </div>
+                    </div>
+                  </div>
+                <div class="row">
                     <!-- <div class="col-md-6">
                       <div class="form-group">
                         <label for="">Poder Notarial para Representación de Persona Moral</label>
