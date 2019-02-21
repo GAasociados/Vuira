@@ -265,6 +265,8 @@ EOD;
             $data["Doc_Plano_Fisico"] = ($files['Doc_Plano_Fisico']["error"] != 4) ? $this->subirArchivo($files['Doc_Plano_Fisico'], "planofisico") : "";
             $data["Doc_Escritura_Publica"] = ($files['Doc_Escritura_Publica']["error"] != 4) ? $this->subirArchivo($files['Doc_Escritura_Publica'], "escriturapublica") : "";
             $data["Doc_Resibo_Predial"] = ($files['Doc_Resibo_Predial']["error"] != 4) ? $this->subirArchivo($files['Doc_Resibo_Predial'], "recibopredial") : "";
+            $data["Doc_Poder_Moral"] = ($files['Doc_Poder_Moral']["error"] != 4) ? $this->subirArchivo($files['Doc_Poder_Moral'], "podermoral") : "";
+            $data["Doc_Ine_Soli"] = ($files['Doc_Ine_Soli']["error"] != 4) ? $this->subirArchivo($files['Doc_Ine_Soli'], "docIneSoli") : "";
         }
     }
 }

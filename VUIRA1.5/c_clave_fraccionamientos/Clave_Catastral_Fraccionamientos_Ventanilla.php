@@ -137,8 +137,8 @@ ini_set("display_errors",1);
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi"  name="tipo_persona" value="moral" onclick="" checked>Personal Moral</label>
-                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="tipo_persona" value="fisica" onclick="">Persona Física</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supM"  class="sup_inmueble_swi"  name="tipo_persona" value="moral" onclick="event_mostrar_extra_docs_tipo(this)" >Personal Moral</label>
+                      <label class="radio-inline"><input type="radio"  id="check-unidad_supH" class="sup_inmueble_swi"  name="tipo_persona" value="fisica" onclick="event_mostrar_extra_docs_tipo(this)" checked>Persona Física</label>
                     </div>
                   </div>
                   <div class="row">
@@ -183,6 +183,14 @@ ini_set("display_errors",1);
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                    <!-- <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">Poder Notarial para Representación de Persona Moral</label>
+                        <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Poder_Moral" multiple="">
+                      </div>
+                    </div> -->
+                  </div>
               </div>
             </div>
             <!-- SECCION II -->

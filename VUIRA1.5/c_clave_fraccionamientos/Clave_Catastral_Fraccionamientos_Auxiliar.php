@@ -228,9 +228,9 @@ ini_set("display_errors",1);
 									<input type="button" class="btn btn-danger float" value="Cancelar" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;" onclick="event_cancelar_tramite()">
 									<form id="form">
 										<input type="hidden" name="id" id="id" value="<?php
-										if(isset($_GET["Id"]))
+										if(isset($_GET["id"]))
 										{
-											echo $_GET["Id"];
+											echo $_GET["id"];
 										}
 										?>"/>
 										<input type="hidden" name="uid" id="uid" value="<?php
@@ -279,15 +279,21 @@ ini_set("display_errors",1);
 										            </div>
 										            <div class="col-md-6">
 										            	<div class="form-group">
-										            		<label for="">Poder Notarial para representación de persona moral</label>
-										            		<a id="Doc_Acta" name="Doc_Acta" href="" target="_blank"  > Ver Documento </a>
+										            		<label for="">Poder Notarial para representación de persona moral <strong>(NOTA: En caso que no se haya cargado, este elemento no mostrará nada)</strong></label>
+										            		<a id="Doc_Poder_Moral" name="Doc_Poder_Moral" href="" target="_blank"  > Ver Documento </a>
 										            	</div>
 										            </div>
 										          </div>
 										          <div class="row">
-										          	<div class="col-md-6">
+															<div class="col-md-6">
 										          		<div class="form-group">
 										            		<label for="" >Presentar Plano físico de Traza autorizada por la Dirección General de Desarrollo Territorial</label>
+										            	</div>
+										          	</div>
+										          	<div class="col-md-6">
+										          		<div class="form-group">
+										            		<label for="">Identificación de Solicitante: INE, Pasaporte o Cédula Profesional <strong>(NOTA: En caso que no se haya cargado, este elemento no mostrará nada)</strong></label>
+																		<a id="Doc_Ine_Soli" name="Doc_Ine_Soli" href="" target="_blank"  >Ver Documento </a>
 										            	</div>
 										          	</div>
 										          </div>

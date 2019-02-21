@@ -36,7 +36,7 @@ function event_insert_data_inmueble()
   }); 
 }
 
-//cuando es persona moral se muestran estos documentos
+//cuando es propietario se muestran estos documentos
 function event_mostrar_extra_docs(event)
 {
   var extra_row = $("#extra_docs_row");
@@ -46,7 +46,7 @@ function event_mostrar_extra_docs(event)
     $("#extra_docs_row").remove();
   }
 
-  if ( event.value == "si")
+  if ( event.value == "no")
   {
     var innerField = "";
     innerField += "<div id='extra_docs_row' class='row'>";
@@ -54,6 +54,31 @@ function event_mostrar_extra_docs(event)
     innerField += "<div class='form-group'>";
     innerField += "<label>Identificación de Solicitante: INE, Pasaporte o Cédula Profesional</label>";
     innerField += "<input accept='.jpg, .jpeg, .png ,.pdf, .rar, .zip' type='file' name='Doc_Ine_Soli' multiple=''>";
+    innerField += "</div>";
+    innerField += "</div>";
+    innerField += "</div>";
+    $("#content-wrapper-fecha-recep").append(innerField);
+  }
+}
+
+//cuando es persona moral se muestran estos documentos
+function event_mostrar_extra_docs_tipo(event)
+{
+  var extra_row = $("#extra_docs_row_tipo");
+  console.log(extra_row.length);
+  if( extra_row.length != 0)
+  {
+    $("#extra_docs_row_tipo").remove();
+  }
+
+  if ( event.value == "moral")
+  {
+    var innerField = "";
+    innerField += "<div id='extra_docs_row_tipo' class='row'>";
+    innerField += "<div class='col-md-6'>";
+    innerField += "<div class='form-group'>";
+    innerField += "<label>Poder Notarial para Representación de Persona Moral</label>";
+    innerField += "<input accept='.jpg, .jpeg, .png ,.pdf, .rar, .zip' type='file' name='Doc_Poder_Moral' multiple=''>";
     innerField += "</div>";
     innerField += "</div>";
     innerField += "</div>";
@@ -372,8 +397,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "https://"+window.location.hostname+"/";
-      this.basePath = "http://localhost/Vuira/";
+      this.basePath = "https://"+window.location.hostname+"/";
+      //this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()

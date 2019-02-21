@@ -186,7 +186,7 @@ class detFracc
 
     public function getInfoFraccInit($id)
     {
-        $query = "SELECT * FROM natural7_vuira.Claves_Catastrales_fracc_info_init WHERE Id_Fraccionamientos = $id";
+        $query = "SELECT Id_Fraccionamientos FROM natural7_vuira.Claves_Catastrales_fracc_info_init WHERE Id_Fraccionamientos = $id";
         return $this->con->executeQuerry($query);
     }
 }
