@@ -1,5 +1,5 @@
 <?php
-include_once( "../DataConexion.php");
+include_once("../DataConexion.php");
 
 
 $objD = new dataFraccionamientos_info_init();

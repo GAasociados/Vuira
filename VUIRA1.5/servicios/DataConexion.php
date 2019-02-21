@@ -3,8 +3,8 @@
     {
     	private $conn;
     	private $user="vuira";
-		private $pwd="CvBJFxb2GNbhYLZC";
-		private $host="10.16.42.35";
+		private $pwd="irap.ga";
+		private $host="localhost";
 		private $dataBase="natural7_vuira";
 
 		public function conect()
@@ -14,6 +14,10 @@
 			{
     			die("Connection failed: " . $this->conn->connect_error);
 				error_log("Connection failed: " . $this->conn->connect_error);
+			}
+			else
+			{
+				error_log("Se logró la conexion");
 			}
 			$acentos = $this->conn->query("SET NAMES 'utf8'");
 		}

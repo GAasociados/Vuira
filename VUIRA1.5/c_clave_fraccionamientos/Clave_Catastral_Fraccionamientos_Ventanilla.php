@@ -178,7 +178,7 @@ ini_set("display_errors",1);
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="">Poder Notarial para Representación de Persona Moral</label>
+                      <label for="">Acta Constitutiva</label>
                       <input accept=".jpg, .jpeg, .png ,.pdf, .rar, .zip" type="file" name="Doc_Acta" multiple="">
                     </div>
                   </div>

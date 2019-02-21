@@ -806,8 +806,10 @@ class view_claves_fraccionamiento
     var correo = $("#Correo_Electronico").val();
     var clave = cuentas_asignadas[0]["Cuenta_Predial"];
     var folios = JSON.stringify(numeros_asignados);
+    var objVista = new view_claves_fraccionamiento();
+    objVista.update_fechas($("#Id").val(), fecha_ini, fecha_final);
     //aqui funcion para insertar el id en la tabla fracc_info_init
-    new view_claves_fraccionamiento().insertar_idFracc_info_init($("#id").val());
+    objVista.insertar_idFracc_info_init($("#id").val());
     window.open("../../PDFGen/pdfGenTalon.php?nombre="+nombre_propietario+"&correo="+correo
       +"&fecha_inicial="+fecha_ini+"&fecha_final="+fecha_final+"&folios="+folios+"&clave="+clave, "_blank");
     new view_claves_fraccionamiento().set_folio_fracc_detalles(0);
@@ -918,7 +920,7 @@ class view_claves_fraccionamiento
       var fechaIni = $("#fecha-inicio").val();
       var fechaFin = $("#fecha-entrega").val();
       objVista.update_fechas($("#Id").val(), fechaIni, fechaFin);
-      window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
+      //window.location.href=this.basePath+"VUIRA1.5/c_clave_fraccionamientos/Clave_Catastral_Listado.php";
     }
   }
 
@@ -1222,7 +1224,7 @@ class view_claves_fraccionamiento
   {
     $.ajax({
       type:"post",
-      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_init_insert.php",
+      url:this.basePath+"VUIRA1.5/servicios/c_clave_fraccionamiento/c_clave_fracc_info_init_insert.php",
       data:{id:id},
       async:true,
       success: function (jdata)

@@ -21,6 +21,9 @@ if(isset($_GET['service_name']))
             print_r(json_encode($obj->coreSel((isset($_GET["id"]) ? $_GET["id"] : (isset($_POST["id"]) ? $_POST["id"] : -1))), JSON_UNESCAPED_SLASHES));
         break;
 
+        case 'updateFechas':
+            print_r(json_encode($obj->updateFechas($_POST["id"], $_POST["fechaInicial"], $_POST["fechaFinal"]),JSON_UNESCAPED_SLASHES));
+        break;
 
         //ESTE SOLO SE UTLIZA EN INDIVIDUAL, PARA OBTENER SOLO UN REGISTRO
         case 'getMotivoIndividual': 
@@ -71,13 +74,14 @@ if(isset($_GET['service_name']))
 		case 'getSinAsignar':
 						print_r(json_encode($obj->getAllFraccionamientosSinAsignar(), JSON_UNESCAPED_SLASHES));
         break;
-
-        case 'getAuxiliar':
-            print_r(json_encode($obj->getInfoAux($_POST["uid"]), JSON_UNESCAPED_SLASHES));
-        break;
         
 		case 'getByAuxiliar':
 						print_r(json_encode($obj->getAllFraccionamientosByAuxiliar((isset($_GET["auxiliar"]) ? $_GET["auxiliar"] : (isset($_POST["auxiliar"]) ? $_POST["auxiliar"] : -1))), JSON_UNESCAPED_SLASHES));
+        break;
+
+        //OBTIENE LA INFORMACION DEL AUXILIAR
+        case 'getAuxiliar':
+						print_r(json_encode($obj->getAuxiliar($_POST['uid']), JSON_UNESCAPED_SLASHES));
         break;
         
 		default:
@@ -137,12 +141,6 @@ class coreFracc
         return $this->con->executeQuerry($sql);
     }
 
-    public function getInfoAux($uid)
-    {
-        $sql = "SELECT * FROM usuarios WHERE ID = {$uid}";
-        return $this->con->executeQuerry($sql);
-    }
-
 		public function getAllFraccionamientosByAuxiliar($idAuxiliar)
     {
 				$sql = <<<EOD
@@ -153,6 +151,12 @@ class coreFracc
 EOD;
 			//echo $sql;
 
+        return $this->con->executeQuerry($sql);
+    }
+
+    public function getAuxiliar($uid)
+    {
+        $sql = "SELECT * FROM usuarios WHERE ID = {$uid}";
         return $this->con->executeQuerry($sql);
     }
 
@@ -170,6 +174,12 @@ EOD;
 			echo $sql;
 			return $this->con->sqlOperations($sql);
         }
+
+    public function updateFechas($id, $fechaInicial, $fechaFinal)
+    {
+        $sql="UPDATE Claves_Catastrales_Fraccionamientos SET fecha_inicial = '$fechaInicial', fecha_final = '$fechaFinal' WHERE Id = '$id'";
+        return $this->con->sqlOperations($sql);
+    }
 
     //OBTIENE LOS CAMPOS MOTIVO_NEGACION Y NOOFICIO. SOLO SE UTILIZA ESTE WS EN INDIVIDUAL      
     public function getMotivoIndividual($id)

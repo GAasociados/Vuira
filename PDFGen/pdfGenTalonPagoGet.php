@@ -206,8 +206,7 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
     $total = floatval($totalClaves + $totalClaveCertificada);
     error_log($total);
 	$decimales = explode(".",$total);
-    $numeroConLetra = num_to_letras($total);
-    error_log(is_float($total));
+    //$numeroConLetra = num_to_letras($total);
     if (count($decimales) > 1)
     {
         error_log("Tiene decimales");
@@ -223,24 +222,23 @@ if( isset($_GET["data"]) && isset($_GET["nombre"]) && isset($_GET["cantidadClave
             $total = round($total,0,PHP_ROUND_HALF_UP);
             $total = number_format($total,2);
         }
+        error_log($total);
     }
     else
     {
         error_log("No tiene decimales");
     }
-    for ($i = 0; $i < count($dataFraccionamientos); $i++)
-    // {
-    //     if($i>0)
-	// 		$folios .="/2019, ";
-	// 	$folios .= $dataFraccionamientos[$i];
-    // } 
+
     for ($i = 0; $i < count($dataFraccionamientos); $i++)
     {
         // if($i>0)
 		// 	$folios .="/2019, ";
         // $folios .= $dataFraccionamientos[$i];
         $folios .= "00".$dataFraccionamientos[$i]."/2019, ";
-    } 
+        //$folios = "Del "."00".$dataFraccionamientos[0]."/2019"." al 00".$dataFraccionamientos[count($dataFraccionamientos) - 1]."/2019";
+    }
+    $total = str_replace(",","",$total);
+    $numeroConLetra = num_to_letras($total);
 }
 
 $fechaPrueba = "2010-11-24";
@@ -344,32 +342,32 @@ $html = <<<EOD
 			<td align="center">Orden de Pago</td>
     </tr>
     <tr>
-			<td align="center" colspan="4" style="border: 1px solid black;">TIPO DE AUTORIZACION</td>
-			<td align="center" style="border: 1px solid black;">No. DE AUTORIZACION</td>
+			<td align="center" colspan="4" style="border: 1px solid black;">TIPO DE AUTORIZACIÓN</td>
+			<td align="center" style="border: 1px solid black;">No. DE AUTORIZACIÓN</td>
     </tr>
     <tr>
 			<td align="justify" colspan="4" rowspan="5" >EN RELACIÓN A LA SOLICITUD PRESENTADA ANTE LA DIRECCIÓN DE CATASTRO, ADSCRITA A LA TESORERÍA MUNICIPAL, 
 			CON LA FINALIDAD DE OBTENER LA CLAVE CATASTRAL CERTIFICADA; PREVIO ANÁLISIS PRACTICADO PARA TAL EFECTO SE TIENE LO SIGUIENTE: DEBERÁ
-			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LAS PRESENTES CLAVES CATASTRALES CERTIFICADAS POR LA CANTIDAD DE $'.$total.'
+			PAGAR A LA TESORERÍA MUNICIPAL LOS DERECHOS CORRESPONDIENTES A LAS PRESENTES CLAVES CATASTRALES CERTIFICADAS POR LA CANTIDAD DE $$total
 			($numeroConLetra), DE CONFORMIDAD CON LO DISPUESTO EN EL ARTÍCULO 27 FRACCIÓN VIII Y 32 FRACCIÓN IV DE LA LEY DE INGRESOS PARA 
 			EL MUNICIPIO DE IRAPUATO GUANAJUATO QUE ENTRÓ EN VIGOR A PARTIR DEL 1° DE ENERO DEL AÑO 2019.</td>
 			<td align="center">$idFracc</td>
     </tr>
     <tr>
-			<td align="center" style="border: 1px solid black;">NUMEROS DE SEGUIMIENTO</td>
+			<td align="center" style="border: 1px solid black;">NÚMEROS DE SEGUIMIENTO</td>
 		</tr>
 		<tr>
 			<td align="center">$folios</td>
 		</tr>
 		<tr>
-			<td align="center" style="border: 1px solid black;">FECHA DE AUTORIZACION</td>
+			<td align="center" style="border: 1px solid black;">FECHA DE AUTORIZACIÓN</td>
 		</tr>
 		<tr>
 			<td align="center">$fechaAutorizacion</td>
 		</tr>
 		<tr>
 			<td align="center" colspan="4" style="border: 1px solid black;">Descripción</td>
-			<td align="center" style="border: 1px solid black;">Monto de Autorizacion</td>
+			<td align="center" style="border: 1px solid black;">Monto de Autorización</td>
 		</tr>
 		<tr>
 			<td align="left"><strong>CONCEPTO</strong></td>
@@ -407,32 +405,32 @@ $html = <<<EOD
 			<td align="right"><strong>$$total</strong></td>
 		</tr>
 		<tr>
-			<td align="center" style="border: 1px solid black;">INFORMACION</td>
-			<td align="center" style="border: 1px solid black;" colspan="3">PROPIETARIO/SOLICITANTE/RAZON SOCIAL</td>
-			<td align="center" style="border: 1px solid black;">AUTORIZACION</td>
+			<td align="center" style="border: 1px solid black;">INFORMACIÓN</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PROPIETARIO/SOLICITANTE/RAZÓN SOCIAL</td>
+			<td align="center" style="border: 1px solid black;">AUTORIZACIÓN</td>
 		</tr>
 		<tr>
             <td style="border: 1px solid black;font-size:15px;"><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=Id:$idFracc%20Solicitante:$propietarioUrl%20Costo:$$total&chof=png"></td>
                                                                                                                      
-			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong><br>PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPAUTO LA CANTIDAD
+			<td align="center" style="border: 1px solid black;" colspan="3"><strong>$propietario</strong><br>PROPIETARIO MISMO QUE PAGARÁ A LA TESORERIA MUNICIPAL DE IRAPUATO LA CANTIDAD
 			DE $$total ($numeroConLetra)</td>
 			<td align="center" style="border: 1px solid black;" ><img src="http://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=../assets/nombramiento-catastro.PDF/&chld=L|1"></td>
             <td></td>
         </tr>
 		<tr>
-			<td align="center" colspan="5">Si requiere factura tiene 48 horas para su solicitud al correo electronico facturacion@irapuato.gob.mx</td>
+			<td align="center" colspan="5">Si requiere factura tiene 48 horas para su solicitud al correo electrónico facturacion@irapuato.gob.mx</td>
 		</tr>
 		<tr>
 			<td align="center" style="border: 1px solid black;" colspan="2">PARA USO EXCLUSIVO DEL BANCO</td>
-			<td align="center" style="border: 1px solid black;" colspan="3">PARA USO EN BANCA ELECTRONICA</td>
+			<td align="center" style="border: 1px solid black;" colspan="3">PARA USO EN BANCA ELECTRÓNICA</td>
 		</tr>
 		<tr>
 			<td align="justify" colspan="2">REF1: $propietario</td>
-            <td align="center" colspan="1">Pago en banca electronica</td>
+            <td align="center" colspan="1">Pago en banca electrónica</td>
             <td align="right" colspan="2"><img src="../assets/images/codigoclavecosto.gif" alt="" width="80"></td>
 		</tr>
 		<tr>
-			<td align="justify" colspan="2">REF2: Claves Catastral Fraccionamiento</td>
+			<td align="justify" colspan="2">REF2: Clave Catastral Fraccionamiento</td>
 			<td align="center" colspan="1">CLAVE:030222900012857979</td>
 		</tr>
 		<tr>
