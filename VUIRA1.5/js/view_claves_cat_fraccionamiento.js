@@ -10,6 +10,8 @@ var cuentas_asignadas = [];
 var numeros_asignados = 0;
 //SE UTILIZA EN AUXILIAR
 var data_auxiliar = 0;
+//GUARDA LOS PROPIETARIOS
+var propietarios = [];
 
 function event_insert_data_inmueble()
 {
@@ -1030,17 +1032,25 @@ class view_claves_fraccionamiento
   set_nombre_propietario(data)
   {
     var nombre_propietario_actual = $("#Propietario").val();
-    var nombre_nuevo = data.NOMBRE + " " + data.APELLIDO_PATERNO + " " + data.APELLIDO_MATERNO;
+    var nombre_nuevo = data.NOMBRE;
     if ( nombre_propietario_actual != "")
     {
-      if ( nombre_propietario_actual != nombre_nuevo)
+      //AQUI VA LA CONDICION
+      /* if ( nombre_propietario_actual != nombre_nuevo)
       {
         mensajeInfo('Los Propietarios No Son Iguales');
+      } */
+
+      if (!propietarios.includes(nombre_nuevo)) 
+      {
+        mensajeInfo('Los Propietarios No Son Iguales');
+        propietarios.push(nombre_nuevo);
       }
     }
     else
     {
       $("#Propietario").val(nombre_nuevo);
+      propietarios.push(nombre_nuevo);
     }
   }
 
