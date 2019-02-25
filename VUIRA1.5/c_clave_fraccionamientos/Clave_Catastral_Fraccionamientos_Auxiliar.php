@@ -228,11 +228,12 @@ ini_set("display_errors",1);
 									<input type="button" class="btn btn-danger float" value="Cancelar" id="btnCancelarFracc" style="position: fixed;bottom: 70px;right: 20px;" onclick="event_cancelar_tramite()">
 									<form id="form">
 										<input type="hidden" name="id" id="id" value="<?php
-										if(isset($_GET["id"]))
+										if(isset($_GET["Id"]))
 										{
-											echo $_GET["id"];
+											echo $_GET["Id"];
 										}
 										?>"/>
+										
 										<input type="hidden" name="uid" id="uid" value="<?php
 										if(isset($_GET['uid']))
 										{
