@@ -314,7 +314,10 @@ ini_set("display_errors",1);
 											  
 											  <div id="documentosCadWord" class="content-box border-top border-blue">
 										        <div class="content-box-wrapper">
+														<h3><strong>Para crear un solo documento con todas las claves incluidas</strong></h3>
+														<br>
 													<div class="row">
+													
 														<div class="col-md-6">
 															<div class="form-group">
 																<input type="file" name="archivoAutocad" id="archivoAutoCad">

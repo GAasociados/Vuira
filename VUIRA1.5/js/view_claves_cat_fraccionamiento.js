@@ -354,6 +354,17 @@ function uploadFile()
         new view_claves_fraccionamiento().set_cadFile_url($("#id").val(), $("#Cad_URL").val());
         }
       });
+
+      $.ajax({
+        url: '../../motor_de_pago', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script, if anything
+        data:{"referencia":"2018-ORT-1538410232"},
+        type: 'post',
+        success: function(data)
+        {
+          console.log(data);
+        }
+      });
     }
     else
     {
@@ -399,8 +410,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      //this.basePath = "https://"+window.location.hostname+"/";
-      this.basePath = "http://localhost/Vuira/";
+      this.basePath = "https://"+window.location.hostname+"/";
+      //this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -750,8 +761,8 @@ class view_claves_fraccionamiento
     innerTableContent += "<div class='form-row'>";
     innerTableContent += "<div class='form-group col-md-6 col'><input type='button' name='' class='btn btn-danger' value='Cancelar' onclick='event_cancelar_selection()'></div>";
     innerTableContent += "</div>";
-    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange=''>"
-    innerTableContent += "<input type='button' onclick='uploadFile()'  value='Subir Archivo'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
+    innerTableContent += "<div class='form-row'><div class='form-group col-md-12 col'><input type='file' name='croquis' id='autocat' onchange='' title='Seleccionar Croquis'>"
+    innerTableContent += "<input type='button' onclick='uploadFile()'  value='Subir Croquis'><input type='hidden' id='Croquis_URL' name='Croquis_URL' value='assets/tramites/clavescatastralesindividual/croquis/2861.PNG'></div></div>";
     innerTableContent += "</div>";
   	innerTableContent += "</div></td>";
   	tblRow.html(innerTableContent);
