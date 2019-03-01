@@ -39,6 +39,30 @@ ini_set("display_errors",1);
 	<input class="form-control" type="text" id="p_ciudad_escritura">
 </div>
 <div class="form-group col-md-6">
+	<label class="control-label">Área Privativa</label>
+	<input class="form-control" type="number" id="p_area_privativa">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Área Común</label>
+	<input class="form-control" type="number" id="p_area_comun">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Área Común Cubierta</label>
+	<input class="form-control" type="number" id="p_area_cubierta">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Total Indiviso</label>
+	<input class="form-control" type="number" id="p_indiviso">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Porcentaje Indiviso</label>
+	<input class="form-control" type="number" id="p_porcen_indiviso">
+</div>
+<div class="form-group col-md-6">
+	<label class="control-label">Área común descubierta</label>
+	<input class="form-control" type="number" id="p_descubierta">
+</div>
+<div class="form-group col-md-6">
 	<label class="control-label">Haga click en el botón de abajo para guardar los datos</label>
 	<input class="btn btn-info" value="Guadar Datos de la Plantilla" type="button" onclick="event_insert_data_inmueble()" id="buttonSaveTemplate">
 </div>

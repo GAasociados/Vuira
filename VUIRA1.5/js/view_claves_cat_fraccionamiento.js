@@ -24,12 +24,19 @@ function event_insert_data_inmueble()
   var numero_oficio = $("#p_numero_oficio").val();
   var estado_escritura = $("#p_estado_escritura").val();
   var ciudad_escritura = $("#p_ciudad_escritura").val();
+  var area_privativa = $("#p_area_privativa").val();
+  var area_comun = $("#p_area_comun").val();
+  var area_cubierta = $("#p_area_cubierta").val();
+  var indiviso = $("#p_indiviso").val();
+  var poercentaje_indiviso = $("#p_porcen_indiviso").val();
+  var descubierta = $("#p_descubierta").val();
   $.ajax({
     type:"post",
     url:"../servicios/c_clave_fraccionamiento/c_clave_fracc_info_init_update.php",
     data:{Id:$("#id").val(), caracter:caracter, superficie_terreno:superficie, numero_escritura:numero_escritura, nombre_notario:notario, 
     numero_notario:numero_notario, fecha_escritura:fecha_escritura, numero_oficio:numero_oficio, estado_escitura:estado_escritura,
-  ciudad_escritura:ciudad_escritura},
+    ciudad_escritura:ciudad_escritura,area_privativa:area_privativa,area_comun:area_comun,area_cubierta:area_cubierta,
+    indiviso:indiviso,porcentaje_indiviso:poercentaje_indiviso,descubierta:descubierta},
     async:true,
     success: function (jdata)
     {
@@ -272,6 +279,12 @@ function event_select_entry(buttonName)
     $("#numero_oficio").val( $("#p_numero_escritura").val());
     $("#estado_escitura").val( $("#p_estado_escritura").val() );
     $("#ciudad_escritura").val( $("#p_ciudad_escritura").val() );
+    $("#area_privativa").val( $("#p_area_privativa").val() );
+    $("#area_comun").val( $("#p_area_comun").val() );
+    $("#area_cubierta").val( $("#p_area_cubierta").val() );
+    $("#total_indiviso").val( $("#p_indiviso").val() );
+    $("#porcentaje_indiviso").val( $("#p_porcen_indiviso").val() );
+    $("#area_descubierta").val( $("#p_descubierta").val() )
   }
 }
 
@@ -410,8 +423,8 @@ class view_claves_fraccionamiento
   constructor()
   {
       //this.basePath = "https://vuira.irapuato.gob.mx/";
-      this.basePath = "https://"+window.location.hostname+"/";
-      //this.basePath = "http://localhost/Vuira/";
+      //this.basePath = "https://"+window.location.hostname+"/";
+      this.basePath = "http://localhost/Vuira/";
   }
 
   isUpdate()
@@ -614,6 +627,15 @@ class view_claves_fraccionamiento
     $("#estado_escitura").val( data[0]["Es_Estado_Escritura"] );
     $("#ciudad_escritura").val( data[0]["Es_Ciudad_Escritura"] );
     $("#Croquis_URL").val( data[0]["Croquis_URL"] );
+
+    $("#area_privativa").val( data[0]["Area_Privativa"] );
+    $("#area_comun").val( data[0]["Area_Comun"] );
+    $("#area_cubierta").val( data[0]["Area_Comun_Cubierta"] );
+    $("#total_indiviso").val( data[0]["Total_Indiviso"] );
+    $("#porcentaje_indiviso").val( data[0]["Porcentaje_Indiviso"] );
+    $("#area_descubierta").val( data[0]["Area_Comun_Descubierta"] );
+
+
   }
 
   set_to_grid(data)
@@ -752,6 +774,18 @@ class view_claves_fraccionamiento
     innerTableContent += "<div class='form-row'>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='estado_escritura' class='control-label'>Entidad Federativa *</label> <input type='text' id='estado_escitura' class='form-control'></div>";
   	innerTableContent += "<div class='form-group col-md-4 col'><label for='ciudad_escritura' class='control-label'>Ciudad de Escritura *</label> <input type='text' id='ciudad_escritura' class='form-control'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='area_privativa' class='control-label'>Área privativa *</label> <input type='text' id='area_privativa' class='form-control'></div>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='area_comun' class='control-label'>Área Común *</label> <input type='text' id='area_comun' class='form-control'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='area_cubierta' class='control-label'>Área Cubierta *</label> <input type='text' id='area_cubierta' class='form-control'></div>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='indiviso' class='control-label'>Total Indiviso *</label> <input type='text' id='total_indiviso' class='form-control'></div>";
+    innerTableContent += "</div>";
+    innerTableContent += "<div class='form-row'>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='porcentaje_indiviso' class='control-label'>Porcentaje Indiviso *</label> <input type='text' id='porcentaje_indiviso' class='form-control'></div>";
+  	innerTableContent += "<div class='form-group col-md-4 col'><label for='area_descubierta' class='control-label'>Área Descubierta *</label> <input type='text' id='area_descubierta' class='form-control'></div>";
     innerTableContent += "</div>";
   	innerTableContent += "</td>";
     innerTableContent += "<td>";
@@ -1118,6 +1152,13 @@ class view_claves_fraccionamiento
     data['Numero_Seguimiento'] = $("#Id_clave").val();
     data['tipotramitedp'] = 1;
     data['Tramite_Solicitado'] = 100;
+
+    data['Area_Comun'] = $("#area_comun").val();
+    data['Area_Comun_Cubierta'] = $("#area_cubierta").val();
+    data['Area_Comun_Descubierta'] = $("#area_descubierta").val();
+    data['Area_Privativa'] = $("#area_privativa").val();
+    data['Total_Indiviso'] = $("#total_indiviso").val();
+    data['Porcentaje_Indiviso'] = $("#porcentaje_indiviso").val();
     
   	return data;
   }
@@ -1153,6 +1194,12 @@ class view_claves_fraccionamiento
     $("#p_numero_oficio").val( data[0]["numero_oficio"] );
     $("#p_estado_escritura").val( data[0]["entidad_federativa"] );
     $("#p_ciudad_escritura").val( data[0]["ciudad_escrituras"] );
+    $("#p_area_privativa").val( data[0]["area_privativa"] );
+    $("#p_area_comun").val( data[0]["area_comun"] );
+    $("#p_area_cubierta").val( data[0]["area_cubierta"] );
+    $("#p_indiviso").val( data[0]["indiviso"] );
+    $("#p_porcen_indiviso").val( data[0]["porcentaje_indiviso"] );
+    $("#p_descubierta").val( data[0]["area_descubierta"] );
   }
 
   cancelar_claveGen()
